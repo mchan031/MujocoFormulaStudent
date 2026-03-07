@@ -1,5 +1,5 @@
 <mujoco>
-  <compiler meshdir="cars/meshes" />
+  <compiler meshdir="cars/meshes"/>
   <asset>
     <mesh name="buddy_mushr_base_nano" file="mushr_base_nano.stl"/>
     <mesh name="buddy_mushr_wheel" file="mushr_wheel.stl"/>
@@ -17,8 +17,8 @@
     </default>
   </default>
   <worldbody>
-    <body name="buddy" pos="0.0 2.0 0.0" euler="0 0 0.0">
-      <camera name="buddy_third_person" mode="fixed" pos="-1 0 1" xyaxes="0 -1 0 0.707 0 0.707"/>
+    <body name="buddy" pos="0.0 0.0 0.0" euler="0 0 0.0">
+      <camera name="buddy_third_person" mode="fixed" pos="-5 0 4" xyaxes="0 -1 0 0.5 0 0.866"/>
       <joint type="free"/>
 
       <camera name="buddy_realsense_d435i" mode="fixed" pos="0.030 0 .165" euler="0 4.712 4.712"/>

@@ -1,0 +1,48 @@
+<mujoco model="track_scene">
+    <compiler angle="radian"/>
+    <size njmax="500" nconmax="100"/>
+    <option timestep="0.01"/>
+
+    <include file="track.xml"/>
+    <include file="cars/base_car/buddy.xml"/>
+
+    <visual>
+        <headlight ambient="0.6 0.6 0.6" diffuse="0.8 0.8 0.8" specular="0.2 0.2 0.2"/>
+        <map znear="0.001"/>
+    </visual>
+    
+    <asset>
+        <texture name="skybox" type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512"/>
+
+        <!-- Ground texture -->
+        <texture name="texplane" type="2d" builtin="checker" 
+                 rgb1="0.2 0.3 0.4" rgb2="0.3 0.4 0.5" 
+                 width="512" height="512" mark="none"/>
+        
+        <!-- Ground material -->
+        <material name="matplane" 
+                  texture="texplane" 
+                  texrepeat="10 10"
+                  reflectance="0.0"/>    
+    </asset>
+
+    <!-- Optional: Add a floor if needed (currently commented out) -->
+    <worldbody>
+        <geom name="floor" type="plane" size="120 120 0.1" rgba="0.1 0.1 0.1 1.0" condim="3"/>
+    </worldbody>
+
+    <!-- <worldbody> -->
+        <!-- Ground plane -->
+        <!-- <geom name="floor" 
+              type="plane" 
+              size="100 100 0.1"
+              pos="0 0 -0.05"
+              material="matplane"
+              condim="3"
+              friction="0.5 0.005 0.0001"
+              contype="1"
+              conaffinity="1"/>
+    </worldbody> -->
+
+
+</mujoco>
