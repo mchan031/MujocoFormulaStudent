@@ -6,7 +6,6 @@ from env import MujocoFormulaStudent
 import time
 import os
 
-
 def test_longitudinal_acceleration():
     """Test acceleration and braking"""
     actions = []

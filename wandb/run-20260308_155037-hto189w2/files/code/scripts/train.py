@@ -28,7 +28,6 @@ track = True
 timestep = 10_000
 nstep = 1024
 batchsize = 256
-exp_name = "testing"
 
 # def parse_args():
 #     parser = argparse.ArgumentParser()
@@ -68,7 +67,7 @@ def main():
     # pass
     # args = parse_args()
 
-    run_name = f"MujocoFormulaStudent__{exp_name}__{time.strftime('%Y-%m-%d_%H-%M-%S')}"
+    run_name = f"MujocoFormulaStudent__{seed}__{time.strftime('%Y-%m-%d_%H-%M-%S')}"
     
 
     if track:
@@ -105,7 +104,6 @@ def main():
     )
     train_env = VecTransposeImage(train_env)
     train_env = VecNormalize(train_env)
-    train_env.seed(seed=seed)
     
     # eval_env = make_vec_env(
     #     make_env(full_path, run_name, seed, False),
@@ -115,7 +113,7 @@ def main():
 
     model = PPO("MultiInputPolicy", 
                 train_env, 
-                verbose=1, 
+                # verbose=1, 
                 tensorboard_log=log_dir,
                 device=device,
                 n_steps=nstep,

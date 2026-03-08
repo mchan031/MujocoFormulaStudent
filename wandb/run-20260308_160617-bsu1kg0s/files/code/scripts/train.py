@@ -105,7 +105,6 @@ def main():
     )
     train_env = VecTransposeImage(train_env)
     train_env = VecNormalize(train_env)
-    train_env.seed(seed=seed)
     
     # eval_env = make_vec_env(
     #     make_env(full_path, run_name, seed, False),

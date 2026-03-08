@@ -65,6 +65,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._lap_completion_reward = lap_completion_reward
         self._forward_velocity_reward = forward_velocity_reward
         self._crash_penalty = crash_penalty
+        self.max_steps = 2000
+        self.step_count = 0
         
         # self._progress_reward_weight = progress_reward_weight
         self.longitudinal_vel = 0.0
@@ -193,10 +195,11 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         )
         
     def step(self, action):      
+        self.step_count += 1
+
         #1. Process Action and Step Env
         action = self._process_action(action)
         self.do_simulation(action, self.frame_skip)
-
         #2. Get Observation
         self._check_checkpoint_crossing()
         crashed = self._check_crash()
@@ -209,6 +212,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
 
         #4. Check Termination
         terminated = crashed
+        truncated = self.step_count >= self.max_steps + self.current_checkpoint * 500
         
         # Info dict
         info = {
@@ -221,7 +225,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         if self.render_mode == "human":
             self.render()
             
-        return observation, reward, terminated, False, info
+        return observation, reward, terminated, truncated, info
 
     def reset_model(self):
         qpos = self.init_qpos.copy()
@@ -241,7 +245,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.current_checkpoint = 0
         self.prev_checkpoint = 0
         self.longitudinal_vel = 0.0
-
+        self.step_count = 0
+        
         return self._get_obs()
 
     def _get_obs(self):
