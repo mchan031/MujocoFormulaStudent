@@ -25,10 +25,11 @@ log_dir = "logs"
 mujoco_path = "mujoco_tracks/sim_env.xml"
 checkpoint_path = "mujoco_tracks/checkpoints.json"
 track = True
-timestep = 10_000
+timestep = 100_000
 nstep = 1024
 batchsize = 256
-exp_name = "testing"
+n_envs = 4
+exp_name = "2000_episode_reward_dict_input"
 
 # def parse_args():
 #     parser = argparse.ArgumentParser()
@@ -42,7 +43,8 @@ def make_env(model_path, run_name, seed=10, capture_video=False): #, idx, captur
         env = MujocoFormulaStudent(
             model_path=model_path,
             render_mode="rgb_array",
-            checkpoint_file=checkpoint_path
+            checkpoint_file=checkpoint_path,
+            lap_completion_reward=2000
         )
         
         env.action_space.seed(seed)
@@ -101,18 +103,29 @@ def main():
     ## make env
     train_env = make_vec_env(
         make_env(full_path, run_name, seed, False),
-        n_envs=1,
+        n_envs=n_envs,
     )
     train_env = VecTransposeImage(train_env)
     train_env = VecNormalize(train_env)
     train_env.seed(seed=seed)
-    
-    # eval_env = make_vec_env(
-    #     make_env(full_path, run_name, seed, False),
-    #     n_envs=1,
-    # )
-    # eval_env = VecTransposeImage(eval_env)
 
+    # train_env = VecVideoRecorder(
+    #     train_env,
+    #     video_folder=f"videos/{run_name}",
+    #     # record_video_trigger=
+    #     record_video_trigger=lambda step: step % 2000 == 0,
+    #     video_length=1000,
+    #     name_prefix="ppo-car"
+    # )
+    
+    eval_env = make_vec_env(
+        make_env(full_path, run_name, seed, False),
+        n_envs=1,
+    )
+    eval_env = VecTransposeImage(eval_env)
+    eval_env = VecNormalize(eval_env)
+
+    
     model = PPO("MultiInputPolicy", 
                 train_env, 
                 verbose=1, 
@@ -126,26 +139,23 @@ def main():
     os.makedirs(model_run_dir, exist_ok=True)
     
     
-    # callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=400, 
-    #                                                  verbose=1)
+    callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=200, 
+                                                     verbose=1)
 
-    # stop_train_callback = StopTrainingOnNoModelImprovement(max_no_improvement_evals=5, 
-    #                                                        min_evals = 10000, 
-    #                                                        verbose=1
-    #                                                        )
+    stop_train_callback = StopTrainingOnNoModelImprovement(max_no_improvement_evals=5, 
+                                                           min_evals = 10000, 
+                                                           verbose=1
+                                                           )
 
-    # eval_callback = EvalCallback(
-    #     eval_env=eval_env,
-    #     eval_freq=5000,
-    #     callback_on_new_best=callback_on_best,
-    #     callback_after_eval=stop_train_callback,
-    #     verbose=1,
-    #     best_model_save_path=model_run_dir
-    # )
-    
-    # train_env.observation_space
-    # print(f"{train_env.observation_space = }")
-    # raise
+    eval_callback = EvalCallback(
+        eval_env=eval_env,
+        eval_freq=2000,
+        callback_on_new_best=callback_on_best,
+        callback_after_eval=stop_train_callback,
+        verbose=1,
+        best_model_save_path=model_run_dir
+    )
+
 
     wandb_cb = WandbCallback(
         model_save_path=model_run_dir,
@@ -154,7 +164,7 @@ def main():
     
     model.learn(total_timesteps=timestep, 
                 tb_log_name=run_name, 
-                progress_bar=True,
+                progress_bar=CallbackList([wandb_cb, eval_callback]),
                 callback=wandb_cb
                 )
     
