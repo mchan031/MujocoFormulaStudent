@@ -180,7 +180,7 @@ track = generate_track(
 
 print(track.orange_cones)
 
-n_checkpoints = 11
+n_checkpoints = 21
 # Method 1: Plot with Frenet frames
 fig1, ax1, checkpoints = plot_track_with_frames(track, n_checkpoints=n_checkpoints, arrow_scale=5.0)
 # print(f"{checkpoints = }")

@@ -20,7 +20,7 @@ seed = 42
 model_dir = "models"
 log_dir = "logs"
 mujoco_path = "mujoco_tracks/sim_env.xml"
-checkpoint_path = "mujoco_tracks/checkpoints.json"
+checkpoint_path = "mujoco_tracks/checkpoints_20.json"
 # def parse_args():
 #     parser = argparse.ArgumentParser()
 
@@ -77,7 +77,7 @@ def main():
     )
     eval_env = VecTransposeImage(eval_env)
 
-    model = PPO("MultiInputPolicy", 
+    model = PPO("CnnPolicy", 
                 train_env, 
                 verbose=1, 
                 tensorboard_log=log_dir,
@@ -89,22 +89,22 @@ def main():
     os.makedirs(model_run_dir, exist_ok=True)
     
     
-    callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=400, 
-                                                     verbose=1)
+    # callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=400, 
+    #                                                  verbose=1)
 
-    stop_train_callback = StopTrainingOnNoModelImprovement(max_no_improvement_evals=5, 
-                                                           min_evals = 10000, 
-                                                           verbose=1
-                                                           )
+    # stop_train_callback = StopTrainingOnNoModelImprovement(max_no_improvement_evals=5, 
+    #                                                        min_evals = 10000, 
+    #                                                        verbose=1
+    #                                                        )
 
-    eval_callback = EvalCallback(
-        eval_env=eval_env,
-        eval_freq=5000,
-        callback_on_new_best=callback_on_best,
-        callback_after_eval=stop_train_callback,
-        verbose=1,
-        best_model_save_path=model_run_dir
-    )
+    # eval_callback = EvalCallback(
+    #     eval_env=eval_env,
+    #     eval_freq=5000,
+    #     callback_on_new_best=callback_on_best,
+    #     callback_after_eval=stop_train_callback,
+    #     verbose=1,
+    #     best_model_save_path=model_run_dir
+    # )
     
     # train_env.observation_space
     # print(f"{train_env.observation_space = }")
@@ -112,7 +112,7 @@ def main():
     
     model.learn(total_timesteps=100_000, 
                 tb_log_name=run_name, 
-                callback=CallbackList([eval_callback]),
+                # callback=CallbackList([eval_callback]),
                 progress_bar=True
                 )
     

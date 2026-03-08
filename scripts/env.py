@@ -152,35 +152,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             dtype=np.uint8
         )
         
-        # Vehicle States (Vel, Acc, Yaw, etc.)
-        car_states_space = spaces.Box(
-            low=-np.inf, 
-            high=np.inf, 
-            shape=(7,), 
-            dtype=np.float32
-        )
-        
-        # Relative Position to the next n (n = 5) checkpoints
-        checkpoint_space = spaces.Box(
-            low=0, 
-            high=np.inf, 
-            shape=(5,), 
-            dtype=np.float32)  # distances to next 5
-
-        # Progress 0.0 to 1.0, 1.0 for full lap completion 
-        prog_space = spaces.Box(
-            low=0.0, 
-            high=1.0, 
-            shape=(1,), 
-            dtype=np.float32
-        )
-        
-        self.observation_space = spaces.Dict({
-            'image': image_space,
-            'car_states': car_states_space,
-            'checkpoint_distances': checkpoint_space,
-            'progress': prog_space
-        })
+        self.observation_space = image_space
   
     def _initialize_agent_camera(self):
         # Renderer for agent view (first person)
@@ -245,12 +217,13 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         return self._get_obs()
 
     def _get_obs(self):
-        return {
-            'image': self._get_image(),
-            'car_states': self._get_car_states(),
-            'checkpoint_distances': self._get_checkpoint_distances(),
-            'progress': np.array([self.progress], dtype=np.float32)
-        }
+        # return {
+        #     'image': self._get_image(),
+        #     'car_states': self._get_car_states(),
+        #     'checkpoint_distances': self._get_checkpoint_distances(),
+        #     'progress': np.array([self.progress], dtype=np.float32)
+        # }
+        return self._get_image()
 
     def _get_car_states(self):
         # Sensor Values
@@ -363,6 +336,9 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # 3 Forward velocity reward
         # -------------------------------------------------
         reward += self._forward_velocity_reward * max(velocity, 0.0)
+
+        if velocity < 0.1:
+            reward -= 0.1
 
         # # -------------------------------------------------
         # # 4 Penalize sideways motion
