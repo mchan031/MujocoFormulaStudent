@@ -195,13 +195,15 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         )
         
     def step(self, action):      
+        
         self.step_count += 1
 
         #1. Process Action and Step Env
         action = self._process_action(action)
         self.do_simulation(action, self.frame_skip)
-        #2. Get Observation
-        self._check_checkpoint_crossing()
+
+        #2. Check Checkpoint
+        crossed = self._check_checkpoint_crossing()
         crashed = self._check_crash()
         observation = self._get_obs()
 
@@ -212,7 +214,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
 
         #4. Check Termination
         terminated = crashed
-        truncated = self.step_count >= self.max_steps + self.current_checkpoint * 500
+        truncated = self.step_count >= self.max_steps + int(self.progress * 200)
         
         # Info dict
         info = {
@@ -347,7 +349,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
 
     def _update_progress(self):
         ## Discrete
-        self.progress = self.current_checkpoint / (self.n_checkpoints - 1)
+        self.progress = self.current_checkpoint / (self.n_checkpoints - 1) + self.lap_count
 
     def _compute_reward(self, velocity, action, crashed):
         
@@ -454,6 +456,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             print(f"Checkpoint Crossed: {cp}")
             crossed = True
             self.current_checkpoint = (cp + 1) % self.n_checkpoints
+            
+            if self.current_checkpoint < cp:
+                self.lap_count += 1
+
             self._update_progress()
 
         self.prev_cp_distances = dists

@@ -18,131 +18,105 @@ from stable_baselines3.common.callbacks import (
 from utils import ForceForwardWrapper
 import wandb
 from wandb.integration.sb3 import WandbCallback
+import hydra
+from omegaconf import DictConfig, OmegaConf
 
-seed = 42
 model_dir = "models"
 log_dir = "logs"
 mujoco_path = "mujoco_tracks/sim_env.xml"
 checkpoint_path = "mujoco_tracks/checkpoints.json"
-track = True
-timestep = 100_000
-nstep = 1024
-batchsize = 256
-n_envs = 4
-exp_name = "2000_episode_reward_dict_input"
 
-# def parse_args():
-#     parser = argparse.ArgumentParser()
+FILE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config")
 
-    # pass
-
-
-def make_env(model_path, run_name, seed=10, capture_video=False): #, idx, capture_video, run_name):
-
+def make_env(model_path, cfg): #, idx, capture_video, run_name):
     def thunk():
         env = MujocoFormulaStudent(
             model_path=model_path,
             render_mode="rgb_array",
             checkpoint_file=checkpoint_path,
-            lap_completion_reward=2000
+            lap_completion_reward=cfg.env.lap_completion_reward
         )
         
-        env.action_space.seed(seed)
-        env.observation_space.seed(seed)
-        
-        if capture_video:
-            env = gym.wrappers.RecordVideo(env, 
-                                     f"videos/{run_name}", 
-                                     episode_trigger=lambda x: x % 10 == 0)
-                    
-    
-
+        env.action_space.seed(cfg.seed)
+        env.observation_space.seed(cfg.seed)
         env = ForceForwardWrapper(env)
-
-        return env
-
-
+        return env    
     return thunk
     
     
+@hydra.main(config_path=FILE_PATH, config_name="train", version_base=None)
+def main(config):
+    run_name = f"MujocoFormulaStudent__{config.exp_name}__{time.strftime('%Y-%m-%d_%H-%M-%S')}"
+    full_path = os.path.join(os.path.dirname(__file__), os.path.pardir, mujoco_path)
 
-def main():
-    # pass
-    # args = parse_args()
 
-    run_name = f"MujocoFormulaStudent__{exp_name}__{time.strftime('%Y-%m-%d_%H-%M-%S')}"
-    
+    if config.track_exp:
+        wandb_config = OmegaConf.to_container(config, resolve=True, throw_on_missing=True)
 
-    if track:
-        
         wandb.init(
             project="mujoco-racing",
             name=run_name,
-            config={
-                "algo": "PPO",
-                "env": "MujocoFormulaStudent",
-                "total_timesteps": timestep,
-                "n_steps": nstep,
-                "seed": seed,
-                "batchsize": batchsize
-            },
+            config=wandb_config,
             sync_tensorboard=True,  # automatically logs tensorboard
             monitor_gym=True,       # logs episode rewards
             save_code=True
         )        
 
     # TRY NOT TO MODIFY: seeding
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.backends.cudnn.deterministic = True
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    random.seed(config.seed)
+    np.random.seed(config.seed)
+    torch.manual_seed(config.seed)
+    torch.backends.cudnn.deterministic = config.cuda_deterministic
 
-    full_path = os.path.join(os.path.dirname(__file__), os.path.pardir, mujoco_path)
+    device = torch.device('cuda' if torch.cuda.is_available() and config.cuda else 'cpu')
     
-    ## make env
+    ## make train env
     train_env = make_vec_env(
-        make_env(full_path, run_name, seed, False),
-        n_envs=n_envs,
+        make_env(full_path, config),
+        n_envs=config.env.num_envs,
     )
+    train_env.seed(seed=config.seed)
     train_env = VecTransposeImage(train_env)
     train_env = VecNormalize(train_env)
-    train_env.seed(seed=seed)
 
-    # train_env = VecVideoRecorder(
-    #     train_env,
-    #     video_folder=f"videos/{run_name}",
-    #     # record_video_trigger=
-    #     record_video_trigger=lambda step: step % 2000 == 0,
-    #     video_length=1000,
-    #     name_prefix="ppo-car"
-    # )
-    
+    if config.capture_video:
+        train_env = VecVideoRecorder(
+            train_env,
+            video_folder=f"videos/{run_name}",
+            # record_video_trigger=
+            record_video_trigger=lambda step: step % 2000 == 0,
+            video_length=500,
+            name_prefix="ppo-car"
+        )
+        
     eval_env = make_vec_env(
-        make_env(full_path, run_name, seed, False),
+        make_env(full_path, config),
         n_envs=1,
     )
+    eval_env.seed(seed=config.seed)
     eval_env = VecTransposeImage(eval_env)
-    eval_env = VecNormalize(eval_env)
+    # eval_env = VecNormalize(eval_env)
+    eval_env = VecNormalize(eval_env, training=False)
+    eval_env.obs_rms = train_env.obs_rms
+    eval_env.ret_rms = train_env.ret_rms
 
-    
     model = PPO("MultiInputPolicy", 
                 train_env, 
                 verbose=1, 
                 tensorboard_log=log_dir,
                 device=device,
-                n_steps=nstep,
-                batch_size=batchsize
+                n_steps=config.ppo.n_steps,
+                batch_size=config.ppo.batchsize,
                 )
 
     model_run_dir = os.path.join(model_dir, run_name)
     os.makedirs(model_run_dir, exist_ok=True)
     
     
-    callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=200, 
+    callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=600, 
                                                      verbose=1)
 
-    stop_train_callback = StopTrainingOnNoModelImprovement(max_no_improvement_evals=5, 
+    stop_train_callback = StopTrainingOnNoModelImprovement(max_no_improvement_evals=10, 
                                                            min_evals = 10000, 
                                                            verbose=1
                                                            )
@@ -156,21 +130,26 @@ def main():
         best_model_save_path=model_run_dir
     )
 
+    # cb_list = [eval_callback]
+    cb_list = []
 
-    wandb_cb = WandbCallback(
-        model_save_path=model_run_dir,
-        verbose=2
-    )
-    
-    model.learn(total_timesteps=timestep, 
+    if config.track_exp:
+        wandb_cb = WandbCallback(
+            model_save_path=model_run_dir,
+            verbose=2
+        )
+        cb_list.append(wandb_cb)
+
+    model.learn(total_timesteps=config.ppo.total_timesteps, 
                 tb_log_name=run_name, 
-                progress_bar=CallbackList([wandb_cb, eval_callback]),
-                callback=wandb_cb
+                progress_bar=True,
+                callback=CallbackList(cb_list)
                 )
     
     model.save(os.path.join(model_run_dir, 'last_model'))
+    train_env.save(os.path.join(model_run_dir, "vecnormalize.pkl"))
 
-    if track:
+    if config.track_exp:
         wandb.finish(exit_code=0)
 
 if __name__ == "__main__":
