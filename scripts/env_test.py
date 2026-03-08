@@ -180,6 +180,7 @@ def plot_telemetry(data):
     
     # Yaw rate
     axes[1, 0].plot(data['time'], data['yaw_rate'], 'purple')
+    axes[1, 0].plot(data['time'], data['steering'], 'brown')
     axes[1, 0].set_ylabel('Yaw Rate (rad/s)')
     axes[1, 0].set_xlabel('Time (s)')
     axes[1, 0].set_title('Yaw Rate')
