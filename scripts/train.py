@@ -3,7 +3,7 @@ import numpy as np
 from env import MujocoFormulaStudent
 import os
 from stable_baselines3.common.env_util import make_vec_env
-from stable_baselines3.common.vec_env import VecTransposeImage
+from stable_baselines3.common.vec_env import VecTransposeImage, VecVideoRecorder, VecNormalize
 import random
 import torch
 import argparse
@@ -15,6 +15,7 @@ from stable_baselines3.common.callbacks import (
     EvalCallback, 
     CallbackList
 )
+from utils import ForceForwardWrapper
 
 seed = 42
 model_dir = "models"
@@ -32,7 +33,7 @@ def make_env(model_path, run_name, seed=10, capture_video=False): #, idx, captur
     def thunk():
         env = MujocoFormulaStudent(
             model_path=model_path,
-            render_mode="rgb_array",
+            render_mode="human",
             checkpoint_file=checkpoint_path
         )
         
@@ -44,7 +45,13 @@ def make_env(model_path, run_name, seed=10, capture_video=False): #, idx, captur
                                      f"videos/{run_name}", 
                                      episode_trigger=lambda x: x % 10 == 0)
                     
+    
+
+        env = ForceForwardWrapper(env)
+
         return env
+
+
     return thunk
     
     
@@ -70,16 +77,17 @@ def main():
         n_envs=1,
     )
     train_env = VecTransposeImage(train_env)
+    train_env = VecNormalize(train_env)
     
-    eval_env = make_vec_env(
-        make_env(full_path, run_name, seed, True),
-        n_envs=1,
-    )
-    eval_env = VecTransposeImage(eval_env)
+    # eval_env = make_vec_env(
+    #     make_env(full_path, run_name, seed, True),
+    #     n_envs=1,
+    # )
+    # eval_env = VecTransposeImage(eval_env)
 
     model = PPO("CnnPolicy", 
                 train_env, 
-                verbose=1, 
+                # verbose=1, 
                 tensorboard_log=log_dir,
                 device=device,
                 n_steps=1024
@@ -110,7 +118,7 @@ def main():
     # print(f"{train_env.observation_space = }")
     # raise
     
-    model.learn(total_timesteps=100_000, 
+    model.learn(total_timesteps=10_000, 
                 tb_log_name=run_name, 
                 # callback=CallbackList([eval_callback]),
                 progress_bar=True
