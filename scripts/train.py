@@ -19,7 +19,7 @@ from stable_baselines3.common.callbacks import (
 seed = 42
 model_dir = "models"
 log_dir = "logs"
-mujoco_path = "mujoco_tracks/new_scene.xml"
+mujoco_path = "mujoco_tracks/sim_env.xml"
 checkpoint_path = "mujoco_tracks/checkpoints.json"
 # def parse_args():
 #     parser = argparse.ArgumentParser()
@@ -40,7 +40,7 @@ def make_env(model_path, run_name, seed=10, capture_video=False): #, idx, captur
         env.observation_space.seed(seed)
         
         if capture_video:
-            gym.wrappers.RecordVideo(env, 
+            env = gym.wrappers.RecordVideo(env, 
                                      f"videos/{run_name}", 
                                      episode_trigger=lambda x: x % 10 == 0)
                     
@@ -54,8 +54,7 @@ def main():
     # args = parse_args()
 
     run_name = f"MujocoFormulaStudent__{seed}__{time.strftime('%Y-%m-%d_%H-%M-%S')}"
-    # if not os.path.exists(run_name):
-    #     os.makedirs(run_name)
+    
     # TRY NOT TO MODIFY: seeding
     random.seed(seed)
     np.random.seed(seed)
@@ -72,7 +71,6 @@ def main():
     )
     train_env = VecTransposeImage(train_env)
     
-    
     eval_env = make_vec_env(
         make_env(full_path, run_name, seed, True),
         n_envs=1,
@@ -83,7 +81,8 @@ def main():
                 train_env, 
                 verbose=1, 
                 tensorboard_log=log_dir,
-                device=device
+                device=device,
+                n_steps=1024
                 )
 
     model_run_dir = os.path.join(model_dir, run_name)
@@ -111,12 +110,13 @@ def main():
     # print(f"{train_env.observation_space = }")
     # raise
     
-    model.learn(total_timesteps=10_000, 
+    model.learn(total_timesteps=100_000, 
                 tb_log_name=run_name, 
-                callback=CallbackList([eval_callback])
+                callback=CallbackList([eval_callback]),
+                progress_bar=True
                 )
     
-    model.save(os.path.join(run_name, 'last_model'))
+    model.save(os.path.join(model_run_dir, 'last_model'))
     
 if __name__ == "__main__":
     main()
