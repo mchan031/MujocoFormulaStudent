@@ -43,9 +43,22 @@ def make_env(model_path, cfg): #, idx, capture_video, run_name):
         env.observation_space.seed(cfg.seed)
         env = ForceForwardWrapper(env)
         # env = GrayscaleObservation(env)
-        env = gym.wrappers.GrayscaleObservation(env)
-        env = gym.wrappers.FrameStackObservation(env, stack_size=4)
-        print(env.observation_space.shape)
+        if cfg.grayscale:
+            env = gym.wrappers.GrayscaleObservation(env, keep_dim=not cfg.frame_stack)
+        
+        if cfg.frame_stack:
+            env = gym.wrappers.FrameStackObservation(env, stack_size=4)
+            
+        if cfg.frame_stack and not cfg.grayscale:
+            env = gym.wrappers.TransformObservation(env, 
+                                                    lambda obs: np.transpose(obs, (3, 0, 1, 2)).reshape(-1, 84, 84), 
+                                                    observation_space=gym.spaces.Box(
+                                                        low=0,
+                                                        high=255,
+                                                        shape=(12, 84, 84),
+                                                        dtype=np.uint8
+                                                        )
+                                                    )
         return env    
     return thunk
     
@@ -117,7 +130,7 @@ def main(config):
     os.makedirs(model_run_dir, exist_ok=True)
     
     
-    callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=600, 
+    callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=400, 
                                                      verbose=1)
 
     stop_train_callback = StopTrainingOnNoModelImprovement(max_no_improvement_evals=10, 

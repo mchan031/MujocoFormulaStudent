@@ -517,8 +517,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.checkpoint_tangents = np.array(cp_tangents, dtype=np.float32)
         self.checkpoint_distances = np.array(cp_distances, dtype=np.float32)
         self.track_length = total_length
-        print(f"Generated {self.n_checkpoints} checkpoints")
-        print(f"Track length: {self.track_length:.2f} m")
+        # print(f"Generated {self.n_checkpoints} checkpoints")
+        # print(f"Track length: {self.track_length:.2f} m")
         
         
     def _get_frenet_frame(self, point_index):

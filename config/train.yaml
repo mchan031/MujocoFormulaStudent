@@ -1,15 +1,18 @@
 seed: 42
 cuda: False
 cuda_deterministic: True
-exp_name: testing
+exp_name: cnn_1
 track_exp: True
 capture_video: False
 
+grayscale: True
+frame_stack: True
+
 env:
-  num_envs: 8 # Number of drones for training
-  num_checkpoints: 10
+  num_envs: 4 # Number of drones for training
+  num_checkpoints: 15
   lap_completion_reward: 1000
-  extra_progress_time: 2000
+  extra_progress_time: 2200
 
 wandb:
   project: mujoco-racing
@@ -18,4 +21,4 @@ wandb:
 ppo:
   total_timesteps: 1_000_000
   batchsize: 256
-  n_steps: 2048
+  n_steps: 1024
