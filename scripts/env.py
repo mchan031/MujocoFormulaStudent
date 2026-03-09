@@ -36,8 +36,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         crash_penalty: float = 100.0,
         extra_progress_time: float = 200.0,
         reset_noise_scale: float = 0.01,
-        checkpoint_file: str = None,
+        centreline_file: str = None,
         next_n_checkpoint: int = 5,
+        max_env_step: int = 2000,
+        num_checkpoints: int = 10,
         **kwargs,
     ):
         
@@ -53,9 +55,11 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             lap_completion_reward,
             forward_velocity_reward,
             crash_penalty,
+            extra_progress_time,
             reset_noise_scale,
-            checkpoint_file,
             next_n_checkpoint,
+            max_env_step,
+            num_checkpoints,
             **kwargs,
         )
         
@@ -65,10 +69,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._lap_completion_reward = lap_completion_reward
         self._forward_velocity_reward = forward_velocity_reward
         self._crash_penalty = crash_penalty
-        self.max_steps = 2000
-        self.step_count = 0
         self._extra_progress_time = extra_progress_time
+        self.max_steps = max_env_step
         
+        self.step_count = 0
         self.longitudinal_vel = 0.0
         
         ## Noise Config
@@ -80,20 +84,19 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._render_width = render_width
         self._render_height = render_height
         
-        ## Checkpoints Config
-        self.checkpoints = []
+        # ## Checkpoints Config
         self.track_length = 0.0
         self.checkpoint_distances = []
         self.checkpoint_points = None
         self.checkpoint_normals = None
         self.checkpoint_tangents = None
+        self.centreline = None
+        self.n_checkpoints = num_checkpoints
         self._next_n_checkpoint = next_n_checkpoint
         
-        if checkpoint_file and os.path.exists(checkpoint_file):
-            self._load_checkpoints(checkpoint_file)
-        else:
-            print(f"Checkpoint file {checkpoint_file} not found.")
-        
+        self._load_centreline(centreline_file)
+        self._create_checkpoint()
+                
         # Initialize observation space
         self._initialize_observation_space()
         
@@ -124,7 +127,6 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._initialize_agent_camera()
 
         # Progress tracker
-        # TODO lap count logic havent implement
         self.lap_count = 0
         self.progress = 0.0
         self.prev_cp_distances = np.zeros(self.n_checkpoints)
@@ -352,7 +354,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
 
     def _update_progress(self):
         ## Discrete
-        self.progress = self.current_checkpoint / (self.n_checkpoints - 1) + self.lap_count
+        self.progress = (self.current_checkpoint - 1) / (self.n_checkpoints) + self.lap_count
 
     def _compute_reward(self, velocity, action, crashed):
         
@@ -412,37 +414,6 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
 
         throttle *= MAX_THROTTLE        
         return [steer, throttle]
-
-    def _load_checkpoints(self, filepath: str):
-        """Load checkpoints from JSON file"""
-        with open(filepath, 'r') as f:
-            data = json.load(f)
-        
-        # Load track length
-        self.track_length = data.get('track_length', 352.13)
-        
-        # Load checkpoints
-        self.checkpoints = []
-        for cp in data['checkpoints']:
-            self.checkpoints.append({
-                'index': cp['index'],
-                'distance': cp['distance'],
-                'point': np.array(cp['point']),
-                'tangent': np.array(cp['tangent']),
-                'normal': np.array(cp['normal']),
-                'centreline_idx': cp.get('centreline_idx', 0)
-            })
-        
-        # Pre-compute arrays for faster access
-        self.n_checkpoints = len(self.checkpoints)
-        if self.n_checkpoints > 0:
-            self.checkpoint_distances = np.array([cp['distance'] for cp in self.checkpoints])
-            self.checkpoint_points = np.array([cp['point'] for cp in self.checkpoints])
-            self.checkpoint_normals = np.array([cp['normal'] for cp in self.checkpoints])
-            self.checkpoint_tangents = np.array([cp['tangent'] for cp in self.checkpoints])
-            
-        print(f"Loaded {len(self.checkpoints)} checkpoints from {filepath}")
-        print(f"Track length: {self.track_length:.2f} m")
         
     def _compute_cp_distances(self, car_pos):
         diff = car_pos[:2] - self.checkpoint_points
@@ -515,3 +486,88 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
                             cone_geom_ids.append(j)
         
         return cone_geom_ids
+    
+    
+    def _load_centreline(self, centreline_file):
+        if not os.path.exists(centreline_file):
+            raise FileNotFoundError(f"Centreline file not found: {centreline_file}")
+        
+        self.centreline = np.loadtxt(centreline_file, delimiter=',', skiprows=1)
+        # print(self.centreline[0])
+        # print(centreline_file)
+
+        
+    def _create_checkpoint(self):
+        if self.centreline is None:
+            raise ValueError("Track has no centreline data")
+        
+        # Calculate cumulative arc length along centreline
+        distances = np.zeros(len(self.centreline))
+        for i in range(1, len(self.centreline)):
+            distances[i] = distances[i-1] + np.linalg.norm(
+                self.centreline[i] - self.centreline[i-1]
+            )
+        
+        total_length = distances[-1]        
+        checkpoint_distances = np.linspace(0, total_length, self.n_checkpoints+1)[:-1]
+
+        # Temporary containers
+        cp_points = []
+        cp_normals = []
+        cp_tangents = []
+        cp_distances = []
+        
+        for i, target_dist in enumerate(checkpoint_distances):
+            
+            # Find the closest point on centreline to target distance
+            idx = np.argmin(np.abs(distances - target_dist)) 
+            
+            # Get point coordinates
+            point = self.centreline[idx]
+            
+            # Get Frenet frame
+            tangent, normal = self._get_frenet_frame(idx)
+            
+            # Store raw arrays
+            cp_points.append(point)
+            cp_normals.append(normal)
+            cp_tangents.append(tangent)
+            cp_distances.append(target_dist)
+                
+        # Convert to numpy arrays
+        self.checkpoint_points = np.array(cp_points, dtype=np.float32)
+        self.checkpoint_normals = np.array(cp_normals, dtype=np.float32)
+        self.checkpoint_tangents = np.array(cp_tangents, dtype=np.float32)
+        self.checkpoint_distances = np.array(cp_distances, dtype=np.float32)
+        self.track_length = total_length
+        print(f"Generated {self.n_checkpoints} checkpoints")
+        print(f"Track length: {self.track_length:.2f} m")
+        
+        
+    def _get_frenet_frame(self, point_index):
+        # Use central differences for interior points, forward/backward for edges
+        n_points = len(self.centreline)
+
+        if point_index == 0:
+            # Forward difference
+            dx = self.centreline[1, 0] - self.centreline[0, 0]
+            dy = self.centreline[1, 1] - self.centreline[0, 1]
+        elif point_index == n_points - 1:
+            # Backward difference
+            dx = self.centreline[-1, 0] - self.centreline[-2, 0]
+            dy = self.centreline[-1, 1] - self.centreline[-2, 1]
+        else:
+            # Central difference
+            dx = self.centreline[point_index + 1, 0] - self.centreline[point_index - 1, 0]
+            dy = self.centreline[point_index + 1, 1] - self.centreline[point_index - 1, 1]
+        
+        # Tangent vector (derivative)
+        tangent = np.array([dx, dy])
+        # Normalize
+        tangent = tangent / np.linalg.norm(tangent)
+        
+        # Normal vector (rotate tangent by +90 degrees for left normal)
+        # For a 2D curve, normal is perpendicular to tangent
+        normal = np.array([tangent[1], -tangent[0]])  # Points left (counter-clockwise)
+        
+        return tangent, normal

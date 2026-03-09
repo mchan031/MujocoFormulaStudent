@@ -1,9 +1,9 @@
 seed: 42
 cuda: False
 cuda_deterministic: True
-exp_name: dict_input
-track_exp: True
-capture_video: True
+exp_name: testing
+track_exp: False
+capture_video: False
 
 env:
   num_envs: 4 # Number of drones for training

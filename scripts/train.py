@@ -24,7 +24,8 @@ from omegaconf import DictConfig, OmegaConf
 model_dir = "models"
 log_dir = "logs"
 mujoco_path = "mujoco_tracks/sim_env.xml"
-checkpoint_path = "mujoco_tracks/checkpoints.json"
+# checkpoint_path = "mujoco_tracks/checkpoints.json"
+centreline_path = "mujoco_tracks/centreline.csv"
 
 FILE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config")
 
@@ -33,7 +34,8 @@ def make_env(model_path, cfg): #, idx, capture_video, run_name):
         env = MujocoFormulaStudent(
             model_path=model_path,
             render_mode="rgb_array",
-            checkpoint_file=checkpoint_path,
+            centreline_file=centreline_path,
+            # checkpoint_file=checkpoint_path,
             lap_completion_reward=cfg.env.lap_completion_reward,
             extra_progress_time=cfg.env.extra_progress_time
         )
