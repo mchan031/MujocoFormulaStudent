@@ -6,7 +6,6 @@ from env import MujocoFormulaStudent
 import time
 import os
 
-
 def test_longitudinal_acceleration():
     """Test acceleration and braking"""
     actions = []
@@ -56,7 +55,9 @@ def test_env_with_logging():
     env = MujocoFormulaStudent(
         model_path=full_path,
         render_mode="rgb_array",
-        checkpoint_file="mujoco_tracks/checkpoints.json"
+        # checkpoint_file="mujoco_tracks/checkpoints.json",
+        centreline_file="mujoco_tracks/centreline.csv",
+        num_checkpoints=4
     )
     
     actions = test_longitudinal_acceleration()
@@ -107,7 +108,10 @@ def test_env_with_logging():
         # print(obs["progress"])
         # print(obs["checkpoint_distances"])
         total_reward += reward
-        print(f"{total_reward = }")
+        # print(f"{total_reward = }")
+        # print(env._get_checkpoint_distances())
+        print(env.current_checkpoint)
+        print(env.progress)
         pos = env._get_car_pos()
         # print(f"{pos[0]}")
         car_states = obs['car_states']

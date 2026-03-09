@@ -1,0 +1,28 @@
+{
+  "os":  "Linux-6.8.0-101-generic-x86_64-with-glibc2.35",
+  "python":  "CPython 3.12.12",
+  "startedAt":  "2026-03-08T07:50:37.435608Z",
+  "program":  "/home/munkit/Desktop/MujocoFormulaStudent/scripts/train.py",
+  "codePath":  "scripts/train.py",
+  "codePathLocal":  "scripts/train.py",
+  "git":  {
+    "remote":  "https://github.com/mchan031/MujocoFormulaStudent.git",
+    "commit":  "48dcb62aead33f285eb23a329380964dc5e8504c"
+  },
+  "email":  "munkityt1@gmail.com",
+  "root":  "/home/munkit/Desktop/MujocoFormulaStudent",
+  "host":  "munkit-EQ",
+  "executable":  "/home/munkit/anaconda3/envs/fs_gym/bin/python",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "375575453696",
+      "used":  "268593332224"
+    }
+  },
+  "memory":  {
+    "total":  "29192073216"
+  },
+  "writerId":  "7yon965muxevx42fxvx4bf11f4m1kd7d"
+}

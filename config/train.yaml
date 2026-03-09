@@ -1,0 +1,21 @@
+seed: 42
+cuda: False
+cuda_deterministic: True
+exp_name: testing
+track_exp: True
+capture_video: False
+
+env:
+  num_envs: 8 # Number of drones for training
+  num_checkpoints: 10
+  lap_completion_reward: 1000
+  extra_progress_time: 2000
+
+wandb:
+  project: mujoco-racing
+  mode: offline # online
+  
+ppo:
+  total_timesteps: 1_000_000
+  batchsize: 256
+  n_steps: 2048

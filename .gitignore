@@ -4,5 +4,7 @@ scripts/__pycache__/
 models/
 logs/
 videos/
+wandb/
+outputs/
 
 MUJOCO_LOG.TXT

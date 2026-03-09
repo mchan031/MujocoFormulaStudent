@@ -13,7 +13,7 @@ class MovingAverageFilter:
 
 class ForceForwardWrapper(gym.Wrapper):
 
-    def __init__(self, env, force_steps=100, force_episodes=5):
+    def __init__(self, env, force_steps=50, force_episodes=5):
         super().__init__(env)
         self.force_steps = force_steps
         self.force_episodes = force_episodes
@@ -28,7 +28,13 @@ class ForceForwardWrapper(gym.Wrapper):
     def step(self, action):
 
         if self.episode < self.force_episodes and self.t < self.force_steps:
-            action = np.array([0.0, 1.0])  #throttle forward
+            # action = np.array([0.0, 1.0])  #throttle forward
+
+            action = [0.0]
+            throttle = np.random.random()/2 + 0.5
+            action.append(throttle)
+            action = np.array(action)
+
 
         self.t += 1
 

@@ -1,0 +1,212 @@
+diff --git a/scripts/__pycache__/env.cpython-312.pyc b/scripts/__pycache__/env.cpython-312.pyc
+index 26244c7..7cfdeae 100644
+Binary files a/scripts/__pycache__/env.cpython-312.pyc and b/scripts/__pycache__/env.cpython-312.pyc differ
+diff --git a/scripts/__pycache__/utils.cpython-312.pyc b/scripts/__pycache__/utils.cpython-312.pyc
+index 8c9d354..f859f96 100644
+Binary files a/scripts/__pycache__/utils.cpython-312.pyc and b/scripts/__pycache__/utils.cpython-312.pyc differ
+diff --git a/scripts/env.py b/scripts/env.py
+index 768fdec..a6a45a5 100644
+--- a/scripts/env.py
++++ b/scripts/env.py
+@@ -65,6 +65,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
+         self._lap_completion_reward = lap_completion_reward
+         self._forward_velocity_reward = forward_velocity_reward
+         self._crash_penalty = crash_penalty
++        self.max_steps = 2000
++        self.step_count = 0
+         
+         # self._progress_reward_weight = progress_reward_weight
+         self.longitudinal_vel = 0.0
+@@ -193,10 +195,11 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
+         )
+         
+     def step(self, action):      
++        self.step_count += 1
++
+         #1. Process Action and Step Env
+         action = self._process_action(action)
+         self.do_simulation(action, self.frame_skip)
+-
+         #2. Get Observation
+         self._check_checkpoint_crossing()
+         crashed = self._check_crash()
+@@ -209,6 +212,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
+ 
+         #4. Check Termination
+         terminated = crashed
++        truncated = self.step_count >= self.max_steps + self.current_checkpoint * 500
+         
+         # Info dict
+         info = {
+@@ -221,7 +225,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
+         if self.render_mode == "human":
+             self.render()
+             
+-        return observation, reward, terminated, False, info
++        return observation, reward, terminated, truncated, info
+ 
+     def reset_model(self):
+         qpos = self.init_qpos.copy()
+@@ -241,7 +245,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
+         self.current_checkpoint = 0
+         self.prev_checkpoint = 0
+         self.longitudinal_vel = 0.0
+-
++        self.step_count = 0
++        
+         return self._get_obs()
+ 
+     def _get_obs(self):
+diff --git a/scripts/env_test.py b/scripts/env_test.py
+index aa9cdba..f80323e 100644
+--- a/scripts/env_test.py
++++ b/scripts/env_test.py
+@@ -6,7 +6,6 @@ from env import MujocoFormulaStudent
+ import time
+ import os
+ 
+-
+ def test_longitudinal_acceleration():
+     """Test acceleration and braking"""
+     actions = []
+diff --git a/scripts/train.py b/scripts/train.py
+index 1e967bd..9f3b4f6 100644
+--- a/scripts/train.py
++++ b/scripts/train.py
+@@ -16,12 +16,20 @@ from stable_baselines3.common.callbacks import (
+     CallbackList
+ )
+ from utils import ForceForwardWrapper
++import wandb
++from wandb.integration.sb3 import WandbCallback
+ 
+ seed = 42
+ model_dir = "models"
+ log_dir = "logs"
+ mujoco_path = "mujoco_tracks/sim_env.xml"
+ checkpoint_path = "mujoco_tracks/checkpoints.json"
++track = True
++timestep = 10_000
++nstep = 1024
++batchsize = 256
++exp_name = "testing"
++
+ # def parse_args():
+ #     parser = argparse.ArgumentParser()
+ 
+@@ -33,7 +41,7 @@ def make_env(model_path, run_name, seed=10, capture_video=False): #, idx, captur
+     def thunk():
+         env = MujocoFormulaStudent(
+             model_path=model_path,
+-            render_mode="human",
++            render_mode="rgb_array",
+             checkpoint_file=checkpoint_path
+         )
+         
+@@ -60,8 +68,27 @@ def main():
+     # pass
+     # args = parse_args()
+ 
+-    run_name = f"MujocoFormulaStudent__{seed}__{time.strftime('%Y-%m-%d_%H-%M-%S')}"
++    run_name = f"MujocoFormulaStudent__{exp_name}__{time.strftime('%Y-%m-%d_%H-%M-%S')}"
+     
++
++    if track:
++        
++        wandb.init(
++            project="mujoco-racing",
++            name=run_name,
++            config={
++                "algo": "PPO",
++                "env": "MujocoFormulaStudent",
++                "total_timesteps": timestep,
++                "n_steps": nstep,
++                "seed": seed,
++                "batchsize": batchsize
++            },
++            sync_tensorboard=True,  # automatically logs tensorboard
++            monitor_gym=True,       # logs episode rewards
++            save_code=True
++        )        
++
+     # TRY NOT TO MODIFY: seeding
+     random.seed(seed)
+     np.random.seed(seed)
+@@ -80,17 +107,18 @@ def main():
+     train_env = VecNormalize(train_env)
+     
+     # eval_env = make_vec_env(
+-    #     make_env(full_path, run_name, seed, True),
++    #     make_env(full_path, run_name, seed, False),
+     #     n_envs=1,
+     # )
+     # eval_env = VecTransposeImage(eval_env)
+ 
+     model = PPO("MultiInputPolicy", 
+                 train_env, 
+-                # verbose=1, 
++                verbose=1, 
+                 tensorboard_log=log_dir,
+                 device=device,
+-                n_steps=1024
++                n_steps=nstep,
++                batch_size=batchsize
+                 )
+ 
+     model_run_dir = os.path.join(model_dir, run_name)
+@@ -117,14 +145,22 @@ def main():
+     # train_env.observation_space
+     # print(f"{train_env.observation_space = }")
+     # raise
++
++    wandb_cb = WandbCallback(
++        model_save_path=model_run_dir,
++        verbose=2
++    )
+     
+-    model.learn(total_timesteps=10_000, 
++    model.learn(total_timesteps=timestep, 
+                 tb_log_name=run_name, 
+-                # callback=CallbackList([eval_callback]),
+-                progress_bar=True
++                progress_bar=True,
++                callback=wandb_cb
+                 )
+     
+     model.save(os.path.join(model_run_dir, 'last_model'))
+-    
++
++    if track:
++        wandb.finish(exit_code=0)
++
+ if __name__ == "__main__":
+     main()
+\ No newline at end of file
+diff --git a/scripts/utils.py b/scripts/utils.py
+index 5b79019..06f3de8 100644
+--- a/scripts/utils.py
++++ b/scripts/utils.py
+@@ -13,7 +13,7 @@ class MovingAverageFilter:
+ 
+ class ForceForwardWrapper(gym.Wrapper):
+ 
+-    def __init__(self, env, force_steps=100, force_episodes=5):
++    def __init__(self, env, force_steps=50, force_episodes=5):
+         super().__init__(env)
+         self.force_steps = force_steps
+         self.force_episodes = force_episodes
+@@ -28,7 +28,13 @@ class ForceForwardWrapper(gym.Wrapper):
+     def step(self, action):
+ 
+         if self.episode < self.force_episodes and self.t < self.force_steps:
+-            action = np.array([0.0, 1.0])  #throttle forward
++            # action = np.array([0.0, 1.0])  #throttle forward
++
++            action = [0.0]
++            throttle = np.random.random()/2 + 0.5
++            action.append(throttle)
++            action = np.array(action)
++
+ 
+         self.t += 1
+ 

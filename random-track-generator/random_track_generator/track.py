@@ -118,18 +118,28 @@ class Track:
             
         elif sim_type == SimType.MUJOCO:
             # Optionally compute checkpoints
-            checkpoints = None
-            if include_checkpoints:
-                cp_out_file = path / "checkpoints.json"
-                self.save_checkpoints(cp_out_file, n_checkpoints=n_checkpoints)
+            # checkpoints = None
+            # print(self.centreline)
+            # print(type(self.centreline))
+            # raise
+            # if include_checkpoints:
+            #     cp_out_file = path / "checkpoints.json"
+            #     self.save_checkpoints(cp_out_file, n_checkpoints=n_checkpoints)
 
             xml_str = _create_mujoco_xml(
                 self.cones_left,
                 self.cones_right,
                 cones_orange_big=self.orange_cones,
-                # checkpoints=checkpoints
             )
-
+            
+            distances = point_to_segment_distance(self.centreline, self.orange_cones[0], self.orange_cones[1])
+            closest_idx = np.argmin(distances)
+            centreline_rolled = np.roll(self.centreline, -closest_idx, axis=0)
+            
+            centreline_out_file = path / "centreline.csv"
+            np.savetxt(centreline_out_file, centreline_rolled, delimiter=',', 
+               header='x,y', comments='')
+            
             os.makedirs(path, exist_ok=True)
             out_file = path / "track.xml"
             with open(out_file, 'w') as f:
@@ -194,7 +204,10 @@ class Track:
         
         
         # self.centreline = np.roll(self.centreline, 10, axis=0)
-        
+        distances = point_to_segment_distance(self.centreline, self.orange_cones[0], self.orange_cones[1])
+        closest_idx = np.argmin(distances)
+        self.centreline = np.roll(self.centreline, -closest_idx, axis=0)
+                
         # Calculate cumulative arc length along centreline
         distances = np.zeros(len(self.centreline))
         for i in range(1, len(self.centreline)):
@@ -204,8 +217,10 @@ class Track:
         
         total_length = distances[-1]
         
+        print(f"First Point: {self.centreline[0]}")
+        
         # Desired distances for checkpoints (excluding start point, including end point)
-        checkpoint_distances = np.linspace(0, total_length, n_checkpoints+1)[1:]
+        checkpoint_distances = np.linspace(0, total_length, n_checkpoints+1)[:-1]
         
         checkpoints = []
         
@@ -214,7 +229,7 @@ class Track:
             # if i == len(checkpoint_distances) - 1:
             #     break
             # Find the closest point on centreline to target distance
-            idx = np.argmin(np.abs(distances - target_dist)) - 20
+            idx = np.argmin(np.abs(distances - target_dist)) 
             
             # Get point coordinates
             point = self.centreline[idx]
@@ -288,7 +303,7 @@ class Track:
         return checkpoints
     
     
-def _create_mujoco_xml(cones_left, cones_right, cones_orange_big=None):
+def _create_mujoco_xml(cones_left, cones_right, cones_orange_big):
     """
     Create MuJoCo XML for dynamic track cones that can be pushed/knocked over.
     """
@@ -449,3 +464,28 @@ def _create_mujoco_xml(cones_left, cones_right, cones_orange_big=None):
     rough_string = ET.tostring(mujoco, encoding='unicode')
     reparsed = minidom.parseString(rough_string)
     return reparsed.toprettyxml(indent="  ")
+
+
+def point_to_segment_distance(points, p1, p2):
+    """
+    points: (N,2) numpy array
+    p1, p2: endpoints of segment
+    returns: distance of each point to the segment
+    """
+    p1 = np.array(p1)
+    p2 = np.array(p2)
+
+    seg = p2 - p1
+    seg_len_sq = np.dot(seg, seg)
+
+    # projection parameter t
+    t = np.dot(points - p1, seg) / seg_len_sq
+
+    # clamp to segment
+    t = np.clip(t, 0, 1)
+
+    # closest points on segment
+    projection = p1 + t[:, None] * seg
+
+    # distance
+    return np.linalg.norm(points - projection, axis=1)
