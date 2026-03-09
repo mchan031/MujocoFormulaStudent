@@ -307,7 +307,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         return self.data.sensordata[adr:adr+dim].copy()
     
     def _get_image(self) -> np.ndarray:
-        return self.agent_renderer.render("rgb_array")
+        img = self.agent_renderer.render("rgb_array")
+        return img.astype(np.uint8)
 
     def _get_car_pos(self):
         return self.data.xpos[self.car_body_id].copy()

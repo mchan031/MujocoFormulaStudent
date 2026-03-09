@@ -1,6 +1,8 @@
 from collections import deque
 import numpy as np
 import gymnasium as gym
+import cv2
+from gymnasium import spaces
 
 class MovingAverageFilter:
     def __init__(self, max_len=5):
@@ -40,3 +42,21 @@ class ForceForwardWrapper(gym.Wrapper):
 
         # print(f"Steering: {action[0]} Throttle: {action[1]}")
         return self.env.step(action)
+
+class GrayscaleObservation(gym.ObservationWrapper):
+    def __init__(self, env):
+        super().__init__(env)
+
+        h, w, _ = env.observation_space.shape
+
+        self.observation_space = spaces.Box(
+            low=0,
+            high=255,
+            shape=(h, w, 1),
+            dtype=np.uint8
+        )
+
+    def observation(self, obs):
+        gray = cv2.cvtColor(obs, cv2.COLOR_RGB2GRAY)
+        gray = gray[:, :, None]   # add channel dimension
+        return gray.astype(np.uint8)

@@ -3,7 +3,7 @@ import numpy as np
 from env import MujocoFormulaStudent
 import os
 from stable_baselines3.common.env_util import make_vec_env
-from stable_baselines3.common.vec_env import VecTransposeImage, VecVideoRecorder, VecNormalize
+from stable_baselines3.common.vec_env import VecTransposeImage, VecVideoRecorder, VecNormalize, VecFrameStack
 import random
 import torch
 import argparse
@@ -15,7 +15,7 @@ from stable_baselines3.common.callbacks import (
     EvalCallback, 
     CallbackList
 )
-from utils import ForceForwardWrapper
+from utils import ForceForwardWrapper, GrayscaleObservation
 import wandb
 from wandb.integration.sb3 import WandbCallback
 import hydra
@@ -42,6 +42,10 @@ def make_env(model_path, cfg): #, idx, capture_video, run_name):
         env.action_space.seed(cfg.seed)
         env.observation_space.seed(cfg.seed)
         env = ForceForwardWrapper(env)
+        # env = GrayscaleObservation(env)
+        env = gym.wrappers.GrayscaleObservation(env)
+        env = gym.wrappers.FrameStackObservation(env, stack_size=4)
+        print(env.observation_space.shape)
         return env    
     return thunk
     
@@ -78,8 +82,9 @@ def main(config):
         n_envs=config.env.num_envs,
     )
     train_env.seed(seed=config.seed)
-    train_env = VecTransposeImage(train_env)
-    train_env = VecNormalize(train_env)
+    # train_env = VecTransposeImage(train_env)
+    # train_env = VecFrameStack(train_env, n_stack=4)
+    
 
     if config.capture_video:
         train_env = VecVideoRecorder(
@@ -96,13 +101,10 @@ def main(config):
         n_envs=1,
     )
     eval_env.seed(seed=config.seed)
-    eval_env = VecTransposeImage(eval_env)
-    # eval_env = VecNormalize(eval_env)
-    eval_env = VecNormalize(eval_env, training=False)
-    eval_env.obs_rms = train_env.obs_rms
-    eval_env.ret_rms = train_env.ret_rms
+    # eval_env = VecTransposeImage(eval_env)
+    # eval_env = VecFrameStack(eval_env, n_stack=4)
 
-    model = PPO("MultiInputPolicy", 
+    model = PPO("CnnPolicy", 
                 train_env, 
                 verbose=1, 
                 tensorboard_log=log_dir,

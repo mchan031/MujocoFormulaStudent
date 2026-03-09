@@ -8,3 +8,4 @@ wandb/
 outputs/
 
 MUJOCO_LOG.TXT
+*.pyc
