@@ -34,7 +34,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         lap_completion_reward: float = 1000.0,
         forward_velocity_reward: float = 0.05,
         crash_penalty: float = 100.0,
-        extra_progress_time: float = 200.0,
+        extra_progress_time: float = 2000.0,
         reset_noise_scale: float = 0.01,
         centreline_file: str = None,
         next_n_checkpoint: int = 5,
@@ -216,10 +216,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
 
         #4. Check Termination
         terminated = crashed
-        progress_count = int(self.progress * self._extra_progress_time)
-        truncated = self.step_count >= self.max_steps + progress_count
+        progress_count = int(self.progress * self._extra_progress_time) + self.max_steps 
+        truncated = self.step_count >= progress_count
         if truncated:
-            print(f"Step Count: {self.step_count} > Progress Count: {progress_count}")
+            print(f"Step Count: {self.step_count} >= Progress Count: {progress_count}")
         
         # Info dict
         info = {
