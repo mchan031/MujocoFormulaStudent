@@ -105,13 +105,14 @@ def test_env_with_logging():
         # print(data.)
         action = actions[step]
         obs, reward, terminated, truncated, info = env.step(action)
+        # print(info)
         # print(obs["progress"])
         # print(obs["checkpoint_distances"])
         total_reward += reward
         # print(f"{total_reward = }")
         # print(env._get_checkpoint_distances())
-        print(env.current_checkpoint)
-        print(env.progress)
+        # print(env.current_checkpoint)
+        # print(env.progress)
         pos = env._get_car_pos()
         # print(f"{pos[0]}")
         car_states = obs['car_states']

@@ -34,7 +34,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         lap_completion_reward: float = 1000.0,
         forward_velocity_reward: float = 0.05,
         crash_penalty: float = 100.0,
-        extra_progress_time: float = 2000.0,
+        checkpoint_bonus_step: float = 200.0,
         reset_noise_scale: float = 0.01,
         centreline_file: str = None,
         next_n_checkpoint: int = 5,
@@ -55,7 +55,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             lap_completion_reward,
             forward_velocity_reward,
             crash_penalty,
-            extra_progress_time,
+            checkpoint_bonus_step,
             reset_noise_scale,
             next_n_checkpoint,
             max_env_step,
@@ -69,11 +69,12 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._lap_completion_reward = lap_completion_reward
         self._forward_velocity_reward = forward_velocity_reward
         self._crash_penalty = crash_penalty
-        self._extra_progress_time = extra_progress_time
+        self._checkpoint_bonus_step = checkpoint_bonus_step
         self.max_steps = max_env_step
         
         self.step_count = 0
-        self.longitudinal_vel = 0.0
+        self.prev_velocity = None
+        self.prev_steering = 0.0
         
         ## Noise Config
         self._reset_noise_scale = reset_noise_scale
@@ -210,20 +211,20 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         observation = self._get_obs()
 
         #3. Compute Reward
-        _, self.longitudinal_vel = self._get_velocimeter()
-        reward = self._compute_reward(self.longitudinal_vel, action, crashed)
+        reward = self._compute_reward(action, crashed)
         self.prev_checkpoint = self.current_checkpoint
 
         #4. Check Termination
         terminated = crashed
-        progress_count = int(self.progress * self._extra_progress_time) + self.max_steps 
-        truncated = self.step_count >= progress_count
+        ##  max_allow_step =  max_step + (checkpoint_bonus_step * current_checkpoint) * num_of_lap
+        max_allow_step = self.max_steps + (self._checkpoint_bonus_step * (self.current_checkpoint + 1)) * (self.lap_count + 1)
+        truncated = self.step_count >= max_allow_step
         if truncated:
-            print(f"Step Count: {self.step_count} >= Progress Count: {progress_count}")
+            print(f"Step Count: {self.step_count} >= Max Allowed Step: {max_allow_step}")
         
         # Info dict
         info = {
-            'longitudinal_vel': self.longitudinal_vel,
+            'velocity': self.prev_velocity,
             'progress': self.progress,
             'lap_count': self.lap_count,
             'crashed': crashed,
@@ -251,8 +252,9 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.prev_cp_distances = np.zeros(self.n_checkpoints)
         self.current_checkpoint = 0
         self.prev_checkpoint = 0
-        self.longitudinal_vel = 0.0
         self.step_count = 0
+        self.prev_velocity = np.array(self._get_velocimeter())
+        self.prev_steering = 0.0
         
         return self._get_obs()
 
@@ -356,8 +358,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         ## Discrete
         self.progress = (self.current_checkpoint - 1) / (self.n_checkpoints) + self.lap_count
 
-    def _compute_reward(self, velocity, action, crashed):
+    def _compute_reward(self, action, crashed):
         
+        curr_vel = self._get_velocimeter()
+        lat_vel, long_vel = curr_vel
         reward = 0.0
 
         # -------------------------------------------------
@@ -374,24 +378,31 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # -------------------------------------------------
         # 3 Forward velocity reward
         # -------------------------------------------------
-        reward += self._forward_velocity_reward * max(velocity, 0.0)
+        reward += self._forward_velocity_reward * max(long_vel, 0.0)
 
         # # -------------------------------------------------
-        # # 4 Penalize sideways motion
+        # # 4 Velocity Smoothness Reward
         # # -------------------------------------------------
-        # lateral_speed = self._get_velocimeter()[0]
-
-        # reward -= 0.02 * abs(lateral_speed)
-
+        
+        curr_vel = np.array(curr_vel)
+        vel_change = np.linalg.norm(curr_vel - self.prev_velocity)
+        smoothness_penalty = -0.1 * vel_change
+        self.prev_velocity = curr_vel
+        reward -= smoothness_penalty
 
         # # -------------------------------------------------
-        # # 5 Steering penalty (prevents zig-zag)
+        # # 5 Steering Smoothness Reward
         # # -------------------------------------------------
 
-        # steering = action[0]
         # reward -= 0.01 * abs(steering)
-
-
+        steering = action[0]
+        steering_change = abs(steering - self.prev_steering)
+        self.prev_steering = steering
+        steering_smooth_penalty = - 1 * steering_change
+        reward -= steering_smooth_penalty
+        # print(f"{smoothness_penalty = } {steering_smooth_penalty = }")
+        # print(f"{vel_change * 10 = } {steering_change * 10 =}")
+        
         # -------------------------------------------------
         # 6 Crash penalty
         # -------------------------------------------------
@@ -408,8 +419,9 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         
         if abs(throttle) < 0.05:
             throttle = 0
-            
-        if self.longitudinal_vel <= 0.05 and throttle < 0:
+        
+        _, long_vel = self.prev_velocity
+        if long_vel <= 0.05 and throttle < 0:
             throttle = 0
 
         throttle *= MAX_THROTTLE        
@@ -493,8 +505,6 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             raise FileNotFoundError(f"Centreline file not found: {centreline_file}")
         
         self.centreline = np.loadtxt(centreline_file, delimiter=',', skiprows=1)
-        # print(self.centreline[0])
-        # print(centreline_file)
 
         
     def _create_checkpoint(self):
@@ -540,8 +550,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.checkpoint_tangents = np.array(cp_tangents, dtype=np.float32)
         self.checkpoint_distances = np.array(cp_distances, dtype=np.float32)
         self.track_length = total_length
-        print(f"Generated {self.n_checkpoints} checkpoints")
-        print(f"Track length: {self.track_length:.2f} m")
+        # print(f"Generated {self.n_checkpoints} checkpoints")
+        # print(f"Track length: {self.track_length:.2f} m")
         
         
     def _get_frenet_frame(self, point_index):
