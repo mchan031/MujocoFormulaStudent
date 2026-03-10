@@ -34,11 +34,11 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         lap_completion_reward: float = 1000.0,
         forward_velocity_reward: float = 0.05,
         crash_penalty: float = 100.0,
-        checkpoint_bonus_step: float = 200.0,
+        checkpoint_bonus_step: float = 250.0,
         reset_noise_scale: float = 0.01,
         centreline_file: str = None,
         next_n_checkpoint: int = 5,
-        max_env_step: int = 2000,
+        max_env_step: int = 1500,
         num_checkpoints: int = 10,
         **kwargs,
     ):
@@ -217,7 +217,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         #4. Check Termination
         terminated = crashed
         ##  max_allow_step =  max_step + (checkpoint_bonus_step * current_checkpoint) * num_of_lap
-        max_allow_step = self.max_steps + (self._checkpoint_bonus_step * (self.current_checkpoint + 1)) * (self.lap_count + 1)
+        max_allow_step = self.max_steps + (self._checkpoint_bonus_step * (self.current_checkpoint)) * (self.lap_count + 1)
         truncated = self.step_count >= max_allow_step
         if truncated:
             print(f"Step Count: {self.step_count} >= Max Allowed Step: {max_allow_step}")
@@ -356,7 +356,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
 
     def _update_progress(self):
         ## Discrete
-        self.progress = (self.current_checkpoint - 1) / (self.n_checkpoints) + self.lap_count
+        self.progress = (self.current_checkpoint) / (self.n_checkpoints) + self.lap_count
 
     def _compute_reward(self, action, crashed):
         

@@ -10,7 +10,7 @@ env:
   num_checkpoints: 10
   lap_completion_reward: 1000
   max_env_step: 1500
-  checkpoint_bonus_step: 200
+  checkpoint_bonus_step: 250
 
 wandb:
   project: mujoco-racing

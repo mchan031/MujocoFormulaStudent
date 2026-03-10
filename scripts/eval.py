@@ -14,7 +14,7 @@ seed = 42
 device = "cpu"
 
 # model_path = "models/MujocoFormulaStudent__testing__2026-03-08_16-46-30/model.zip"
-model_path = "d:/Users/mchan031/Downloads/last_model.zip"
+model_path = "models/MujocoFormulaStudent__testing__2026-03-09_17-55-13/model.zip"
 # model_path = "wandb/run-20260308_164630-k5enfe6y/files/model.zip"
 
 def make_env(env_path, centreline_path, seed=42):
@@ -24,6 +24,11 @@ def make_env(env_path, centreline_path, seed=42):
             model_path=env_path,
             render_mode="rgb_array",
             centreline_file=centreline_path,
+            num_checkpoints=20
+            # lap_completion_reward=cfg.env.lap_completion_reward,
+            # max_env_step=cfg.env.max_env_step,
+            # checkpoint_bonus_step=cfg.env.checkpoint_bonus_step
+            
             # extra_progress_time=2500
             # lap_completion_reward=2000
         )
@@ -42,16 +47,16 @@ def eval():
     )
     # Apply the same wrappers as during training
     eval_env = VecTransposeImage(eval_env)  # This transposes (84,84,3) to (3,84,84)
-    eval_env = VecNormalize.load("d:/Users/mchan031/Downloads/vecnormalize.pkl", eval_env)
+    eval_env = VecNormalize.load("models/MujocoFormulaStudent__testing__2026-03-09_17-55-13/vecnormalize.pkl", eval_env)
     eval_env.training = False
     eval_env.norm_reward = False    
-    eval_env = VecVideoRecorder(
-        eval_env,
-        video_folder="./videos",
-        record_video_trigger=lambda step: step == 0,  # start recording immediately
-        video_length=2000,  # max steps to record
-        name_prefix="fs_unseen_track",
-    )
+    # eval_env = VecVideoRecorder(
+    #     eval_env,
+    #     video_folder="./videos",
+    #     record_video_trigger=lambda step: step == 0,  # start recording immediately
+    #     video_length=2000,  # max steps to record
+    #     name_prefix="fs_unseen_track",
+    # )
     
     np.random.seed(seed)
     
@@ -81,18 +86,18 @@ def eval():
             # print(obs)
             # raise
         #             # Show camera
-        #     frame = eval_env.envs[0].render()
+            frame = eval_env.envs[0].render()
 
-        #     frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-        #     cv2.imshow("View", frame)
-        #     # cv2.imshow("View", cv2.resize(frame, (256, 256)))
-        #     if cv2.waitKey(1) & 0xFF == ord('q'):
-        #         break
+            frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+            cv2.imshow("View", frame)
+            # cv2.imshow("View", cv2.resize(frame, (256, 256)))
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
             
-        #     if step_count % 10 == 0:
+            if step_count % 10 == 0:
         #         # print(f"{total_reward = } {info = }")
         #         # print(action)
-        #         print(f"{info[0]["progress"] = }")
+                print(f"{info[0]["progress"] = }")
         
         # # print(f"Episode {episode + 1}: Reward = {total_reward:.2f}, Steps = {step_count}")
     
