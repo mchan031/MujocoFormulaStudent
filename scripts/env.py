@@ -354,9 +354,6 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # -------------------------------------------------
         reward += self._forward_velocity_reward * max(long_vel, 0.0)
 
-        if velocity < 0.1:
-            reward -= 0.1
-
         # # -------------------------------------------------
         # # 4 Velocity Smoothness Reward
         # # -------------------------------------------------
