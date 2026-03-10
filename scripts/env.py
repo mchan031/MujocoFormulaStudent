@@ -133,6 +133,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.prev_cp_distances = np.zeros(self.n_checkpoints)
         self.current_checkpoint = 0
         self.prev_checkpoint = 0
+        self.lap_completed = False
         
         # Collision Detection
         self.car_geoms = self._get_car_geom_ids()
@@ -169,7 +170,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         checkpoint_space = spaces.Box(
             low=0, 
             high=np.inf, 
-            shape=(5,), 
+            shape=(self._next_n_checkpoint,), 
             dtype=np.float32)  # distances to next 5
 
         # Progress 0.0 to 1.0, 1.0 for full lap completion 
@@ -219,6 +220,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         ##  max_allow_step =  max_step + (checkpoint_bonus_step * current_checkpoint) * num_of_lap
         # max_allow_step = self.max_steps + (self._checkpoint_bonus_step * (self.current_checkpoint)) * (self.lap_count + 1)
         max_allow_step = self.max_steps + (self.current_checkpoint + self.n_checkpoints * self.lap_count) * self._checkpoint_bonus_step
+        # print(f"{max_allow_step = }")
         truncated = self.step_count >= max_allow_step
         if truncated:
             print(f"Step Count: {self.step_count} >= Max Allowed Step: {max_allow_step}")
@@ -256,6 +258,9 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.step_count = 0
         self.prev_velocity = np.array(self._get_velocimeter())
         self.prev_steering = 0.0
+        self.lap_completed = False
+        # print(self._get_checkpoint_distances())
+        # raise
         
         return self._get_obs()
 
@@ -373,9 +378,16 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # -------------------------------------------------
         # 2 Checkpoint reward
         # -------------------------------------------------
+        # print(self.current_checkpoint, self.prev_checkpoint)
+        # print(self.prev_checkpoint)
         if self.current_checkpoint != self.prev_checkpoint:
             reward += self._lap_completion_reward / self.n_checkpoints
+            print(f"lap completion reward: {reward}")
 
+        if self.n_checkpoints == 1 and self.lap_completed:
+            reward += self._lap_completion_reward ** self.lap_count
+            self.lap_completed = False
+            # print("Lap Completd Reward Given")
         # -------------------------------------------------
         # 3 Forward velocity reward
         # -------------------------------------------------
@@ -399,7 +411,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         steering = action[0]
         steering_change = abs(steering - self.prev_steering)
         self.prev_steering = steering
-        steering_smooth_penalty = - 1 * steering_change
+        steering_smooth_penalty = - 0.1 * steering_change
         reward += steering_smooth_penalty
         # print(f"{smoothness_penalty = } {steering_smooth_penalty = }")
         # print(f"{vel_change * 10 = } {steering_change * 10 =}")
@@ -444,9 +456,12 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             crossed = True
             self.current_checkpoint = (cp + 1) % self.n_checkpoints
             
-            if self.current_checkpoint < cp:
+            if self.current_checkpoint < cp or self.n_checkpoints == 1:
                 self.lap_count += 1
-
+            # print(f"{self.lap_count = }")
+            if self.n_checkpoints == 1:
+                self.lap_completed = True
+            
             self._update_progress()
 
         self.prev_cp_distances = dists
@@ -551,7 +566,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.checkpoint_tangents = np.array(cp_tangents, dtype=np.float32)
         self.checkpoint_distances = np.array(cp_distances, dtype=np.float32)
         self.track_length = total_length
-        # print(f"Generated {self.n_checkpoints} checkpoints")
+        (f"Generated {self.n_checkpoints} checkpoints")
         # print(f"Track length: {self.track_length:.2f} m")
         
         

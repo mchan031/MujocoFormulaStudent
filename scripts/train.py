@@ -38,7 +38,8 @@ def make_env(model_path, cfg): #, idx, capture_video, run_name):
             num_checkpoints=cfg.env.num_checkpoints,
             lap_completion_reward=cfg.env.lap_completion_reward,
             max_env_step=cfg.env.max_env_step,
-            checkpoint_bonus_step=cfg.env.checkpoint_bonus_step
+            checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
+            next_n_checkpoint=cfg.env.next_n_checkpoint
             )
         
         env.action_space.seed(cfg.seed)
