@@ -217,7 +217,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         #4. Check Termination
         terminated = crashed
         ##  max_allow_step =  max_step + (checkpoint_bonus_step * current_checkpoint) * num_of_lap
-        max_allow_step = self.max_steps + (self._checkpoint_bonus_step * (self.current_checkpoint)) * (self.lap_count + 1)
+        # max_allow_step = self.max_steps + (self._checkpoint_bonus_step * (self.current_checkpoint)) * (self.lap_count + 1)
+        max_allow_step = self.max_steps + (self.current_checkpoint + self.n_checkpoints * self.lap_count) * self._checkpoint_bonus_step
         truncated = self.step_count >= max_allow_step
         if truncated:
             print(f"Step Count: {self.step_count} >= Max Allowed Step: {max_allow_step}")
