@@ -388,18 +388,18 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         vel_change = np.linalg.norm(curr_vel - self.prev_velocity)
         smoothness_penalty = -0.1 * vel_change
         self.prev_velocity = curr_vel
-        reward -= smoothness_penalty
+        reward += smoothness_penalty
 
-        # # -------------------------------------------------
-        # # 5 Steering Smoothness Reward
-        # # -------------------------------------------------
+        # # # -------------------------------------------------
+        # # # 5 Steering Smoothness Reward
+        # # # -------------------------------------------------
 
         # reward -= 0.01 * abs(steering)
         steering = action[0]
         steering_change = abs(steering - self.prev_steering)
         self.prev_steering = steering
         steering_smooth_penalty = - 1 * steering_change
-        reward -= steering_smooth_penalty
+        reward += steering_smooth_penalty
         # print(f"{smoothness_penalty = } {steering_smooth_penalty = }")
         # print(f"{vel_change * 10 = } {steering_change * 10 =}")
         
