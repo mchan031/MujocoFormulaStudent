@@ -11,7 +11,7 @@ from utils import MovingAverageFilter
 from gymnasium.utils import EzPickle
 
 
-MAX_THROTTLE = 1.5
+MAX_THROTTLE = 2.5
 
 class MujocoFormulaStudent(MujocoEnv, EzPickle):
     metadata = {
@@ -387,7 +387,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         
         curr_vel = np.array(curr_vel)
         vel_change = np.linalg.norm(curr_vel - self.prev_velocity)
-        smoothness_penalty = -0.1 * vel_change
+        smoothness_penalty = -0.5 * vel_change
         self.prev_velocity = curr_vel
         reward += smoothness_penalty
 
@@ -404,6 +404,12 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # print(f"{smoothness_penalty = } {steering_smooth_penalty = }")
         # print(f"{vel_change * 10 = } {steering_change * 10 =}")
         
+        throttle = action[1]
+        if long_vel <= 0.05 and throttle < 0:
+            reward -= 1 * abs(throttle)
+            
+
+        # reward += steering_smooth_penalty        
         # -------------------------------------------------
         # 6 Crash penalty
         # -------------------------------------------------
