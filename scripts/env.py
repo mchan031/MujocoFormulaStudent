@@ -40,6 +40,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         next_n_checkpoint: int = 5,
         max_env_step: int = 1500,
         num_checkpoints: int = 10,
+        vel_penalty_weight: int = 1,
+        steer_penalty_weight: int = 1,
         **kwargs,
     ):
         
