@@ -60,6 +60,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             next_n_checkpoint,
             max_env_step,
             num_checkpoints,
+            vel_penalty_weight,
+            steer_penalty_weight,
             **kwargs,
         )
         
@@ -71,6 +73,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._crash_penalty = crash_penalty
         self._checkpoint_bonus_step = checkpoint_bonus_step
         self.max_steps = max_env_step
+        self._vel_penalty_weight = vel_penalty_weight
+        self._steer_penalty_weight = steer_penalty_weight
         
         self.step_count = 0
         self.prev_velocity = None
@@ -229,6 +233,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             'progress': self.progress,
             'lap_count': self.lap_count,
             'crashed': crashed,
+            'car_states':self._get_car_states(),
+            'car_pos': self._get_car_pos()
         }        
         
         if self.render_mode == "human":
@@ -387,28 +393,22 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         
         curr_vel = np.array(curr_vel)
         vel_change = np.linalg.norm(curr_vel - self.prev_velocity)
-        smoothness_penalty = -0.5 * vel_change
         self.prev_velocity = curr_vel
-        reward += smoothness_penalty
+        reward -= self._vel_penalty_weight * vel_change
 
         # # # -------------------------------------------------
         # # # 5 Steering Smoothness Reward
         # # # -------------------------------------------------
 
-        # reward -= 0.01 * abs(steering)
         steering = action[0]
         steering_change = abs(steering - self.prev_steering)
         self.prev_steering = steering
-        steering_smooth_penalty = - 1 * steering_change
-        reward += steering_smooth_penalty
-        # print(f"{smoothness_penalty = } {steering_smooth_penalty = }")
-        # print(f"{vel_change * 10 = } {steering_change * 10 =}")
+        reward -= self._steer_penalty_weight * steering_change
         
         throttle = action[1]
         if long_vel <= 0.05 and throttle < 0:
             reward -= 1 * abs(throttle)
             
-
         # reward += steering_smooth_penalty        
         # -------------------------------------------------
         # 6 Crash penalty

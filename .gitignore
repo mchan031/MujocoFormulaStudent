@@ -6,5 +6,6 @@ logs/
 videos/
 wandb/
 outputs/
+fs_gym/
 
 MUJOCO_LOG.TXT
