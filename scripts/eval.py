@@ -10,6 +10,8 @@ import cv2
 import matplotlib.pyplot as plt
 import time
 import os
+from matplotlib.collections import LineCollection
+
 
 mujoco_path = "mujoco_tracks/sim_env.xml"
 centreline_path = "mujoco_tracks/centreline.csv"
@@ -17,10 +19,30 @@ seed = 42
 device = "cpu"
 
 # model_path = "models/MujocoFormulaStudent__testing__2026-03-08_16-46-30/model.zip"
-model_path = "models/MujocoFormulaStudent__faster_speed_reverse_penalty__2026-03-11_16-06-12/model.zip"
+# model_path = "models/MujocoFormulaStudent__faster_speed_reverse_penalty__2026-03-11_16-06-12/model.zip"
 # model_path = "models/MujocoFormulaStudent__testing__2026-03-09_17-55-13/model.zip"
-
+model_path = "good_model/MujocoFormulaStudent__faster_speed_reverse_penalty__2026-03-11_16-06-12/model.zip"
 # model_path = "wandb/run-20260308_164630-k5enfe6y/files/model.zip"
+# vec_normalize_path = "good_model/MujocoFormulaStudent__faster_speed_reverse_penalty__2026-03-11_16-06-12/vecnormalize.pkl"
+def load_cones(csv_path):
+
+    blue = []
+    yellow = []
+
+    with open(csv_path) as f:
+        for line in f:
+            parts = line.strip().split(",")
+
+            color = parts[0]
+            x = float(parts[1])
+            y = float(parts[2])
+
+            if color == "blue":
+                blue.append((x,y))
+            elif color == "yellow":
+                yellow.append((x,y))
+
+    return np.array(blue), np.array(yellow)
 
 def make_env(env_path, centreline_path, seed=42):
     """Create a single environment instance"""
@@ -52,7 +74,7 @@ def eval():
     )
     # Apply the same wrappers as during training
     eval_env = VecTransposeImage(eval_env)  # This transposes (84,84,3) to (3,84,84)
-    eval_env = VecNormalize.load("models/MujocoFormulaStudent__faster_speed_reverse_penalty__2026-03-11_16-06-12/vecnormalize.pkl", eval_env)
+    eval_env = VecNormalize.load("good_model/MujocoFormulaStudent__faster_speed_reverse_penalty__2026-03-11_16-06-12/vecnormalize.pkl", eval_env)
     eval_env.training = False
     eval_env.norm_reward = False    
     # eval_env = VecVideoRecorder(
@@ -72,7 +94,8 @@ def eval():
         'g': [],
         'time': []
     }
-    
+    trajectory = []
+    speed_profile = []
     lap_time_list = []
     
     
@@ -102,7 +125,7 @@ def eval():
     # print(f"{method = }")
     while not done:
         # Get action from model
-        action, _ = model.predict(obs, deterministic=False)
+        action, _ = model.predict(obs, deterministic=True)
         obs, reward, done, info = eval_env.step(action)
         
         
@@ -111,14 +134,14 @@ def eval():
         # Optional: render is handled automatically with render_mode="human"
         # print(obs)
         # raise
-    #             # Show camera
-        frame = eval_env.envs[0].render()
+    # #             # Show camera
+    #     frame = eval_env.envs[0].render()
 
-        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-        cv2.imshow("View", frame)
-        # cv2.imshow("View", cv2.resize(frame, (256, 256)))
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+    #     frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+    #     cv2.imshow("View", frame)
+    #     # cv2.imshow("View", cv2.resize(frame, (256, 256)))
+    #     if cv2.waitKey(1) & 0xFF == ord('q'):
+    #         break
         
         if done:
             print("Colllision!!!!!")
@@ -143,31 +166,52 @@ def eval():
             print("    Lap Time    ")
             print("-" * 30)
             
+            # break
+            
             # print(f"Lap Time:")
             for i, item in enumerate(lap_time_list):
                 print(f"Lap: {i} Time: {item}")
             
             # print("-" * 50)
-        if step_count > 1000:
+            
+        if num_lap > 5:
+            break
+        if step_count > 100:
             print(f"{step_count = }")
             break
-            # break
+            break
         
-        car_states = obs['car_states'][0]
+        # car_states = obs['car_states'][0]
+        # print(info)
+        # raise
+        car_states = info[0]["car_states"]
+        car_pos = info[0]["car_pos"]
+
+        x = car_pos[0]
+        y = car_pos[1]
+        long_vel = car_states[0]
+        lat_vel = car_states[1]
+        speed = np.sqrt(long_vel**2 + lat_vel**2)
+        trajectory.append([x, y])
+        speed_profile.append(speed)
+        
         current_time = time.time() - start_time
-        acc_filtered_long = 0.9 * acc_prev_long + 0.1 * car_states[2]
-        acc_filtered_lat = 0.9 * acc_prev_lat + 0.1 * car_states[3]
-        data['step'].append(step_count)
-        data['time'].append(current_time)
         data['long_vel'].append(car_states[0])
         data['lat_vel'].append(car_states[1])
+        acc_filtered_long = 0.9 * acc_prev_long + 0.1 * car_states[2]
+        acc_filtered_lat = 0.9 * acc_prev_lat + 0.1 * car_states[3]
+        data['yaw_rate'].append(car_states[4])
+        data['steering'].append(car_states[5])
+        data['throttle'].append(car_states[6])
+        # if step_count % 10 == 0:
+        #     print(f"Steering: {car_states[5]} Throttle: {car_states[6]}")
+
+        data['step'].append(step_count)
+        data['time'].append(current_time)
         # data['long_acc'].append(car_states[2])
         data['long_acc'].append(acc_filtered_long)
 
         data['lat_acc'].append(acc_filtered_lat)
-        data['yaw_rate'].append(car_states[4])
-        data['steering'].append(car_states[5])
-        data['throttle'].append(car_states[6])
         # data['g'].append(g_filtered)
 
         acc_prev_long = acc_filtered_long
@@ -177,7 +221,7 @@ def eval():
     eval_env.close()
     cv2.destroyAllWindows()
     plot_telemetry(data)
-
+    
 def plot_telemetry(data):
     fig, axes = plt.subplots(3, 2, figsize=(12, 10))
     
