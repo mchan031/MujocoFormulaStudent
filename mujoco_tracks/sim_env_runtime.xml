@@ -3,7 +3,7 @@
     <size njmax="500" nconmax="100"/>
     <option timestep="0.01"/>
 
-    <include file="{TRACK_FILE}"/>
+    <include file="track_1/track.xml"/>
     <include file="cars/base_car/buddy.xml"/>
 
     <visual>

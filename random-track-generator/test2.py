@@ -175,7 +175,7 @@ track = generate_track(
     min_bound=0.,      # Minimum x/y bound [m]
     max_bound=150.,    # Maximum x/y bound [m]
     mode="extend",     # Generation mode
-    seed=1            # Optional: for reproducibility
+    # seed=1            # Optional: for reproducibility
 )
 
 print(track.orange_cones)
@@ -190,6 +190,7 @@ fig1, ax1, checkpoints = plot_track_with_frames(track, n_checkpoints=n_checkpoin
 # fig2, ax2 = plot_perpendicular_lines(track, n_checkpoints=n_checkpoints, line_length=5.0)
 # track.save("mujoco_tracks", SimType.MUJOCO,  include_checkpoints=True)
 track.save("mujoco_tracks", SimType.MUJOCO, include_checkpoints=True, n_checkpoints=n_checkpoints)
+track.save("mujoco_tracks", SimType.FSDS, include_checkpoints=True, n_checkpoints=n_checkpoints)
 
 # print(f"{checkpoints = }")
 # # Access checkpoint data

@@ -14,34 +14,38 @@ import torch
 import cv2
 from utils import plot_racing_line
 
-FILE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config")
-
-def make_env(env_path, cfg):
+def make_env(cfg):
     """Create a single environment instance"""
+    
+    
     def _init():
+        global track_cones_path
+
         env = MujocoFormulaStudent(
-            model_path=env_path,
             render_mode="rgb_array",
             num_checkpoints=cfg.env.num_checkpoints,
             lap_completion_reward=cfg.env.lap_completion_reward,
             max_env_step=cfg.env.max_env_step,
             checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
-            centreline_file=cfg.env.centreline_path
         )
         # env.reset(seed=cfg.seed)
+        
+        track_cones_path = env.random_track_path
+        
         return env
     return _init
+
+FILE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config")
 
 @hydra.main(config_path=FILE_PATH, config_name="eval", version_base=None)
 def main(config):
     device = torch.device('cuda' if torch.cuda.is_available() and config.cuda else 'cpu')
     
-    full_path = os.path.join(os.path.dirname(__file__), os.path.pardir, config.env.mujoco_path)
-    model_path = config.env.model_dir + "/model.zip"
-    vecnormalize_path = config.env.model_dir + "/vecnormalize.pkl"
+    model_path = config.ppo.model_dir + "/model.zip"
+    vecnormalize_path = config.ppo.model_dir + "/vecnormalize.pkl"
     
     eval_env = make_vec_env(
-        make_env(full_path, config),
+        make_env(config),
         n_envs=1,
     )
     eval_env = VecTransposeImage(eval_env)  
@@ -74,7 +78,7 @@ def main(config):
     if config.plot_racing_line:
         trajectory = []
         speed_profile = []
-    
+        
     while not done:
         action, _ = model.predict(obs, deterministic=True)
         obs, reward, done, info = eval_env.step(action)
@@ -134,7 +138,7 @@ def main(config):
     cv2.destroyAllWindows()
     eval_env.close()
     if config.plot_racing_line:
-        plot_racing_line(trajectory, speed_profile, config.track_cones_path, lap_time_list)
+        plot_racing_line(trajectory, speed_profile, track_cones_path, lap_time_list)
         
 
 if __name__ == "__main__":

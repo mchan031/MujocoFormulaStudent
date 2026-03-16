@@ -7,8 +7,9 @@ import mujoco
 from typing import Optional, Dict, Any, Tuple, List
 import os
 import json
-from utils import MovingAverageFilter
+from utils import MovingAverageFilter, create_env_xml 
 from gymnasium.utils import EzPickle
+import random
 
 
 class MujocoFormulaStudent(MujocoEnv, EzPickle):
@@ -22,7 +23,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
     
     def __init__(
         self,
-        model_path: str,
+        track_root: str = "mujoco_tracks",
         frame_skip: int = 5,
         observation_width: int = 84,
         observation_height: int = 84,
@@ -34,19 +35,18 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         crash_penalty: float = 100.0,
         checkpoint_bonus_step: float = 250.0,
         reset_noise_scale: float = 0.01,
-        centreline_file: str = None,
         next_n_checkpoint: int = 5,
         max_env_step: int = 1500,
         num_checkpoints: int = 10,
         vel_penalty_weight: int = 1,
         steer_penalty_weight: int = 1,
         max_throttle: float = 2.5,
+        random_track_mode: bool = True,
         **kwargs,
     ):
         
         EzPickle.__init__(
             self,
-            model_path,
             frame_skip,
             observation_width,
             observation_height,
@@ -64,6 +64,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             vel_penalty_weight,
             steer_penalty_weight,
             max_throttle,
+            random_track_mode,
             **kwargs,
         )
         
@@ -101,17 +102,28 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.centreline = None
         self.n_checkpoints = num_checkpoints
         self._next_n_checkpoint = next_n_checkpoint
-        
-        self._load_centreline(centreline_file)
-        self._create_checkpoint()
-                
+
         # Initialize observation space
         self._initialize_observation_space()
         
+        # Randomly select a track from the track root directory
+        track_dir = self._select_random_track(track_root, random_track_mode)        
+        print("Running on track:", track_dir)
+        
+        # Load Selected Track Centreline
+        self._load_centreline(track_dir)
+        self._create_checkpoint()
+        
+        self.random_track_path = os.path.join(track_dir, "random_track.csv") 
+
+        # Create Runtime XML with selected track
+        model_xml_path = create_env_xml(track_dir)
+        full_xml_path = os.path.join(os.path.dirname(__file__), os.path.pardir, model_xml_path)
+            
         # Initialize Parent Class
         MujocoEnv.__init__(
             self,
-            model_path=model_path,
+            model_path=full_xml_path,
             frame_skip=frame_skip,
             observation_space=self.observation_space,
             width=render_width,
@@ -152,7 +164,6 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # Domain Randomization
         self.wind_strength = None
         self.wind_dir = None
-        
 
     def _initialize_observation_space(self):
         """
@@ -525,7 +536,9 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         return cone_geom_ids
     
     
-    def _load_centreline(self, centreline_file):
+    def _load_centreline(self, track_dir):
+        
+        centreline_file = os.path.join(track_dir, "centreline.csv")
         if not os.path.exists(centreline_file):
             raise FileNotFoundError(f"Centreline file not found: {centreline_file}")
         
@@ -631,3 +644,19 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             return
         wind_force = self.wind_strength * self.wind_dir 
         self.data.xfrc_applied[self.car_body_id][:3] = wind_force
+        
+    def _select_random_track(self, track_root, random_track_mode=False):
+        
+        if not os.path.exists(track_root):
+            raise FileNotFoundError(f"Track root directory not found: {track_root}")
+
+        tracks = [
+            os.path.join(track_root, d)
+            for d in os.listdir(track_root)
+            if d.startswith("track")
+        ]
+        
+        if random_track_mode:
+            return random.choice(tracks)
+        else:
+            return tracks[0]

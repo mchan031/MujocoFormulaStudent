@@ -3,6 +3,7 @@ import numpy as np
 import gymnasium as gym
 import matplotlib.pyplot as plt 
 from matplotlib.collections import LineCollection
+import os
 
 class MovingAverageFilter:
     def __init__(self, max_len=5):
@@ -128,3 +129,18 @@ def plot_racing_line(traj, speed, track_csv, lap_time_list=None):
     ax.grid(alpha=0.3)
 
     plt.show()
+    
+    
+def create_env_xml(track_dir):
+
+    template = open("mujoco_tracks/sim_env.xml").read()
+
+    track_name = os.path.basename(track_dir)
+    track_xml = f"{track_name}/track.xml"
+
+    xml = template.replace("{TRACK_FILE}", track_xml)
+
+    with open("mujoco_tracks/sim_env_runtime.xml", "w") as f:
+        f.write(xml)
+
+    return "mujoco_tracks/sim_env_runtime.xml"

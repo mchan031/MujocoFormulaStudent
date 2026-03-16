@@ -1,11 +1,11 @@
 seed: 42
 cuda: False
 cuda_deterministic: True
-capture_video: True
+capture_video: False
 video_length: 500
 video_name: "eval_video"
 plot_racing_line: True
-max_step: 
+max_step: 100
 track_cones_path: "mujoco_tracks/random_track.csv"
 num_laps: 3
 
@@ -14,7 +14,7 @@ env:
   lap_completion_reward: 1000
   max_env_step: 1500
   checkpoint_bonus_step: 250
-  mujoco_path: "mujoco_tracks/sim_env.xml"
-  centreline_path: "mujoco_tracks/centreline.csv"
+  
+ppo:
   # model_dir: "good_model/MujocoFormulaStudent__smooth_reward_steer_vel__2026-03-10_17-14-42"
   model_dir: "good_model/MujocoFormulaStudent__faster_speed_reverse_penalty__2026-03-11_16-06-12"

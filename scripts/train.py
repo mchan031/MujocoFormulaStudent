@@ -23,23 +23,19 @@ from omegaconf import DictConfig, OmegaConf
 
 model_dir = "models"
 log_dir = "logs"
-# mujoco_path = "mujoco_tracks/sim_env.xml"
-# checkpoint_path = "mujoco_tracks/checkpoints.json"
-# centreline_path = "mujoco_tracks/centreline.csv"
 
 FILE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config")
 
-def make_env(model_path, cfg): #, idx, capture_video, run_name):
+def make_env(cfg): #, idx, capture_video, run_name):
     def thunk():
         env = MujocoFormulaStudent(
-            model_path=model_path,
             render_mode="rgb_array",
-            centreline_file=cfg.env.centreline_path,
             num_checkpoints=cfg.env.num_checkpoints,
             lap_completion_reward=cfg.env.lap_completion_reward,
             max_env_step=cfg.env.max_env_step,
             checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
             max_throttle=cfg.env.max_throttle,
+            random_track_mode=cfg.env.random_track_mode,
             )
         
         env.action_space.seed(cfg.seed)
@@ -52,8 +48,6 @@ def make_env(model_path, cfg): #, idx, capture_video, run_name):
 @hydra.main(config_path=FILE_PATH, config_name="train", version_base=None)
 def main(config):
     run_name = f"MujocoFormulaStudent__{config.exp_name}__{time.strftime('%Y-%m-%d_%H-%M-%S')}"
-    full_path = os.path.join(os.path.dirname(__file__), os.path.pardir, config.env.mujoco_path)
-
 
     if config.track_exp:
         wandb_config = OmegaConf.to_container(config, resolve=True, throw_on_missing=True)
@@ -77,7 +71,7 @@ def main(config):
     
     ## make train env
     train_env = make_vec_env(
-        make_env(full_path, config),
+        make_env(config),
         n_envs=config.env.num_envs,
     )
     train_env.seed(seed=config.seed)
@@ -95,7 +89,7 @@ def main(config):
         )
         
     eval_env = make_vec_env(
-        make_env(full_path, config),
+        make_env(config),
         n_envs=1,
     )
     eval_env.seed(seed=config.seed)

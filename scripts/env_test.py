@@ -48,15 +48,9 @@ def test_lateral_acceleration_sinusoidal(steps=500, amplitude=1.0, frequency=0.0
 def test_env_with_logging():
     # model_path = "C:/Users/munki/OneDrive - Nanyang Technological University/Y4/new_fyp/models/one_car.xml"
     # model_path = "C:/Users/munki/OneDrive - Nanyang Technological University/Y4/new_fyp/mujoco_tracks/new_scene.xml"
-    mujoco_path = "mujoco_tracks/sim_env.xml"
     
-    full_path = os.path.join(os.path.dirname(__file__), os.path.pardir, mujoco_path)
-
     env = MujocoFormulaStudent(
-        model_path=full_path,
         render_mode="rgb_array",
-        # checkpoint_file="mujoco_tracks/checkpoints.json",
-        centreline_file="mujoco_tracks/centreline.csv",
         num_checkpoints=4,
         # max_throttle=5
     )
