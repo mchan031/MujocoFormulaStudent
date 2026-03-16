@@ -28,7 +28,7 @@
 
     <!-- Optional: Add a floor if needed (currently commented out) -->
     <worldbody>
-        <geom name="floor" type="plane" size="120 120 0.1" rgba="0.1 0.1 0.1 1.0" condim="3"/>
+        <geom name="floor" type="plane" size="120 120 0.1" rgba="0.1 0.1 0.1 1.0" condim="3" friction="1.0 0.005 0.0001"/>
     </worldbody>
 
     <!-- <worldbody> -->

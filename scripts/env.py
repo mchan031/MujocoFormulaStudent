@@ -11,8 +11,6 @@ from utils import MovingAverageFilter
 from gymnasium.utils import EzPickle
 
 
-MAX_THROTTLE = 2.5
-
 class MujocoFormulaStudent(MujocoEnv, EzPickle):
     metadata = {
         "render_modes": [
@@ -42,6 +40,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         num_checkpoints: int = 10,
         vel_penalty_weight: int = 1,
         steer_penalty_weight: int = 1,
+        max_throttle: float = 2.5,
         **kwargs,
     ):
         
@@ -64,6 +63,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             num_checkpoints,
             vel_penalty_weight,
             steer_penalty_weight,
+            max_throttle,
             **kwargs,
         )
         
@@ -77,6 +77,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.max_steps = max_env_step
         self._vel_penalty_weight = vel_penalty_weight
         self._steer_penalty_weight = steer_penalty_weight
+        self._max_throttle = max_throttle
         
         self.step_count = 0
         self.prev_velocity = None
@@ -126,9 +127,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             dtype=np.float32
         )
         
-        # Get Car and Sensor Ids
+        # Get Car, Sensor Ids, and Floor Id
         self._get_car_joint_ids()
         self._get_sensor_id()
+        self._get_floor_id()
         
         # Initialize Agent Camera
         self._initialize_agent_camera()
@@ -146,6 +148,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         
         # Filter
         self.acc_filter = MovingAverageFilter(10)
+        
+        # Domain Randomization
+        self.wind_strength = None
+        self.wind_dir = None
         
 
     def _initialize_observation_space(self):
@@ -206,8 +212,9 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
     def step(self, action):      
         
         self.step_count += 1
-
+        
         #1. Process Action and Step Env
+        self._apply_wind_force()
         action = self._process_action(action)
         self.do_simulation(action, self.frame_skip)
 
@@ -264,6 +271,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.step_count = 0
         self.prev_velocity = np.array(self._get_velocimeter())
         self.prev_steering = 0.0
+        
+        # Domain Randomize
+        # self._set_windy_scenario()
+        # self._set_slipery_scenario()
         
         return self._get_obs()
 
@@ -322,6 +333,11 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.gyro_sensor_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_SENSOR, "buddy_gyro")
         if self.gyro_sensor_id < 0:
             raise ValueError("Body 'Gyro Sensor' not found.")   
+           
+    def _get_floor_id(self):
+        self.floor_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_GEOM, "floor")
+        if self.floor_id < 0:
+            raise ValueError("Geom 'floor' not found.")
            
     def _get_velocimeter(self):
         vel = self._read_sensor(self.vel_sensor_id)
@@ -433,7 +449,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         if long_vel <= 0.05 and throttle < 0:
             throttle = 0
 
-        throttle *= MAX_THROTTLE        
+        throttle *= self._max_throttle        
         return [steer, throttle]
         
     def _compute_cp_distances(self, car_pos):
@@ -590,3 +606,28 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         normal = np.array([tangent[1], -tangent[0]])  # Points left (counter-clockwise)
         
         return tangent, normal
+    
+    def _set_windy_scenario(self):
+        dir = self.np_random.integers(0, 4)
+        angle = dir * (np.pi / 2)
+        
+        self.wind_dir = np.array([
+            np.cos(angle),
+            np.sin(angle),
+            0
+        ])
+        
+        self.wind_strength = self.np_random.uniform(10, 30) 
+        print(f"Wind Angle: {angle:.2f} rad, Strength: {self.wind_strength:.2f} N")
+        
+    def _set_slipery_scenario(self):
+        self.road_friction = self.np_random.uniform(0.1, 0.6)
+        self.model.geom_friction[self.floor_id][0] = self.road_friction
+        print(f"Road Friction: {self.road_friction:.4f}")
+        
+        
+    def _apply_wind_force(self):
+        if self.wind_strength is None or self.wind_dir is None:
+            return
+        wind_force = self.wind_strength * self.wind_dir 
+        self.data.xfrc_applied[self.car_body_id][:3] = wind_force

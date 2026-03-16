@@ -28,7 +28,7 @@ def make_env(env_path, cfg):
             checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
             centreline_file=cfg.env.centreline_path
         )
-        env.reset(seed=cfg.seed)
+        # env.reset(seed=cfg.seed)
         return env
     return _init
 
@@ -122,15 +122,16 @@ def main(config):
             print("-" * 30)
             
             for i, item in enumerate(lap_time_list):
-                print(f"Lap: {i} Time: {item}")
+                print(f"Lap: {i + 1} Time: {item}")
             
             print()
             print("-" * 30)
             
-        if num_lap > config.num_laps:
+        if num_lap >= config.num_laps:
             print("Max laps reached, ending evaluation.")
             break
         
+    cv2.destroyAllWindows()
     eval_env.close()
     if config.plot_racing_line:
         plot_racing_line(trajectory, speed_profile, config.track_cones_path, lap_time_list)

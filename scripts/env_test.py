@@ -11,19 +11,19 @@ def test_longitudinal_acceleration():
     actions = []
     
     # Phase 1: Acceleration (0-100 steps)
-    for step in range(500):
+    for step in range(150):
         actions.append([0.0, 1.0])  # Full throttle, straight
     
     # Phase 2: Coast (100-150 steps)
     for step in range(50):
         actions.append([0.5, 0.0])  # No throttle
     
-    # Phase 3: Braking (150-200 steps)
-    for step in range(50):
-        actions.append([0.0, -1.0])  # Brake
+    # # Phase 3: Braking (150-200 steps)
+    # for step in range(50):
+    #     actions.append([0.0, -1.0])  # Brake
     
-    for step in range(200):
-        actions.append([0.0, 1.0])  # Full throttle, straight
+    # for step in range(200):
+    #     actions.append([0.0, 1.0])  # Full throttle, straight
     return actions
 
 
@@ -37,7 +37,7 @@ def test_lateral_acceleration_sinusoidal(steps=500, amplitude=1.0, frequency=0.0
     for step in range(steps):
         # Sinusoidal steering, constant throttle
         steering = amplitude * np.sin(2 * np.pi * frequency * step * 0.05)  # 0.05 is dt
-        throttle = 0.5  # Constant half throttle
+        throttle = 1.0  # Constant half throttle
         actions.append([steering, throttle])
     return actions
 
@@ -57,7 +57,8 @@ def test_env_with_logging():
         render_mode="rgb_array",
         # checkpoint_file="mujoco_tracks/checkpoints.json",
         centreline_file="mujoco_tracks/centreline.csv",
-        num_checkpoints=4
+        num_checkpoints=4,
+        # max_throttle=5
     )
     
     actions = test_longitudinal_acceleration()
@@ -150,10 +151,10 @@ def test_env_with_logging():
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
         
-        if terminated or truncated:
-            print("Terminated!!!!!!")
-            obs, info = env.reset()
-            total_reward = 0.0
+        # if terminated or truncated:
+        #     print("Terminated!!!!!!")
+        #     obs, info = env.reset()
+        #     total_reward = 0.0
     
     env.close()
     cv2.destroyAllWindows()

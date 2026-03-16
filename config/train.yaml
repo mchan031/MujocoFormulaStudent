@@ -11,6 +11,9 @@ env:
   lap_completion_reward: 1000
   max_env_step: 1500
   checkpoint_bonus_step: 250
+  max_throttle: 2.5
+  mujoco_path: "mujoco_tracks/sim_env.xml"
+  centreline_path: "mujoco_tracks/centreline.csv"
 
 wandb:
   project: mujoco-racing
