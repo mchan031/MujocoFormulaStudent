@@ -13,6 +13,8 @@ env:
   checkpoint_bonus_step: 250
   max_throttle: 2.5
   random_track_mode: True # Whether to randomize track selection during training
+  vel_penalty_weight: 0.5 # Weight for velocity penalty in the reward function
+  steer_penalty_weight: 0.5 # Weight for steering penalty in the reward function
 
 wandb:
   project: mujoco-racing

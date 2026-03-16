@@ -36,6 +36,8 @@ def make_env(cfg): #, idx, capture_video, run_name):
             checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
             max_throttle=cfg.env.max_throttle,
             random_track_mode=cfg.env.random_track_mode,
+            vel_penalty_weight=cfg.env.vel_penalty_weight,
+            steer_penalty_weight=cfg.env.steer_penalty_weight,
             )
         
         env.action_space.seed(cfg.seed)
