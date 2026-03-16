@@ -11,16 +11,16 @@ def test_longitudinal_acceleration():
     actions = []
     
     # Phase 1: Acceleration (0-100 steps)
-    for step in range(150):
-        actions.append([0.0, 1.0])  # Full throttle, straight
+    # for step in range(50):
+    #     actions.append([0.2, 1.0])  # Full throttle, straight
     
     # Phase 2: Coast (100-150 steps)
-    for step in range(50):
-        actions.append([0.5, 0.0])  # No throttle
+    # for step in range(50):
+    #     actions.append([0.5, 0.0])  # No throttle
     
     # # Phase 3: Braking (150-200 steps)
-    # for step in range(50):
-    #     actions.append([0.0, -1.0])  # Brake
+    for step in range(100):
+        actions.append([0.0, 0.0])  # Brake
     
     # for step in range(200):
     #     actions.append([0.0, 1.0])  # Full throttle, straight
@@ -50,8 +50,8 @@ def test_env_with_logging():
     # model_path = "C:/Users/munki/OneDrive - Nanyang Technological University/Y4/new_fyp/mujoco_tracks/new_scene.xml"
     
     env = MujocoFormulaStudent(
-        render_mode="rgb_array",
-        num_checkpoints=4,
+        render_mode="human",
+        num_checkpoints=10,
         # max_throttle=5
     )
     

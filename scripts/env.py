@@ -11,6 +11,7 @@ from utils import MovingAverageFilter, create_env_xml
 from gymnasium.utils import EzPickle
 import random
 
+DISTANCE_MODE = False
 
 class MujocoFormulaStudent(MujocoEnv, EzPickle):
     metadata = {
@@ -187,13 +188,21 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             shape=(7,), 
             dtype=np.float32
         )
-        
-        # Relative Position to the next n (n = 5) checkpoints
-        checkpoint_space = spaces.Box(
-            low=0, 
-            high=np.inf, 
-            shape=(5,), 
-            dtype=np.float32)  # distances to next 5
+                
+        if DISTANCE_MODE:
+            # Relative Distance to the next n (n = 5) checkpoints
+            checkpoint_space = spaces.Box(
+                low=0.0,
+                high=np.inf, 
+                shape=(self._next_n_checkpoint,),  # distance to next n checkpoints
+                dtype=np.float32)  # distances to next 5
+        else:
+            # Relative Position to the next n (n = 5) checkpoints
+            checkpoint_space = spaces.Box(
+                low=-np.inf,
+                high=np.inf, 
+                shape=(self._next_n_checkpoint, 2),  # relative x, y to next n checkpoints
+                dtype=np.float32)  # distances to next 5            
 
         # Progress 0.0 to 1.0, 1.0 for full lap completion 
         prog_space = spaces.Box(
@@ -206,7 +215,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.observation_space = spaces.Dict({
             'image': image_space,
             'car_states': car_states_space,
-            'checkpoint_distances': checkpoint_space,
+            'checkpoints': checkpoint_space,
             'progress': prog_space
         })
   
@@ -290,10 +299,15 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         return self._get_obs()
 
     def _get_obs(self):
+        if DISTANCE_MODE:
+            checkpoint_obs = self._get_checkpoint_distances()
+        else:
+            checkpoint_obs = self._get_checkpoint_relative_positions()
+            
         return {
             'image': self._get_image(),
             'car_states': self._get_car_states(),
-            'checkpoint_distances': self._get_checkpoint_distances(),
+            'checkpoints': checkpoint_obs,
             'progress': np.array([self.progress], dtype=np.float32)
         }
 
@@ -377,6 +391,11 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
     def _get_car_pos(self):
         return self.data.xpos[self.car_body_id].copy()
     
+    def _get_car_yaw(self):
+        R = self.data.xmat[self.car_body_id].reshape(3,3)
+        yaw = np.arctan2(R[1,0], R[0,0])
+        return yaw
+    
     def _get_checkpoint_distances(self) -> np.ndarray:
         if self.checkpoint_points is None:
             return np.zeros(self._next_n_checkpoint, dtype=np.float32)
@@ -389,6 +408,35 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             cp_pos = self.checkpoint_points[idx]
             distances[i] = np.linalg.norm(cp_pos - car_pos)
         return distances
+    
+    def _get_checkpoint_relative_positions(self):
+
+        if self.checkpoint_points is None:
+            return np.zeros((self._next_n_checkpoint, 2), dtype=np.float32)
+
+        car_pos = self._get_car_pos()[:2]
+        yaw = self._get_car_yaw()
+
+        cos_yaw = np.cos(yaw)
+        sin_yaw = np.sin(yaw)
+
+        R = np.array([
+            [cos_yaw, sin_yaw],
+            [-sin_yaw, cos_yaw]
+        ])
+
+        rel_positions = np.zeros((self._next_n_checkpoint, 2), dtype=np.float32)
+        cp = self.current_checkpoint
+
+        for i in range(self._next_n_checkpoint):
+            idx = (cp + i) % self.n_checkpoints
+            cp_pos = self.checkpoint_points[idx]
+
+            delta = cp_pos - car_pos
+            rel = R @ delta
+            rel_positions[i] = rel
+            
+        return rel_positions
 
     def _update_progress(self):
         ## Discrete
