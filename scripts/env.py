@@ -43,6 +43,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         steer_penalty_weight: int = 1,
         max_throttle: float = 2.5,
         random_track_mode: bool = True,
+        domain_randomization: bool = True,
         **kwargs,
     ):
         
@@ -66,6 +67,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             steer_penalty_weight,
             max_throttle,
             random_track_mode,
+            domain_randomization,
             **kwargs,
         )
         
@@ -80,7 +82,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._vel_penalty_weight = vel_penalty_weight
         self._steer_penalty_weight = steer_penalty_weight
         self._max_throttle = max_throttle
-        
+
         self.step_count = 0
         self.prev_velocity = None
         self.prev_steering = 0.0
@@ -163,6 +165,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.acc_filter = MovingAverageFilter(10)
         
         # Domain Randomization
+        self.domain_randomization = domain_randomization
+        self.default_friction = self.model.geom_friction[self.floor_id][0]
         self.wind_strength = None
         self.wind_dir = None
 
@@ -293,8 +297,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.prev_steering = 0.0
         
         # Domain Randomize
-        # self._set_windy_scenario()
-        # self._set_slipery_scenario()
+        if self.domain_randomization:
+            self._apply_domain_randomization()
         
         return self._get_obs()
 
@@ -681,7 +685,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.wind_strength = self.np_random.uniform(10, 30) 
         print(f"Wind Angle: {angle:.2f} rad, Strength: {self.wind_strength:.2f} N")
         
-    def _set_slipery_scenario(self):
+    def _set_slippery_scenario(self):
         self.road_friction = self.np_random.uniform(0.1, 0.6)
         self.model.geom_friction[self.floor_id][0] = self.road_friction
         print(f"Road Friction: {self.road_friction:.4f}")
@@ -708,3 +712,18 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             return random.choice(tracks)
         else:
             return tracks[0]
+
+
+    def _apply_domain_randomization(self):
+        # Reset to default first
+        self.model.geom_friction[self.floor_id][0] = self.default_friction
+        self.wind_strength = None
+        self.wind_dir = None
+
+        # Random slippery condition
+        if self.np_random.random() < 0.3:  # 30% chance
+            self._set_slippery_scenario()
+
+        # Random wind
+        if self.np_random.random() < 0.3:  # 30% chance
+            self._set_windy_scenario()
