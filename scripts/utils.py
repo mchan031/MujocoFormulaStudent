@@ -5,6 +5,91 @@ import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 import os
 
+
+class TelemetryStorage:
+    def __init__(self):
+        self.data = {
+            "step": [],
+            "long_vel": [], "lat_vel": [],
+            "long_acc": [], "lat_acc": [],
+            "yaw_rate": [], "steering": [], "throttle": [],
+            "g": [],
+            "time": []
+        }
+        # self.acc_prev_long = 0.0
+        # self.acc_prev_lat = 0.0
+
+    def append(self, step, car_states, current_time):
+        # acc_filtered_long = 0.9 * self.acc_prev_long + 0.1 * car_states[2]
+        # acc_filtered_lat = 0.9 * self.acc_prev_lat + 0.1 * car_states[3]
+
+        self.data["step"].append(step)
+        self.data["time"].append(current_time)
+        self.data["long_vel"].append(car_states[0])
+        self.data["lat_vel"].append(car_states[1])
+        self.data["long_acc"].append(car_states[2])
+        self.data["lat_acc"].append(car_states[3])
+        self.data["yaw_rate"].append(car_states[4])
+        self.data["steering"].append(car_states[5])
+        self.data["throttle"].append(car_states[6])
+
+        # self.acc_prev_long = acc_filtered_long
+        # self.acc_prev_lat = acc_filtered_lat
+
+    def plot_telemetry(self):
+        if len(self.data["time"]) == 0:
+            return
+
+        fig, axes = plt.subplots(3, 2, figsize=(12, 10))
+
+        axes[0, 0].plot(self.data["time"], self.data["long_vel"], "b-", label="Longitudinal")
+        axes[0, 0].plot(self.data["time"], self.data["lat_vel"], "r-", label="Lateral")
+        axes[0, 0].set_ylabel("Velocity (m/s)")
+        axes[0, 0].set_xlabel("Time (s)")
+        axes[0, 0].set_title("Vehicle Velocity")
+        axes[0, 0].legend()
+        axes[0, 0].grid(True, alpha=0.3)
+
+        axes[0, 1].plot(self.data["time"], self.data["long_acc"], "g-", label="Longitudinal")
+        axes[0, 1].plot(self.data["time"], self.data["lat_acc"], "orange", label="Lateral")
+        axes[0, 1].set_ylabel("Acceleration (m/s^2)")
+        axes[0, 1].set_xlabel("Time (s)")
+        axes[0, 1].set_title("Vehicle Acceleration")
+        axes[0, 1].legend()
+        axes[0, 1].grid(True, alpha=0.3)
+
+        axes[1, 0].plot(self.data["time"], self.data["yaw_rate"], "purple")
+        axes[1, 0].set_ylabel("Yaw Rate (rad/s)")
+        axes[1, 0].set_xlabel("Time (s)")
+        axes[1, 0].set_title("Yaw Rate")
+        axes[1, 0].grid(True, alpha=0.3)
+
+        axes[1, 1].plot(self.data["time"], self.data["steering"], "brown")
+        axes[1, 1].set_ylabel("Steering Angle")
+        axes[1, 1].set_xlabel("Time (s)")
+        axes[1, 1].set_title("Steering Command")
+        axes[1, 1].grid(True, alpha=0.3)
+
+        axes[2, 0].plot(self.data["time"], self.data["throttle"], "pink")
+        axes[2, 0].set_ylabel("Throttle")
+        axes[2, 0].set_xlabel("Time (s)")
+        axes[2, 0].set_title("Throttle Command")
+        axes[2, 0].grid(True, alpha=0.3)
+
+        axes[2, 1].plot(self.data["time"], self.data["long_vel"], "b-", label="Long Vel", alpha=0.7)
+        axes[2, 1].plot(self.data["time"], self.data["steering"], "brown", label="Steering", alpha=0.7)
+        axes[2, 1].plot(self.data["time"], self.data["throttle"], "pink", label="Throttle", alpha=0.7)
+        axes[2, 1].set_ylabel("Values")
+        axes[2, 1].set_xlabel("Time (s)")
+        axes[2, 1].set_title("Combined Telemetry")
+        axes[2, 1].legend(loc="upper right", fontsize="small")
+        axes[2, 1].grid(True, alpha=0.3)
+
+        plt.suptitle("Vehicle Telemetry Data", fontsize=14)
+        plt.tight_layout()
+        # plt.savefig('one_lap.png', dpi=150)
+        plt.show()
+
 class MovingAverageFilter:
     def __init__(self, max_len=5):
         self.value_history = deque(maxlen=max_len)

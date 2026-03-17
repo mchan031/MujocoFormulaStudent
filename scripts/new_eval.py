@@ -12,7 +12,7 @@ from omegaconf import DictConfig, OmegaConf
 from matplotlib.collections import LineCollection
 import torch
 import cv2
-from utils import plot_racing_line
+from utils import plot_racing_line, TelemetryStorage
 
 def make_env(cfg):
     """Create a single environment instance"""
@@ -27,6 +27,7 @@ def make_env(cfg):
             lap_completion_reward=cfg.env.lap_completion_reward,
             max_env_step=cfg.env.max_env_step,
             checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
+            max_throttle=3.5,
         )
         # env.reset(seed=cfg.seed)
         
@@ -74,6 +75,8 @@ def main(config):
     num_lap = 0
     lap_time_list = []
     lap_start_time = time.time()
+    start_time = time.time()
+    telemetry = TelemetryStorage()
     
     if config.plot_racing_line:
         trajectory = []
@@ -84,6 +87,10 @@ def main(config):
         obs, reward, done, info = eval_env.step(action)
         total_reward += reward
         step_count += 1
+
+        car_states = info[0]["car_states"]
+        current_time = time.time() - start_time
+        telemetry.append(step_count, car_states, current_time)
         
         if config.capture_video and step_count >= config.video_length:
             break
@@ -97,7 +104,6 @@ def main(config):
         
         if config.plot_racing_line:
             car_pos = info[0]["car_pos"]
-            car_states = info[0]["car_states"]
 
             x, y, _ = car_pos
             long_vel = car_states[0]
@@ -114,7 +120,7 @@ def main(config):
             print("Max step reached, ending evaluation.")
             break
         
-        if info[0]["lap_count"] - num_lap == 1:
+        if info[0]["progress"] - num_lap == 1.1:
             time_now = time.time()
             lap_time = time_now - lap_start_time
             lap_time_list.append(lap_time)
@@ -136,6 +142,7 @@ def main(config):
             break
         
     cv2.destroyAllWindows()
+    telemetry.plot_telemetry()
     eval_env.close()
     if config.plot_racing_line:
         plot_racing_line(trajectory, speed_profile, track_cones_path, lap_time_list)
