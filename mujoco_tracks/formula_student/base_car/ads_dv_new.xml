@@ -1,0 +1,172 @@
+<mujoco>
+    <compiler meshdir="formula_student/meshes"/>  
+
+    <asset>
+        <mesh name="ads_dv_chassis" file="ads_dv_chassis.stl"/>
+        <mesh name="ads_dv_wheel_left" file="ads_wheel_left.stl"/>
+        <mesh name="ads_dv_wheel_right" file="ads_wheel_right.stl"/>
+    </asset>
+    
+    <default>
+        
+        <joint type="hinge" damping="0.1" armature="0.01" limited="true"/>
+        
+        <geom type="mesh" condim="4" friction="1.0 0.5 0.1" solimp="0.9 0.95 0.001" solref="0.02 1"/>
+        
+        <default class="wheel">
+            <geom friction="1.2 0.5 0.1" solimp="0.9 0.95 0.001" solref="0.02 1"/>
+            <joint damping="0.1" armature="0.01"/>
+        </default>
+        
+        <!-- Steering joint class -->
+        <default class="ads_steering">
+            <joint type="hinge" axis="0 1 0" limited="true" range="-0.6 0.6" 
+                   damping="0.1" armature="0.01" frictionloss="0.001"/>
+        </default>
+
+        <!-- Throttle joint class -->
+        <default class="ads_throttle">
+            <joint type="hinge" axis="0 0 -1" limited="false" 
+                   damping="0.1" armature="0.05" frictionloss="0.01"/>
+        </default>
+        
+        <!-- <motor ctrllimited="true" ctrlrange="-1 1"/> -->
+    </default>
+    
+    <worldbody>
+        
+        <!-- ========== CHASSIS ========== -->
+        <body name="chassis" pos="0 0 0.2525">  <!-- raised by wheel radius (0.505/2) -->
+            <freejoint/>
+            <inertial pos="0 0 0" mass="140" diaginertia="16.3 33.6 47.9"/>
+            
+            <!-- Visual and collision mesh -->
+            <geom name="chassis_visual" type="mesh" mesh="ads_dv_chassis" rgba="0.8 0.2 0.2 1"/>
+            <!-- <geom name="chassis_collision" type="mesh" mesh="ads_dv_chassis" contype="1" conaffinity="1" mass="0" group="3"/> -->
+            
+            <!-- IMU site (at chassis origin) -->
+            <site name="ads_dv_imu" pos="0 0 0" size="0.01" group="4" rgba="1 0 0 1"/>
+            
+            
+            <body name="steering_master" pos="0.765 0 0.2525">  <!-- Positioned at front axle center -->
+                <joint class="ads_steering" name="steering_master_joint"/>
+                <!-- Tiny invisible geom -->
+                <geom type="sphere" size="0.01" rgba="0 0 0 0" contype="0" conaffinity="0"/>
+            </body>            
+            
+            <!-- ========== WHEELS with Ackermann steering geometry ========== -->
+            <!-- Wheelbase = 1.530, Track width = 1.201 -->
+            <!-- Front axle at +0.765, Rear axle at -0.765 -->
+            <!-- Half track = 0.6005 -->
+            
+            <!-- Front Left -->
+            <body name="fl_wheel" pos="0.765 0.6005 0" euler="1.5708 0 0" childclass="wheel">
+                <!-- <joint name="fl_steer" type="hinge" axis="0 0 1" pos="0 0 0" range="-0.38 0.38" limited="true"/> -->
+                <joint class="ads_steering" name="fl_steer_joint"/>
+                <joint class="ads_throttle" name="fl_axle_joint"/>
+                <!-- <joint name="fl_axle" type="hinge" axis="0 0 1" pos="0 0 0" limited="false"/> -->
+                <geom name="fl_wheel_geom" type="mesh" mesh="ads_dv_wheel_left" rgba="0.1 0.1 0.1 1"/>
+                <!-- <site name="fl_site" pos="0 0 0" size="0.01"/> -->
+            </body>
+
+            <!-- Front Right -->
+            <body name="fr_wheel" pos="0.765 -0.6005 0" euler="1.5708 0 0" childclass="wheel">
+                <joint class="ads_steering" name="fr_steer_joint"/>
+                <joint class="ads_throttle" name="fr_axle_joint"/>
+                <!-- <joint name="fr_axle" type="hinge" axis="0 0 1" pos="0 0 0" limited="false"/> -->
+                <geom name="fr_wheel_geom" type="mesh" mesh="ads_dv_wheel_right" rgba="0.1 0.1 0.1 1"/>
+                <!-- <site name="fr_site" pos="0 0 0" size="0.01"/> -->
+            </body>
+
+            <!-- Rear Left -->
+            <body name="rl_wheel" pos="-0.765 0.6005 0" euler="1.5708 0 0" childclass="wheel">
+                <joint class="ads_throttle" name="rl_axle_joint"/>
+                <!-- <joint name="rl_axle" type="hinge" axis="0 0 1" pos="0 0 0" limited="false"/> -->
+                <geom name="rl_wheel_geom" type="mesh" mesh="ads_dv_wheel_left" rgba="0.1 0.1 0.1 1"/>
+                <!-- <site name="rl_site" pos="0 0 0" size="0.01"/> -->
+            </body>
+
+            <!-- Rear Right -->
+            <body name="rr_wheel" pos="-0.765 -0.6005 0" euler="1.5708 0 0" childclass="wheel">
+                <joint class="ads_throttle" name="rr_axle_joint"/>
+                <!-- <joint name="rr_axle" type="hinge" axis="0 0 1" pos="0 0 0" limited="false"/> -->
+                <geom name="rr_wheel_geom" type="mesh" mesh="ads_dv_wheel_right" rgba="0.1 0.1 0.1 1"/>
+                <!-- <site name="rr_site" pos="0 0 0" size="0.01"/> -->
+            </body>
+
+
+            <!-- <joint type="free"/> -->
+            <camera name="realsense_rgb" mode="fixed" pos="0.535 0 0.420" euler="0 4.712 4.712" fovy="69" resolution="640 480"/>
+            <camera name="third_person" mode="fixed" pos="-5 0 4" xyaxes="0 -1 0 0.5 0 0.866"/>
+
+
+        </body>
+    </worldbody>
+
+    <!-- ========== ACKERMANN STEERING EQUALITY ========== -->
+    <equality>
+        <!-- Link left steering to master with Ackermann polynomial -->
+        <!-- L = wheelbase = 1.530, W = track width = 1.201 -->
+        <!-- Coefficients calculated for these dimensions -->
+        <joint joint1="fl_steer_joint" joint2="steering_master_joint" 
+                polycoef="0 1.0 0.392 0.153 -0.085"
+                solref="0.001 1"
+                solimp="0.95 0.99 0.0001"/>
+            
+        <!-- Link right steering to master with Ackermann polynomial -->
+        <joint joint1="fr_steer_joint" joint2="steering_master_joint" 
+                polycoef="0 1.0 -0.392 0.153 0.085"
+                solref="0.001 1"
+                solimp="0.95 0.99 0.0001"/>
+                
+    </equality>
+
+    <!-- ========== THROTTLE TENDON ========== -->
+    <tendon>
+        <fixed name="drive_tendon">
+            <joint joint="fl_axle_joint" coef="0.25"/>
+            <joint joint="fr_axle_joint" coef="0.25"/>
+            <joint joint="rl_axle_joint" coef="0.25"/>
+            <joint joint="rr_axle_joint" coef="0.25"/>
+        </fixed>
+    </tendon>
+
+    <!-- ========== ACTUATORS ========== -->
+    <actuator>
+        <!-- Steering - only actuate the master joint -->
+        <position name="steering" joint="steering_master_joint" kp="1500"/>
+
+        <!-- <position name="fl_steer" joint="fl_steer_joint" kp="1000"/>
+        <position name="fr_steer" joint="fr_steer_joint" kp="1000"/>
+         -->
+        <!-- Throttle - control all wheels via tendon -->
+        <velocity name="throttle" tendon="drive_tendon" 
+                  kv="50" gear="4" forcerange="-500 500" ctrlrange="-100 100"/>
+    </actuator>
+
+
+
+    <!-- ========== SENSORS ========== -->
+    <sensor>
+        <!-- IMU at site "ads_dv_imu" -->
+        <accelerometer name="ads_dv_accelerometer" site="ads_dv_imu"/>
+        <gyro name="ads_dv_gyro" site="ads_dv_imu"/>
+        <velocimeter name="ads_dv_velocimeter" site="ads_dv_imu"/>
+        
+        <!-- Optional wheel sensors (joint positions / velocities)
+        <jointpos name="fl_steer_pos" joint="fl_steer"/>
+        <jointpos name="fr_steer_pos" joint="fr_steer"/>
+        <jointvel name="rl_wheel_vel" joint="rl_axle"/>
+        <jointvel name="rr_wheel_vel" joint="rr_axle"/> -->
+    </sensor>
+    
+    <!-- ========== CONTACT PAIRS (optional, can improve tyre‑ground) ========== -->
+    <!-- <contact>
+        <pair geom1="fl_wheel_geom" geom2="ground" condim="3"/>
+        <pair geom1="fr_wheel_geom" geom2="ground" condim="3"/>
+        <pair geom1="rl_wheel_geom" geom2="ground" condim="3"/>
+        <pair geom1="rr_wheel_geom" geom2="ground" condim="3"/>
+    </contact> -->
+    
+
+</mujoco>

@@ -13,7 +13,7 @@ CONE_SPACING = 1.5                  # [m]
 LENGTH_START_AREA = 6.             # [m]
 CURVATURE_THRESHOLD = 1. / 3.75    # [m^-1]
 STRAIGHT_THRESHOLD = 1. / 100.     # [m^-1]
-SCALE = 0.5
+SCALE = 1.0                            # Scale factor for track size
 
 def _bounded_voronoi(input_points: np.ndarray, bounding_box: np.ndarray) -> spatial.Voronoi:
     """
