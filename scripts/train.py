@@ -35,7 +35,6 @@ def make_env(cfg): #, idx, capture_video, run_name):
             max_env_step=cfg.env.max_env_step,
             checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
             max_throttle=cfg.env.max_throttle,
-            random_track_mode=cfg.env.random_track_mode,
             vel_penalty_weight=cfg.env.vel_penalty_weight,
             steer_penalty_weight=cfg.env.steer_penalty_weight,
             domain_randomization=cfg.env.domain_randomization,
@@ -43,7 +42,7 @@ def make_env(cfg): #, idx, capture_video, run_name):
         
         env.action_space.seed(cfg.seed)
         env.observation_space.seed(cfg.seed)
-        env = ForceForwardWrapper(env)
+        # env = ForceForwardWrapper(env)
         return env    
     return thunk
     

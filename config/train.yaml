@@ -2,7 +2,7 @@ seed: 42
 cuda: True
 cuda_deterministic: True
 exp_name: testing
-track_exp: False
+track_exp: True
 capture_video: False
 
 env:
@@ -11,14 +11,13 @@ env:
   lap_completion_reward: 1000
   max_env_step: 500
   checkpoint_bonus_step: 150
-  max_throttle: 2.5
-  random_track_mode: True # Whether to randomize track selection during training
+  max_throttle: 1.0
   vel_penalty_weight: 0.5 # Weight for velocity penalty in the reward function
   steer_penalty_weight: 0.5 # Weight for steering penalty in the reward function
-  domain_randomization: True # Whether to apply domain randomization during training
+  domain_randomization: False # Whether to apply domain randomization during training
 
 wandb:
-  project: mujoco-racing
+  project: mujoco-racing-new
   mode: offline # online
   
 ppo:

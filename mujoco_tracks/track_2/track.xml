@@ -4,7 +4,7 @@
   <default>
     <default class="cone">
       <joint type="free" damping="0.1" frictionloss="0.05"/>
-      <geom condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </default>
   </default>
   <asset>
@@ -13,1505 +13,805 @@
     <material name="orange_cone" rgba="1.0 0.5 0.0 1.0" specular="0.5" shininess="0.2"/>
   </asset>
   <worldbody>
-    <body name="cone_left_0000" pos="-4.2197120775100885 -16.20065246783279 0.15">
+    <body name="cone_left_0000" pos="0.011323781485344853 1.4999285766834873 0.325">
       <joint name="cone_left_joint_0000" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0000" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0000" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0001" pos="-4.900837792793013 -16.50502917918046 0.15">
+    <body name="cone_left_0001" pos="2.4869953911673655 1.4905469606769657 0.325">
       <joint name="cone_left_joint_0001" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0001" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0001" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0002" pos="-5.60658784490699 -16.746679492615083 0.15">
+    <body name="cone_left_0002" pos="4.9626766365523665 1.490098705492926 0.325">
       <joint name="cone_left_joint_0002" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0002" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0002" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0003" pos="-6.333892635846372 -16.911899210274232 0.15">
+    <body name="cone_left_0003" pos="7.43798408198769 1.530468863598088 0.325">
       <joint name="cone_left_joint_0003" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0003" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0003" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0004" pos="-7.076131212119854 -16.983025771855893 0.15">
+    <body name="cone_left_0004" pos="9.910899041179839 1.6446799769493055 0.325">
       <joint name="cone_left_joint_0004" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0004" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0004" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0005" pos="-7.820324351963169 -16.940731748843834 0.15">
+    <body name="cone_left_0005" pos="12.376228764783853 1.8678675779494256 0.325">
       <joint name="cone_left_joint_0005" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0005" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0005" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0006" pos="-8.546081773690972 -16.771231925033504 0.15">
+    <body name="cone_left_0006" pos="14.823632579904892 2.237825971385405 0.325">
       <joint name="cone_left_joint_0006" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0006" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0006" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0007" pos="-9.233015289291025 -16.481742744526436 0.15">
+    <body name="cone_left_0007" pos="17.235248867654533 2.7940574083635 0.325">
       <joint name="cone_left_joint_0007" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0007" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0007" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0008" pos="-9.867932645215575 -16.090801842652162 0.15">
+    <body name="cone_left_0008" pos="19.58378270421597 3.5738193396790052 0.325">
       <joint name="cone_left_joint_0008" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0008" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0008" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0009" pos="-10.445058534368304 -15.618431843809345 0.15">
+    <body name="cone_left_0009" pos="21.834420123687458 4.602142403031735 0.325">
       <joint name="cone_left_joint_0009" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0009" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0009" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0010" pos="-10.96380496377942 -15.082416048875873 0.15">
+    <body name="cone_left_0010" pos="23.994452652414374 5.811262556384861 0.325">
       <joint name="cone_left_joint_0010" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0010" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0010" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0011" pos="-11.425994086605868 -14.49682511573008 0.15">
+    <body name="cone_left_0011" pos="26.12918975864736 7.065013400203924 0.325">
       <joint name="cone_left_joint_0011" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0011" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0011" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0012" pos="-11.834940906957385 -13.87283369084051 0.15">
+    <body name="cone_left_0012" pos="28.30573145457639 8.243883528523128 0.325">
       <joint name="cone_left_joint_0012" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0012" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0012" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0013" pos="-12.193737030547823 -13.21866600640251 0.15">
+    <body name="cone_left_0013" pos="30.577340122653613 9.22465501677064 0.325">
       <joint name="cone_left_joint_0013" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0013" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0013" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0014" pos="-12.50400416998038 -12.54010467750716 0.15">
+    <body name="cone_left_0014" pos="32.96424755989279 9.870489326840385 0.325">
       <joint name="cone_left_joint_0014" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0014" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0014" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0015" pos="-12.767755677881954 -11.842135741213813 0.15">
+    <body name="cone_left_0015" pos="35.42772348341257 10.0168747460217 0.325">
       <joint name="cone_left_joint_0015" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0015" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0015" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0016" pos="-12.985122555514472 -11.128349747162599 0.15">
+    <body name="cone_left_0016" pos="37.820091153557165 9.41575322476612 0.325">
       <joint name="cone_left_joint_0016" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0016" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0016" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0017" pos="-13.155802173530631 -10.40198802798281 0.15">
+    <body name="cone_left_0017" pos="39.99168388010527 8.236285309696626 0.325">
       <joint name="cone_left_joint_0017" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0017" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0017" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0018" pos="-13.278140562366659 -9.665945884889624 0.15">
+    <body name="cone_left_0018" pos="41.930061228692104 6.6995032062727375 0.325">
       <joint name="cone_left_joint_0018" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0018" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0018" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0019" pos="-13.349262249190431 -8.923225501432505 0.15">
+    <body name="cone_left_0019" pos="43.673256636459186 4.943144777002772 0.325">
       <joint name="cone_left_joint_0019" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0019" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0019" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0020" pos="-13.365505835782574 -8.17730593629095 0.15">
+    <body name="cone_left_0020" pos="45.22621306496318 3.0165095067774246 0.325">
       <joint name="cone_left_joint_0020" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0020" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0020" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0021" pos="-13.320409725434235 -7.432616696039421 0.15">
+    <body name="cone_left_0021" pos="46.5759058824983 0.942333175059531 0.325">
       <joint name="cone_left_joint_0021" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0021" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0021" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0022" pos="-13.208035123895709 -6.695139019806881 0.15">
+    <body name="cone_left_0022" pos="47.717874264973396 -1.2531946037544515 0.325">
       <joint name="cone_left_joint_0022" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0022" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0022" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0023" pos="-13.025137246254044 -5.971944166591122 0.15">
+    <body name="cone_left_0023" pos="48.65546147638173 -3.5436259365516776 0.325">
       <joint name="cone_left_joint_0023" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0023" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0023" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0024" pos="-12.771467182037505 -5.270447195642021 0.15">
+    <body name="cone_left_0024" pos="49.398207936973016 -5.9045874850856706 0.325">
       <joint name="cone_left_joint_0024" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0024" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0024" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0025" pos="-12.44899494092823 -4.5977947920199895 0.15">
+    <body name="cone_left_0025" pos="49.96024788095977 -8.315084943239981 0.325">
       <joint name="cone_left_joint_0025" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0025" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0025" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0026" pos="-12.061691736866074 -3.9602465912607876 0.15">
+    <body name="cone_left_0026" pos="50.35735490480262 -10.758281922399988 0.325">
       <joint name="cone_left_joint_0026" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0026" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0026" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0027" pos="-11.615063025092738 -3.36272500440872 0.15">
+    <body name="cone_left_0027" pos="50.60561767770526 -13.22115010702646 0.325">
       <joint name="cone_left_joint_0027" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0027" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0027" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0028" pos="-11.115553028327994 -2.808607653489151 0.15">
+    <body name="cone_left_0028" pos="50.71884897800052 -15.693954748004757 0.325">
       <joint name="cone_left_joint_0028" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0028" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0028" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0029" pos="-10.569956929645407 -2.29975652851963 0.15">
+    <body name="cone_left_0029" pos="50.686738347024594 -18.169004726835794 0.325">
       <joint name="cone_left_joint_0029" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0029" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0029" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0030" pos="-9.98494015569781 -1.83671931834634 0.15">
+    <body name="cone_left_0030" pos="50.4777790948157 -20.635203478128687 0.325">
       <joint name="cone_left_joint_0030" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0030" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0030" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0031" pos="-9.366708481891596 -1.4190180425128247 0.15">
+    <body name="cone_left_0031" pos="50.05385227228576 -23.073340570298882 0.325">
       <joint name="cone_left_joint_0031" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0031" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0031" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0032" pos="-8.720825350561867 -1.0454516065141704 0.15">
+    <body name="cone_left_0032" pos="49.37242674589429 -25.451932959112185 0.325">
       <joint name="cone_left_joint_0032" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0032" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0032" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0033" pos="-8.052146051782113 -0.714364961594157 0.15">
+    <body name="cone_left_0033" pos="48.39241504010461 -27.723231265763673 0.325">
       <joint name="cone_left_joint_0033" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0033" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0033" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0034" pos="-7.364756420159612 -0.42405595076948543 0.15">
+    <body name="cone_left_0034" pos="47.10056148445743 -29.832748716605806 0.325">
       <joint name="cone_left_joint_0034" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0034" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0034" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0035" pos="-6.662109577014565 -0.1728832795732984 0.15">
+    <body name="cone_left_0035" pos="45.53771917134375 -31.750610155992973 0.325">
       <joint name="cone_left_joint_0035" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0035" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0035" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0036" pos="-5.947369077515141 0.041513206762754606 0.15">
+    <body name="cone_left_0036" pos="43.75584759448691 -33.46740909178769 0.325">
       <joint name="cone_left_joint_0036" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0036" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0036" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0037" pos="-5.222844727341869 0.2201144735462215 0.15">
+    <body name="cone_left_0037" pos="41.80294326823916 -34.98734060434526 0.325">
       <joint name="cone_left_joint_0037" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0037" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0037" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0038" pos="-4.490993787895803 0.3658764470750846 0.15">
+    <body name="cone_left_0038" pos="39.71882534063874 -36.32216141285693 0.325">
       <joint name="cone_left_joint_0038" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0038" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0038" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0039" pos="-3.753893260879437 0.48232047758351726 0.15">
+    <body name="cone_left_0039" pos="37.53433914585905 -37.485860389600646 0.325">
       <joint name="cone_left_joint_0039" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0039" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0039" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0040" pos="-3.013216809473107 0.5733740897931199 0.15">
+    <body name="cone_left_0040" pos="35.273450810642245 -38.49341374300974 0.325">
       <joint name="cone_left_joint_0040" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0040" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0040" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0041" pos="-2.270181507958391 0.6426814417599189 0.15">
+    <body name="cone_left_0041" pos="32.95380893465998 -39.35741671913172 0.325">
       <joint name="cone_left_joint_0041" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0041" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0041" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0042" pos="-1.52563330461021 0.6933255983019713 0.15">
+    <body name="cone_left_0042" pos="30.588749047212115 -40.08818807163328 0.325">
       <joint name="cone_left_joint_0042" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0042" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0042" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0043" pos="-0.7801642087325291 0.7279715014247614 0.15">
+    <body name="cone_left_0043" pos="28.18863306022263 -40.694122868263406 0.325">
       <joint name="cone_left_joint_0043" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0043" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0043" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0044" pos="-0.03419639013271336 0.7494475462450509 0.15">
+    <body name="cone_left_0044" pos="25.761488422061785 -41.18075258880438 0.325">
       <joint name="cone_left_joint_0044" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0044" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0044" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0045" pos="0.7120064476080046 0.7601736348877033 0.15">
+    <body name="cone_left_0045" pos="23.313817886129552 -41.550616298791624 0.325">
       <joint name="cone_left_joint_0045" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0045" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0045" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0046" pos="1.4582854178534532 0.7624569094722489 0.15">
+    <body name="cone_left_0046" pos="20.851347668165573 -41.80382068151215 0.325">
       <joint name="cone_left_joint_0046" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0046" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0046" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0047" pos="2.204558963509051 0.7584830998414063 0.15">
+    <body name="cone_left_0047" pos="18.379460239170626 -41.936250080649785 0.325">
       <joint name="cone_left_joint_0047" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0047" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0047" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0048" pos="2.9508028272814997 0.7506383778419732 0.15">
+    <body name="cone_left_0048" pos="15.904052442881444 -41.94197110566722 0.325">
       <joint name="cone_left_joint_0048" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0048" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0048" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0049" pos="3.6970295912889455 0.7412724560757837 0.15">
+    <body name="cone_left_0049" pos="13.4315559678225 -41.82134550742802 0.325">
       <joint name="cone_left_joint_0049" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0049" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0049" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0050" pos="4.443268650682974 0.7329752756344448 0.15">
+    <body name="cone_left_0050" pos="10.967327555602694 -41.58543274128621 0.325">
       <joint name="cone_left_joint_0050" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0050" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0050" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0051" pos="5.189539759397043 0.7286461806884752 0.15">
+    <body name="cone_left_0051" pos="8.514215566114022 -41.25275665365234 0.325">
       <joint name="cone_left_joint_0051" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0051" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0051" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0052" pos="5.935814032439232 0.7317109481733262 0.15">
+    <body name="cone_left_0052" pos="6.072060675644995 -40.847039201003895 0.325">
       <joint name="cone_left_joint_0052" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0052" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0052" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0053" pos="6.681942077659009 0.7464913018379598 0.15">
+    <body name="cone_left_0053" pos="3.6385741553494597 -40.39199352895341 0.325">
       <joint name="cone_left_joint_0053" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0053" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0053" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0054" pos="7.427511744053724 0.7786047561448726 0.15">
+    <body name="cone_left_0054" pos="1.2131869584074693 -39.8957297571346 0.325">
       <joint name="cone_left_joint_0054" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0054" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0054" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0055" pos="8.17157090935855 0.8355484327464033 0.15">
+    <body name="cone_left_0055" pos="-1.1949334785904497 -39.32205164678538 0.325">
       <joint name="cone_left_joint_0055" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0055" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0055" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0056" pos="8.9118884763473 0.9288816425125077 0.15">
+    <body name="cone_left_0056" pos="-3.5698018306128034 -38.624205078260445 0.325">
       <joint name="cone_left_joint_0056" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0056" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0056" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0057" pos="9.643103201177475 1.07679175221622 0.15">
+    <body name="cone_left_0057" pos="-5.883786789003565 -37.74659265231017 0.325">
       <joint name="cone_left_joint_0057" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0057" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0057" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0058" pos="10.350853557393854 1.3111232094964826 0.15">
+    <body name="cone_left_0058" pos="-8.085754898641596 -36.61902115043776 0.325">
       <joint name="cone_left_joint_0058" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0058" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0058" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0059" pos="10.988979160456317 1.6926236968942199 0.15">
+    <body name="cone_left_0059" pos="-10.081734145404866 -35.160523119006456 0.325">
       <joint name="cone_left_joint_0059" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0059" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0059" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0060" pos="11.416171359119716 2.2943380701279104 0.15">
+    <body name="cone_left_0060" pos="-11.717426830157748 -33.310454635007886 0.325">
       <joint name="cone_left_joint_0060" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0060" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0060" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0061" pos="11.527597936921993 3.027979202945133 0.15">
+    <body name="cone_left_0061" pos="-12.808101112775972 -31.096986712936086 0.325">
       <joint name="cone_left_joint_0061" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0061" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0061" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0062" pos="11.447767195353336 3.7690111741768497 0.15">
+    <body name="cone_left_0062" pos="-13.407861388604516 -28.696777274189202 0.325">
       <joint name="cone_left_joint_0062" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0062" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0062" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0063" pos="11.26661347286828 4.492580966586182 0.15">
+    <body name="cone_left_0063" pos="-14.742502715200466 -26.644613870272366 0.325">
       <joint name="cone_left_joint_0063" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0063" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0063" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0064" pos="11.017112694176824 5.1956870234345445 0.15">
+    <body name="cone_left_0064" pos="-16.83951796340218 -25.350856877100085 0.325">
       <joint name="cone_left_joint_0064" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0064" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0064" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0065" pos="10.712800822697226 5.876920680258181 0.15">
+    <body name="cone_left_0065" pos="-19.19393730054629 -24.594838840560897 0.325">
       <joint name="cone_left_joint_0065" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0065" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0065" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0066" pos="10.36063193113742 6.534704364251283 0.15">
+    <body name="cone_left_0066" pos="-21.625102359555036 -24.13166978351137 0.325">
       <joint name="cone_left_joint_0066" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0066" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0066" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0067" pos="9.96185768034087 7.165316094864622 0.15">
+    <body name="cone_left_0067" pos="-24.08164043534037 -23.82604300836644 0.325">
       <joint name="cone_left_joint_0067" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0067" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0067" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0068" pos="9.52438066820855 7.769825671937319 0.15">
+    <body name="cone_left_0068" pos="-26.54659800180555 -23.59611251235856 0.325">
       <joint name="cone_left_joint_0068" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0068" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0068" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0069" pos="9.065051159535116 8.357986430540059 0.15">
+    <body name="cone_left_0069" pos="-29.013042122182966 -23.382356808005795 0.325">
       <joint name="cone_left_joint_0069" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0069" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0069" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0070" pos="8.600788443960454 8.942280436419459 0.15">
+    <body name="cone_left_0070" pos="-31.47598132430037 -23.132081865955683 0.325">
       <joint name="cone_left_joint_0070" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0070" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0070" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0071" pos="8.149364886378606 9.536494054397707 0.15">
+    <body name="cone_left_0071" pos="-33.92743301723083 -22.788459814783465 0.325">
       <joint name="cone_left_joint_0071" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0071" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0071" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0072" pos="7.732795683112279 10.155469517289461 0.15">
+    <body name="cone_left_0072" pos="-36.34977582435487 -22.281002229059254 0.325">
       <joint name="cone_left_joint_0072" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0072" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0072" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0073" pos="7.3789891029328984 10.812022926998708 0.15">
+    <body name="cone_left_0073" pos="-38.7020006597571 -21.514973071760494 0.325">
       <joint name="cone_left_joint_0073" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0073" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0073" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0074" pos="7.123613821956951 11.512319115819373 0.15">
+    <body name="cone_left_0074" pos="-40.89173246396532 -20.369085930861786 0.325">
       <joint name="cone_left_joint_0074" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0074" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0074" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0075" pos="6.994589372024656 12.246355704021617 0.15">
+    <body name="cone_left_0075" pos="-42.746914376210576 -18.741433295504464 0.325">
       <joint name="cone_left_joint_0075" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0075" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0075" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0076" pos="6.991716752345511 12.991785518640981 0.15">
+    <body name="cone_left_0076" pos="-44.08669995258993 -16.668251095894135 0.325">
       <joint name="cone_left_joint_0076" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0076" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0076" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0077" pos="7.104359234565919 13.728851609222069 0.15">
+    <body name="cone_left_0077" pos="-44.897847022693306 -14.334213494582343 0.325">
       <joint name="cone_left_joint_0077" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0077" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0077" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0078" pos="7.314695049494233 14.444357450190992 0.15">
+    <body name="cone_left_0078" pos="-45.257927457164364 -11.887755044316066 0.325">
       <joint name="cone_left_joint_0078" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0078" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0078" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0079" pos="7.605758496777625 15.131153838005808 0.15">
+    <body name="cone_left_0079" pos="-45.253032776790654 -9.413919430790259 0.325">
       <joint name="cone_left_joint_0079" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0079" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0079" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0080" pos="7.962747469862244 15.786229827780105 0.15">
+    <body name="cone_left_0080" pos="-44.94833578916079 -6.958378389798412 0.325">
       <joint name="cone_left_joint_0080" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0080" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0080" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0081" pos="8.373586558826581 16.40902464770098 0.15">
+    <body name="cone_left_0081" pos="-44.38604942433843 -4.548470585063171 0.325">
       <joint name="cone_left_joint_0081" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0081" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0081" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0082" pos="8.828820095868942 17.00019295727523 0.15">
+    <body name="cone_left_0082" pos="-43.58958600957501 -2.20542873930944 0.325">
       <joint name="cone_left_joint_0082" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0082" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0082" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0083" pos="9.321184842435436 17.560847358493596 0.15">
+    <body name="cone_left_0083" pos="-42.568867074739536 0.04892201348368985 0.325">
       <joint name="cone_left_joint_0083" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0083" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0083" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0084" pos="9.845175564723704 18.09210094031156 0.15">
+    <body name="cone_left_0084" pos="-41.32001492655851 2.185110304490138 0.325">
       <joint name="cone_left_joint_0084" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0084" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0084" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0085" pos="10.397041734708132 18.594356162504006 0.15">
+    <body name="cone_left_0085" pos="-39.829519764442374 4.159654696031595 0.325">
       <joint name="cone_left_joint_0085" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0085" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0085" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0086" pos="10.973021450712032 19.06877904067384 0.15">
+    <body name="cone_left_0086" pos="-38.06324700898822 5.8898974657005 0.325">
       <joint name="cone_left_joint_0086" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0086" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0086" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0087" pos="11.571099643426756 19.51503127020078 0.15">
+    <body name="cone_left_0087" pos="-35.982485956779264 7.219944518890628 0.325">
       <joint name="cone_left_joint_0087" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0087" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0087" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0088" pos="12.188943692510236 19.933490906855205 0.15">
+    <body name="cone_left_0088" pos="-33.62238287719372 7.939382105413586 0.325">
       <joint name="cone_left_joint_0088" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0088" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0088" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0089" pos="12.825103391130597 20.32354777293604 0.15">
+    <body name="cone_left_0089" pos="-31.153846107674305 8.025066357068027 0.325">
       <joint name="cone_left_joint_0089" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0089" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0089" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0090" pos="13.478395905538719 20.684171471251666 0.15">
+    <body name="cone_left_0090" pos="-28.712889555189477 7.628067768445732 0.325">
       <joint name="cone_left_joint_0090" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0090" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0090" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0091" pos="14.147527830223481 21.01447033096877 0.15">
+    <body name="cone_left_0091" pos="-26.340735860777926 6.9230857795323 0.325">
       <joint name="cone_left_joint_0091" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0091" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0091" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0092" pos="14.831693570374952 21.312370578156532 0.15">
+    <body name="cone_left_0092" pos="-24.02645453932405 6.044595260551745 0.325">
       <joint name="cone_left_joint_0092" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0092" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0092" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0093" pos="15.52988655403793 21.5756932414401 0.15">
+    <body name="cone_left_0093" pos="-21.74261929765577 5.089079455791222 0.325">
       <joint name="cone_left_joint_0093" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0093" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0093" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0094" pos="16.2409942797117 21.80179662401831 0.15">
+    <body name="cone_left_0094" pos="-19.45783830588389 4.135846899208275 0.325">
       <joint name="cone_left_joint_0094" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0094" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0094" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0095" pos="16.963941603404393 21.986509746654846 0.15">
+    <body name="cone_left_0095" pos="-17.139744859244132 3.267621046148065 0.325">
       <joint name="cone_left_joint_0095" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0095" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0095" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0096" pos="17.696906806517504 22.12614106197674 0.15">
+    <body name="cone_left_0096" pos="-14.763312099155748 2.5763097871440266 0.325">
       <joint name="cone_left_joint_0096" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0096" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0096" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0097" pos="18.437735343717748 22.214836787421902 0.15">
+    <body name="cone_left_0097" pos="-12.338229561164866 2.081462745631285 0.325">
       <joint name="cone_left_joint_0097" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0097" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0097" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0098" pos="19.183108132592302 22.2473512034532 0.15">
+    <body name="cone_left_0098" pos="-9.88358933152886 1.7627629489281844 0.325">
       <joint name="cone_left_joint_0098" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0098" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0098" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0099" pos="19.928654831719143 22.219756366179965 0.15">
+    <body name="cone_left_0099" pos="-7.4144117591608705 1.5868722017177106 0.325">
       <joint name="cone_left_joint_0099" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0099" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0099" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0100" pos="20.669001144028904 22.12782242336484 0.15">
+    <body name="cone_left_0100" pos="-4.939928390236105 1.513112204575549 0.325">
       <joint name="cone_left_joint_0100" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0100" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0100" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0101" pos="21.397430324383755 21.966895514615068 0.15">
+    <body name="cone_left_0101" pos="-2.464305280248631 1.498223526756675 0.325">
       <joint name="cone_left_joint_0101" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0101" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
+      <geom name="cone_left_vis_0101" type="cylinder" size="0.228 0.325" material="blue_cone" mass="1.0" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.99 0.99 0.001"/>
     </body>
-    <body name="cone_left_0102" pos="22.105470754699468 21.732178320905994 0.15">
-      <joint name="cone_left_joint_0102" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0102" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0103" pos="22.78251931304252 21.419308054688116 0.15">
-      <joint name="cone_left_joint_0103" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0103" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0104" pos="23.415689542707867 21.02532228563566 0.15">
-      <joint name="cone_left_joint_0104" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0104" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0105" pos="23.99098925442931 20.550885896351645 0.15">
-      <joint name="cone_left_joint_0105" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0105" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0106" pos="24.4989309257234 20.004848264759005 0.15">
-      <joint name="cone_left_joint_0106" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0106" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0107" pos="24.934943706380565 19.399728390993516 0.15">
-      <joint name="cone_left_joint_0107" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0107" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0108" pos="25.29980381038032 18.749146617798488 0.15">
-      <joint name="cone_left_joint_0108" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0108" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0109" pos="25.596912559642398 18.06487842390043 0.15">
-      <joint name="cone_left_joint_0109" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0109" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0110" pos="25.83124860593105 17.356577359622634 0.15">
-      <joint name="cone_left_joint_0110" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0110" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0111" pos="26.008397115797536 16.63179885715524 0.15">
-      <joint name="cone_left_joint_0111" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0111" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0112" pos="26.13384373191966 15.89626922370789 0.15">
-      <joint name="cone_left_joint_0112" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0112" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0113" pos="26.212585696331118 15.15426141634908 0.15">
-      <joint name="cone_left_joint_0113" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0113" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0114" pos="26.24896315681685 14.408958834480515 0.15">
-      <joint name="cone_left_joint_0114" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0114" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0115" pos="26.246620850582467 13.662760168086436 0.15">
-      <joint name="cone_left_joint_0115" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0115" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0116" pos="26.208535956114396 12.917517559242462 0.15">
-      <joint name="cone_left_joint_0116" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0116" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0117" pos="26.136857956298087 12.174742817996474 0.15">
-      <joint name="cone_left_joint_0117" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0117" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0118" pos="26.033382396812925 11.435723820576541 0.15">
-      <joint name="cone_left_joint_0118" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0118" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0119" pos="25.899656037231658 10.701572979104775 0.15">
-      <joint name="cone_left_joint_0119" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0119" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0120" pos="25.73635597262257 9.973425243115663 0.15">
-      <joint name="cone_left_joint_0120" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0120" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0121" pos="25.54381192690748 9.252460510248902 0.15">
-      <joint name="cone_left_joint_0121" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0121" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0122" pos="25.32224469160174 8.539883699179875 0.15">
-      <joint name="cone_left_joint_0122" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0122" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0123" pos="25.071151782278662 7.837169552655894 0.15">
-      <joint name="cone_left_joint_0123" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0123" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0124" pos="24.78952430859416 7.146130124604014 0.15">
-      <joint name="cone_left_joint_0124" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0124" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0125" pos="24.47621150853496 6.468870312298712 0.15">
-      <joint name="cone_left_joint_0125" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0125" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0126" pos="24.135424915342064 5.804979004677385 0.15">
-      <joint name="cone_left_joint_0126" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0126" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0127" pos="23.776784955741597 5.150531247894257 0.15">
-      <joint name="cone_left_joint_0127" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0127" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0128" pos="23.41155083079409 4.499727307286456 0.15">
-      <joint name="cone_left_joint_0128" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0128" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0129" pos="23.052950041668723 3.8452613935862523 0.15">
-      <joint name="cone_left_joint_0129" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0129" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0130" pos="22.716844648173378 3.179025995069548 0.15">
-      <joint name="cone_left_joint_0130" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0130" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0131" pos="22.422293688189036 2.4935252477394165 0.15">
-      <joint name="cone_left_joint_0131" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0131" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0132" pos="22.19111814350775 1.7843143191115374 0.15">
-      <joint name="cone_left_joint_0132" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0132" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0133" pos="22.043052060142863 1.0533758012811631 0.15">
-      <joint name="cone_left_joint_0133" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0133" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0134" pos="21.986539000379928 0.30964256605050267 0.15">
-      <joint name="cone_left_joint_0134" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0134" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0135" pos="22.00255280734546 -0.43625857658935274 0.15">
-      <joint name="cone_left_joint_0135" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0135" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0136" pos="22.070233417242193 -1.1793549823952993 0.15">
-      <joint name="cone_left_joint_0136" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0136" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0137" pos="22.175429415698737 -1.9181312319583732 0.15">
-      <joint name="cone_left_joint_0137" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0137" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0138" pos="22.307497473702703 -2.652608707452348 0.15">
-      <joint name="cone_left_joint_0138" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0138" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0139" pos="22.45812524972923 -3.383521212163803 0.15">
-      <joint name="cone_left_joint_0139" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0139" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0140" pos="22.620483435861388 -4.111926865994771 0.15">
-      <joint name="cone_left_joint_0140" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0140" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0141" pos="22.788537041729462 -4.839043986408399 0.15">
-      <joint name="cone_left_joint_0141" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0141" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0142" pos="22.95644886897297 -5.566193797258922 0.15">
-      <joint name="cone_left_joint_0142" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0142" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0143" pos="23.117909887456705 -6.294797963357187 0.15">
-      <joint name="cone_left_joint_0143" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0143" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0144" pos="23.265720073163585 -7.0262800375797525 0.15">
-      <joint name="cone_left_joint_0144" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0144" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0145" pos="23.39081283121409 -7.761959916394634 0.15">
-      <joint name="cone_left_joint_0145" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0145" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0146" pos="23.480740975215348 -8.502701482269565 0.15">
-      <joint name="cone_left_joint_0146" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0146" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0147" pos="23.5180847141254 -9.247818928962765 0.15">
-      <joint name="cone_left_joint_0147" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0147" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0148" pos="23.47763990017836 -9.99249631702589 0.15">
-      <joint name="cone_left_joint_0148" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0148" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0149" pos="23.32547381069351 -10.722042166421208 0.15">
-      <joint name="cone_left_joint_0149" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0149" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0150" pos="23.0255292936655 -11.403434828462089 0.15">
-      <joint name="cone_left_joint_0150" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0150" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0151" pos="22.56143640072004 -11.984860115064675 0.15">
-      <joint name="cone_left_joint_0151" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0151" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0152" pos="21.95889575763818 -12.421799781665628 0.15">
-      <joint name="cone_left_joint_0152" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0152" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0153" pos="21.274645671892706 -12.716793936636401 0.15">
-      <joint name="cone_left_joint_0153" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0153" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0154" pos="20.551261584174668 -12.897797270752033 0.15">
-      <joint name="cone_left_joint_0154" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0154" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0155" pos="19.81133178707453 -12.992523990970078 0.15">
-      <joint name="cone_left_joint_0155" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0155" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0156" pos="19.065795033220198 -13.021604760115393 0.15">
-      <joint name="cone_left_joint_0156" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0156" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0157" pos="18.319952546055198 -12.999485561726566 0.15">
-      <joint name="cone_left_joint_0157" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0157" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0158" pos="17.576506077112562 -12.935400988110196 0.15">
-      <joint name="cone_left_joint_0158" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0158" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0159" pos="16.836925493947795 -12.836084307174843 0.15">
-      <joint name="cone_left_joint_0159" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0159" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0160" pos="16.102158507093748 -12.705765718482846 0.15">
-      <joint name="cone_left_joint_0160" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0160" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0161" pos="15.373082837349763 -12.54663433258343 0.15">
-      <joint name="cone_left_joint_0161" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0161" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0162" pos="14.650434402435614 -12.360483017755733 0.15">
-      <joint name="cone_left_joint_0162" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0162" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0163" pos="13.935284591096462 -12.147329189691456 0.15">
-      <joint name="cone_left_joint_0163" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0163" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0164" pos="13.229230580947288 -11.905768186343613 0.15">
-      <joint name="cone_left_joint_0164" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0164" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0165" pos="12.534243946383938 -11.634021777928691 0.15">
-      <joint name="cone_left_joint_0165" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0165" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0166" pos="11.852065401084133 -11.331562593166726 0.15">
-      <joint name="cone_left_joint_0166" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0166" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0167" pos="11.183537752564753 -11.00000748778826 0.15">
-      <joint name="cone_left_joint_0167" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0167" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0168" pos="10.528647965147428 -10.642241181875875 0.15">
-      <joint name="cone_left_joint_0168" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0168" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0169" pos="9.88587855061455 -10.263098806899244 0.15">
-      <joint name="cone_left_joint_0169" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0169" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0170" pos="9.252821944518814 -9.867925734818474 0.15">
-      <joint name="cone_left_joint_0170" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0170" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0171" pos="8.625478419642143 -9.463723344349368 0.15">
-      <joint name="cone_left_joint_0171" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0171" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0172" pos="7.9889786326248 -9.074280961193654 0.15">
-      <joint name="cone_left_joint_0172" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0172" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0173" pos="7.315661078555287 -8.754528847069757 0.15">
-      <joint name="cone_left_joint_0173" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0173" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0174" pos="6.588395673521717 -8.597879980218536 0.15">
-      <joint name="cone_left_joint_0174" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0174" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0175" pos="5.845956712844668 -8.646641447622635 0.15">
-      <joint name="cone_left_joint_0175" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0175" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0176" pos="5.1341259377485216 -8.866545120361867 0.15">
-      <joint name="cone_left_joint_0176" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0176" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0177" pos="4.467135345297692 -9.200034780407208 0.15">
-      <joint name="cone_left_joint_0177" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0177" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0178" pos="3.8402788415776286 -9.60452557887172 0.15">
-      <joint name="cone_left_joint_0178" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0178" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0179" pos="3.24472254341088 -10.054058163220478 0.15">
-      <joint name="cone_left_joint_0179" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0179" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0180" pos="2.672061313878359 -10.532517215677291 0.15">
-      <joint name="cone_left_joint_0180" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0180" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0181" pos="2.1155073473425787 -11.029666889942451 0.15">
-      <joint name="cone_left_joint_0181" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0181" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0182" pos="1.5691585215319606 -11.538030715956243 0.15">
-      <joint name="cone_left_joint_0182" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0182" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0183" pos="1.0281674316996714 -12.052101580107209 0.15">
-      <joint name="cone_left_joint_0183" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0183" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0184" pos="0.4882716241789993 -12.567324292515028 0.15">
-      <joint name="cone_left_joint_0184" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0184" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0185" pos="-0.05441007887117877 -13.079608230726668 0.15">
-      <joint name="cone_left_joint_0185" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0185" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0186" pos="-0.6035497037600734 -13.584954564414065 0.15">
-      <joint name="cone_left_joint_0186" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0186" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0187" pos="-1.162579107804902 -14.079323308343845 0.15">
-      <joint name="cone_left_joint_0187" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0187" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0188" pos="-1.7348647265699597 -14.558265430738741 0.15">
-      <joint name="cone_left_joint_0188" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0188" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0189" pos="-2.323938512229809 -15.01636955115377 0.15">
-      <joint name="cone_left_joint_0189" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0189" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0190" pos="-2.9327510799370557 -15.447841410916514 0.15">
-      <joint name="cone_left_joint_0190" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0190" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_left_0191" pos="-3.5640533648055523 -15.845616120970003 0.15">
-      <joint name="cone_left_joint_0191" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_left_vis_0191" type="cylinder" size="0.15 0.15" material="blue_cone" mass="0.2" density="100" condim="4" friction="0.5 0.005 0.0001" solref="0.02 1.0" solimp="0.9 0.95 0.001"/>
-    </body>
-    <body name="cone_right_0000" pos="-4.8902582375077515 -14.859422315272333 0.15">
+    <body name="cone_right_0000" pos="0.00793812304288366 -1.5000078914990524 0.325">
       <joint name="cone_right_joint_0000" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0000" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0000" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0001" pos="-5.57570816809141 -15.157626207372362 0.15">
+    <body name="cone_right_0001" pos="2.4937787984190685 -1.509505727239116 0.325">
       <joint name="cone_right_joint_0001" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0001" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0001" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0002" pos="-6.290614033716686 -15.375236931694412 0.15">
+    <body name="cone_right_0002" pos="4.97962786734956 -1.5098534210969774 0.325">
       <joint name="cone_right_joint_0002" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0002" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0002" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0003" pos="-7.029959443501799 -15.480575524386769 0.15">
+    <body name="cone_right_0003" pos="7.465116129441075 -1.470002933652097 0.325">
       <joint name="cone_right_joint_0003" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0003" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0003" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0004" pos="-7.773894796774023 -15.42730799849607 0.15">
+    <body name="cone_right_0004" pos="9.948380448956236 -1.359210058016913 0.325">
       <joint name="cone_right_joint_0004" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0004" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0004" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0005" pos="-8.478328751567318 -15.182399651331082 0.15">
+    <body name="cone_right_0005" pos="12.424863567508396 -1.1462320184916166 0.325">
       <joint name="cone_right_joint_0005" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0005" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0005" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0006" pos="-9.110281971935546 -14.784973583339271 0.15">
+    <body name="cone_right_0006" pos="14.88600251598109 -0.7992949664115372 0.325">
       <joint name="cone_right_joint_0006" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0006" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0006" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0007" pos="-9.663651737416963 -14.283066566813982 0.15">
+    <body name="cone_right_0007" pos="17.317868469323564 -0.28680794430013634 0.325">
       <joint name="cone_right_joint_0007" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0007" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0007" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0008" pos="-10.143432455985408 -13.710023828471991 0.15">
+    <body name="cone_right_0008" pos="19.700206428755237 0.42029960088783014 0.325">
       <joint name="cone_right_joint_0008" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0008" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0008" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0009" pos="-10.556941006548449 -13.087308681333463 0.15">
+    <body name="cone_right_0009" pos="22.00664981555518 1.3448692751543945 0.325">
       <joint name="cone_right_joint_0009" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0009" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0009" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0010" pos="-10.910693806907652 -12.428719102660118 0.15">
+    <body name="cone_right_0010" pos="24.217470945804138 2.480039051748406 0.325">
       <joint name="cone_right_joint_0010" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0010" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0010" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0011" pos="-11.20798482163125 -11.742741527918273 0.15">
+    <body name="cone_right_0011" pos="26.367401527614113 3.727819599297078 0.325">
       <joint name="cone_right_joint_0011" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0011" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0011" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0012" pos="-11.451507117117767 -11.035873487822933 0.15">
+    <body name="cone_right_0012" pos="28.520775413091762 4.969565872171216 0.325">
       <joint name="cone_right_joint_0012" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0012" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0012" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0013" pos="-11.641499304695731 -10.312771076966943 0.15">
+    <body name="cone_right_0013" pos="30.74871340818354 6.069820442294315 0.325">
       <joint name="cone_right_joint_0013" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0013" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0013" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0014" pos="-11.776378399342885 -9.577395363808677 0.15">
+    <body name="cone_right_0014" pos="33.10793766833997 6.8412737396005525 0.325">
       <joint name="cone_right_joint_0014" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0014" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0014" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0015" pos="-11.851937776612164 -8.833612097978712 0.15">
+    <body name="cone_right_0015" pos="35.572991015218875 6.9706291458490455 0.325">
       <joint name="cone_right_joint_0015" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0015" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0015" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0016" pos="-11.862620236750416 -8.086134731473734 0.15">
+    <body name="cone_right_0016" pos="37.862938894263316 6.038638630114406 0.325">
       <joint name="cone_right_joint_0016" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0016" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0016" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0017" pos="-11.797902582815922 -7.341491123916072 0.15">
+    <body name="cone_right_0017" pos="39.84294752665792 4.541519624877395 0.325">
       <joint name="cone_right_joint_0017" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0017" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0017" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0018" pos="-11.647934779861028 -6.60933066155043 0.15">
+    <body name="cone_right_0018" pos="41.587777890422544 2.7730157600850305 0.325">
       <joint name="cone_right_joint_0018" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0018" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0018" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0019" pos="-11.409396329788699 -5.901082717831361 0.15">
+    <body name="cone_right_0019" pos="43.11140361425441 0.8106409465544573 0.325">
       <joint name="cone_right_joint_0019" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0019" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0019" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0020" pos="-11.083773042508096 -5.228414985345495 0.15">
+    <body name="cone_right_0020" pos="44.399569656473524 -1.3138862018825819 0.325">
       <joint name="cone_right_joint_0020" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0020" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0020" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0021" pos="-10.678279637683872 -4.600624385962913 0.15">
+    <body name="cone_right_0021" pos="45.45161395619698 -3.564920703190495 0.325">
       <joint name="cone_right_joint_0021" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0021" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0021" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0022" pos="-10.202506873420802 -4.0241827188664026 0.15">
+    <body name="cone_right_0022" pos="46.278347348434345 -5.908323350998813 0.325">
       <joint name="cone_right_joint_0022" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0022" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0022" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0023" pos="-9.667299195986995 -3.502348282268347 0.15">
+    <body name="cone_right_0023" pos="46.897752363193135 -8.31505643666003 0.325">
       <joint name="cone_right_joint_0023" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0023" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0023" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0024" pos="-9.083341034757844 -3.0356134292929404 0.15">
+    <body name="cone_right_0024" pos="47.33054471861869 -10.762407220125368 0.325">
       <joint name="cone_right_joint_0024" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0024" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0024" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0025" pos="-8.460256812956377 -2.622484137109332 0.15">
+    <body name="cone_right_0025" pos="47.598092892035005 -13.233411380727887 0.325">
       <joint name="cone_right_joint_0025" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0025" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0025" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0026" pos="-7.806215085422821 -2.2602734624587946 0.15">
+    <body name="cone_right_0026" pos="47.71865784698394 -15.716000222637973 0.325">
       <joint name="cone_right_joint_0026" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0026" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0026" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0027" pos="-7.12759681146062 -1.9464343125420278 0.15">
+    <body name="cone_right_0027" pos="47.681568210728436 -18.201056803596316 0.325">
       <joint name="cone_right_joint_0027" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0027" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0027" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0028" pos="-6.429835258862347 -1.6777645171316031 0.15">
+    <body name="cone_right_0028" pos="47.44555851810233 -20.674825956375315 0.325">
       <joint name="cone_right_joint_0028" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0028" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0028" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0029" pos="-5.717122117434343 -1.4516484019894662 0.15">
+    <body name="cone_right_0029" pos="46.95619872311552 -23.110585465453056 0.325">
       <joint name="cone_right_joint_0029" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0029" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0029" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0030" pos="-4.992900375108626 -1.26559870749497 0.15">
+    <body name="cone_right_0030" pos="46.14865516403605 -25.45912643769873 0.325">
       <joint name="cone_right_joint_0030" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0030" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0030" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0031" pos="-4.260121285063214 -1.1166952105452594 0.15">
+    <body name="cone_right_0031" pos="44.96568699735023 -27.641867494728302 0.325">
       <joint name="cone_right_joint_0031" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0031" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0031" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0032" pos="-3.521530307965431 -0.9998562458646774 0.15">
+    <body name="cone_right_0032" pos="43.43913027545786 -29.600634521701636 0.325">
       <joint name="cone_right_joint_0032" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0032" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0032" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0033" pos="-2.7791403888820874 -0.9101253544827976 0.15">
+    <body name="cone_right_0033" pos="41.64834230397662 -31.32217682147933 0.325">
       <joint name="cone_right_joint_0033" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0033" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0033" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0034" pos="-2.0343081249758157 -0.8435282374134125 0.15">
+    <body name="cone_right_0034" pos="39.664267886168155 -32.81773553494159 0.325">
       <joint name="cone_right_joint_0034" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0034" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0034" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0035" pos="-1.288008750120511 -0.7960001743550933 0.15">
+    <body name="cone_right_0035" pos="37.540230688927146 -34.107531153395485 0.325">
       <joint name="cone_right_joint_0035" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0035" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0035" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0036" pos="-0.5408512044413385 -0.7645981548294856 0.15">
+    <body name="cone_right_0036" pos="35.3143691088879 -35.21290338319071 0.325">
       <joint name="cone_right_joint_0036" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0036" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0036" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0037" pos="0.20674423250481055 -0.7462276634909379 0.15">
+    <body name="cone_right_0037" pos="33.013737394944044 -36.15320192835236 0.325">
       <joint name="cone_right_joint_0037" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0037" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0037" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0038" pos="0.9545262873674218 -0.7382660664331127 0.15">
+    <body name="cone_right_0038" pos="30.657357663779667 -36.94379805597305 0.325">
       <joint name="cone_right_joint_0038" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0038" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0038" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0039" pos="1.7023530374353015 -0.7383137203021946 0.15">
+    <body name="cone_right_0039" pos="28.259038342797407 -37.5964423101081 0.325">
       <joint name="cone_right_joint_0039" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0039" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0039" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0040" pos="2.4501607450809075 -0.743852109169989 0.15">
+    <body name="cone_right_0040" pos="25.829069327586854 -38.11923874561137 0.325">
       <joint name="cone_right_joint_0040" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0040" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0040" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0041" pos="3.1979394932665173 -0.7525329691300158 0.15">
+    <body name="cone_right_0041" pos="23.375459119253257 -38.5166663852751 0.325">
       <joint name="cone_right_joint_0041" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0041" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0041" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0042" pos="3.9457107907768787 -0.7618485551591974 0.15">
+    <body name="cone_right_0042" pos="20.904882424403354 -38.78942228664434 0.325">
       <joint name="cone_right_joint_0042" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0042" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0042" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0043" pos="4.693504064795107 -0.7691199319713498 0.15">
+    <body name="cone_right_0043" pos="18.42350550738167 -38.93360018500579 0.325">
       <joint name="cone_right_joint_0043" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0043" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0043" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0044" pos="5.441327530577141 -0.7713457106893422 0.15">
+    <body name="cone_right_0044" pos="15.937981952534706 -38.94184526570595 0.325">
       <joint name="cone_right_joint_0044" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0044" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0044" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0045" pos="6.189123195919358 -0.7649766807183909 0.15">
+    <body name="cone_right_0045" pos="13.455666837005282 -38.814702044365504 0.325">
       <joint name="cone_right_joint_0045" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0045" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0045" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0046" pos="6.936692975905757 -0.7458158443037917 0.15">
+    <body name="cone_right_0046" pos="10.982527837314926 -38.565669560388386 0.325">
       <joint name="cone_right_joint_0046" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0046" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0046" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0047" pos="7.683562274510344 -0.7084780542867755 0.15">
+    <body name="cone_right_0047" pos="8.5212426801682 -38.21789777316127 0.325">
       <joint name="cone_right_joint_0047" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0047" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0047" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0048" pos="8.428724392954742 -0.6459815906056292 0.15">
+    <body name="cone_right_0048" pos="6.071083808509762 -37.79846215680536 0.325">
       <joint name="cone_right_joint_0048" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0048" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0048" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0049" pos="9.170116629703976 -0.5488106068197496 0.15">
+    <body name="cone_right_0049" pos="3.6292373197811933 -37.33287473110701 0.325">
       <joint name="cone_right_joint_0049" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0049" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0049" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0050" pos="9.903606906392525 -0.403993784007902 0.15">
+    <body name="cone_right_0050" pos="1.197255728471987 -36.81854457846657 0.325">
       <joint name="cone_right_joint_0050" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0050" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0050" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0051" pos="10.620769608601918 -0.19327297640902685 0.15">
+    <body name="cone_right_0051" pos="-1.2122667736985946 -36.20834871732123 0.325">
       <joint name="cone_right_joint_0051" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0051" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0051" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0052" pos="11.304945321512527 0.10689006953568025 0.15">
+    <body name="cone_right_0052" pos="-3.576625624865038 -35.442921602354005 0.325">
       <joint name="cone_right_joint_0052" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0052" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0052" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0053" pos="11.926262384441273 0.520793965130192 0.15">
+    <body name="cone_right_0053" pos="-5.8485896830624355 -34.43843146905101 0.325">
       <joint name="cone_right_joint_0053" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0053" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0053" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0054" pos="12.439598061087935 1.0620169029043751 0.15">
+    <body name="cone_right_0054" pos="-7.9166625488631155 -33.06796830458097 0.325">
       <joint name="cone_right_joint_0054" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0054" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0054" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0055" pos="12.800147688051709 1.7147648807715612 0.15">
+    <body name="cone_right_0055" pos="-9.511505312989797 -31.178619622184897 0.325">
       <joint name="cone_right_joint_0055" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0055" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0055" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0056" pos="12.989368736613933 2.4364506081299773 0.15">
+    <body name="cone_right_0056" pos="-10.275553737753498 -28.826198593062003 0.325">
       <joint name="cone_right_joint_0056" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0056" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0056" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0057" pos="13.023985987272624 3.182391434718504 0.15">
+    <body name="cone_right_0057" pos="-11.102860962192388 -26.49160127338456 0.325">
       <joint name="cone_right_joint_0057" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0057" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0057" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0058" pos="12.94376379540855 3.925374996946946 0.15">
+    <body name="cone_right_0058" pos="-12.611838067066294 -24.529522992594906 0.325">
       <joint name="cone_right_joint_0058" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0058" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0058" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0059" pos="12.780963572417456 4.65497069246431 0.15">
+    <body name="cone_right_0059" pos="-14.628848428126282 -23.088937806586017 0.325">
       <joint name="cone_right_joint_0059" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0059" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0059" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0060" pos="12.555871622742892 5.367912679407262 0.15">
+    <body name="cone_right_0060" pos="-16.91536147110395 -22.12219247874458 0.325">
       <joint name="cone_right_joint_0060" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0060" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0060" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0061" pos="12.279755267844749 6.062740490599019 0.15">
+    <body name="cone_right_0061" pos="-19.318980801242624 -21.49332727808212 0.325">
       <joint name="cone_right_joint_0061" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0061" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0061" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0062" pos="11.958942673388705 6.73812453069943 0.15">
+    <body name="cone_right_0062" pos="-21.769795918696722 -21.080318903513245 0.325">
       <joint name="cone_right_joint_0062" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0062" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0062" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0063" pos="11.596333285742752 7.392020301773734 0.15">
+    <body name="cone_right_0063" pos="-24.239038459357012 -20.79464364376318 0.325">
       <joint name="cone_right_joint_0063" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0063" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0063" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0064" pos="11.193332775983087 8.021813744306648 0.15">
+    <body name="cone_right_0064" pos="-26.714763379790234 -20.57062099032109 0.325">
       <joint name="cone_right_joint_0064" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0064" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0064" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0065" pos="10.755843128568557 8.628231637409385 0.15">
+    <body name="cone_right_0065" pos="-29.191098391697807 -20.353304307550786 0.325">
       <joint name="cone_right_joint_0065" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0065" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0065" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0066" pos="10.296982180647 9.21871068508942 0.15">
+    <body name="cone_right_0066" pos="-31.662607163598096 -20.08757077655457 0.325">
       <joint name="cone_right_joint_0066" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0066" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0066" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0067" pos="9.831435517474752 9.803957680101242 0.15">
+    <body name="cone_right_0067" pos="-34.11858441242685 -19.706090199206443 0.325">
       <joint name="cone_right_joint_0067" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0067" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0067" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0068" pos="9.37751717590423 10.398209182198109 0.15">
+    <body name="cone_right_0068" pos="-36.53049105438425 -19.11019222885392 0.325">
       <joint name="cone_right_joint_0068" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0068" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0068" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0069" pos="8.962822179534726 11.020181645685973 0.15">
+    <body name="cone_right_0069" pos="-38.810850743958305 -18.13311248862493 0.325">
       <joint name="cone_right_joint_0069" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0069" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0069" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0070" pos="8.63811303158375 11.692559407670082 0.15">
+    <body name="cone_right_0070" pos="-40.68390603557118 -16.523907474434566 0.325">
       <joint name="cone_right_joint_0070" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0070" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0070" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0071" pos="8.485088530019603 12.42211661684349 0.15">
+    <body name="cone_right_0071" pos="-41.794479804639984 -14.313878704345484 0.325">
       <joint name="cone_right_joint_0071" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0071" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0071" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0072" pos="8.522334831116105 13.167354480963482 0.15">
+    <body name="cone_right_0072" pos="-42.25086614669264 -11.875589293901669 0.325">
       <joint name="cone_right_joint_0072" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0072" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0072" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0073" pos="8.709650648861732 13.890344760575232 0.15">
+    <body name="cone_right_0073" pos="-42.24364699524991 -9.392380595903745 0.325">
       <joint name="cone_right_joint_0073" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0073" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0073" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0074" pos="9.005287288337527 14.576639793180796 0.15">
+    <body name="cone_right_0074" pos="-41.88767571922353 -6.933848493118745 0.325">
       <joint name="cone_right_joint_0074" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0074" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0074" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0075" pos="9.380005272478506 15.223415567175735 0.15">
+    <body name="cone_right_0075" pos="-41.243171771895355 -4.534376763011323 0.325">
       <joint name="cone_right_joint_0075" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0075" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0075" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0076" pos="9.814497124467849 15.831786839225565 0.15">
+    <body name="cone_right_0076" pos="-40.337159776694754 -2.220869939794909 0.325">
       <joint name="cone_right_joint_0076" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0076" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0076" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0077" pos="10.29541019469849 16.40425198497862 0.15">
+    <body name="cone_right_0077" pos="-39.17235410070814 -0.02648292225410387 0.325">
       <joint name="cone_right_joint_0077" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0077" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0077" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0078" pos="10.814392373995098 16.942500008969724 0.15">
+    <body name="cone_right_0078" pos="-37.73126343776605 1.9963438816021721 0.325">
       <joint name="cone_right_joint_0078" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0078" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0078" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0079" pos="11.365024166924947 17.448353114830674 0.15">
+    <body name="cone_right_0079" pos="-35.95770727682581 3.730922675822171 0.325">
       <joint name="cone_right_joint_0079" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0079" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0079" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0080" pos="11.942955506229495 17.92279979304547 0.15">
+    <body name="cone_right_0080" pos="-33.75675495286894 4.849985873612042 0.325">
       <joint name="cone_right_joint_0080" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0080" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0080" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0081" pos="12.544950100690585 18.36633312119347 0.15">
+    <body name="cone_right_0081" pos="-31.289541244196577 5.02649644964967 0.325">
       <joint name="cone_right_joint_0081" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0081" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0081" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0082" pos="13.168575799367304 18.778913305068194 0.15">
+    <body name="cone_right_0082" pos="-28.850219727632975 4.5659861390304854 0.325">
       <joint name="cone_right_joint_0082" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0082" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0082" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0083" pos="13.812106182640257 19.159704234588602 0.15">
+    <body name="cone_right_0083" pos="-26.490235503483554 3.7877192221924076 0.325">
       <joint name="cone_right_joint_0083" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0083" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0083" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0084" pos="14.47396837639775 19.507641544510662 0.15">
+    <body name="cone_right_0084" pos="-24.182766488062178 2.8634281079598907 0.325">
       <joint name="cone_right_joint_0084" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0084" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0084" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0085" pos="15.152931732725989 19.820876787240643 0.15">
+    <body name="cone_right_0085" pos="-21.893075804421322 1.895541166765497 0.325">
       <joint name="cone_right_joint_0085" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0085" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0085" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0086" pos="15.847917560372274 20.096710544949083 0.15">
+    <body name="cone_right_0086" pos="-19.588642948659484 0.9635860653592658 0.325">
       <joint name="cone_right_joint_0086" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0086" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0086" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0087" pos="16.557807227261726 20.331486573281566 0.15">
+    <body name="cone_right_0087" pos="-17.24063361523323 0.14878446806901025 0.325">
       <joint name="cone_right_joint_0087" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0087" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0087" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0088" pos="17.28122542811009 20.5204007287129 0.15">
+    <body name="cone_right_0088" pos="-14.838356189192773 -0.48803792941447455 0.325">
       <joint name="cone_right_joint_0088" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0088" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0088" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0089" pos="18.01622777431458 20.657285372590955 0.15">
+    <body name="cone_right_0089" pos="-12.395744341066738 -0.9470077583310115 0.325">
       <joint name="cone_right_joint_0089" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0089" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0089" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0090" pos="18.75986838070026 20.73396353873268 0.15">
+    <body name="cone_right_0090" pos="-9.928358783716675 -1.2464842796680387 0.325">
       <joint name="cone_right_joint_0090" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0090" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0090" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0091" pos="19.507360119071087 20.742193130383548 0.15">
+    <body name="cone_right_0091" pos="-7.448423155469193 -1.4147224212470348 0.325">
       <joint name="cone_right_joint_0091" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0091" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0091" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0092" pos="20.25180779977228 20.67504414223575 0.15">
+    <body name="cone_right_0092" pos="-4.963712351523434 -1.4868867213253907 0.325">
       <joint name="cone_right_joint_0092" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0092" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0092" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0093" pos="20.983918570435293 20.524778722329785 0.15">
+    <body name="cone_right_0093" pos="-2.477920474951574 -1.5017776552429893 0.325">
       <joint name="cone_right_joint_0093" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0093" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_right_vis_0093" type="cylinder" size="0.228 0.325" material="yellow_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_right_0094" pos="21.690311829089794 20.28119353705415 0.15">
-      <joint name="cone_right_joint_0094" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0094" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0095" pos="22.35196041359614 19.93452043013528 0.15">
-      <joint name="cone_right_joint_0095" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0095" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0096" pos="22.94258549679582 19.477610564643143 0.15">
-      <joint name="cone_right_joint_0096" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0096" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0097" pos="23.441999877359905 18.92227182276033 0.15">
-      <joint name="cone_right_joint_0097" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0097" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0098" pos="23.846328462667863 18.29402075830997 0.15">
-      <joint name="cone_right_joint_0098" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0098" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0099" pos="24.162168529999903 17.61669493348945 0.15">
-      <joint name="cone_right_joint_0099" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0099" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0100" pos="24.39922891750431 16.907781989182794 0.15">
-      <joint name="cone_right_joint_0100" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0100" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0101" pos="24.56860901154416 16.179631934133738 0.15">
-      <joint name="cone_right_joint_0101" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0101" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0102" pos="24.67915703428327 15.44019377858104 0.15">
-      <joint name="cone_right_joint_0102" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0102" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0103" pos="24.738241846740763 14.694838432332098 0.15">
-      <joint name="cone_right_joint_0103" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0103" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0104" pos="24.751839763503746 13.947241728385691 0.15">
-      <joint name="cone_right_joint_0104" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0104" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0105" pos="24.72445644882024 13.200001318999107 0.15">
-      <joint name="cone_right_joint_0105" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0105" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0106" pos="24.65923524173109 12.455095518555382 0.15">
-      <joint name="cone_right_joint_0106" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0106" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0107" pos="24.558882633186812 11.714098764731204 0.15">
-      <joint name="cone_right_joint_0107" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0107" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0108" pos="24.42518275663742 10.978384298015328 0.15">
-      <joint name="cone_right_joint_0108" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0108" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0109" pos="24.25922181298322 10.24926829427514 0.15">
-      <joint name="cone_right_joint_0109" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0109" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0110" pos="24.0614797281425 9.528123371191214 0.15">
-      <joint name="cone_right_joint_0110" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0110" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0111" pos="23.831841131199212 8.816495378638095 0.15">
-      <joint name="cone_right_joint_0111" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0111" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0112" pos="23.569480390600106 8.11627562964113 0.15">
-      <joint name="cone_right_joint_0112" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0112" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0113" pos="23.272688536696748 7.429954758992508 0.15">
-      <joint name="cone_right_joint_0113" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0113" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0114" pos="22.94252869417273 6.759023532960832 0.15">
-      <joint name="cone_right_joint_0114" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0114" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0115" pos="22.588548322720058 6.10030268569151 0.15">
-      <joint name="cone_right_joint_0115" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0115" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0116" pos="22.223435083109322 5.447663428094344 0.15">
-      <joint name="cone_right_joint_0116" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0116" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0117" pos="21.860198732039983 4.7939820702023965 0.15">
-      <joint name="cone_right_joint_0117" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0117" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0118" pos="21.512637592139995 4.131870342869597 0.15">
-      <joint name="cone_right_joint_0118" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0118" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0119" pos="21.19516550634151 3.4548827474193082 0.15">
-      <joint name="cone_right_joint_0119" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0119" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0120" pos="20.92247481759687 2.7587346942220137 0.15">
-      <joint name="cone_right_joint_0120" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0120" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0121" pos="20.7086326627173 2.042407677570715 0.15">
-      <joint name="cone_right_joint_0121" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0121" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0122" pos="20.5644018048921 1.3089612564747206 0.15">
-      <joint name="cone_right_joint_0122" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0122" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0123" pos="20.49467376222271 0.5647036105958243 0.15">
-      <joint name="cone_right_joint_0123" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0123" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0124" pos="20.489645367596843 -0.18291147785574324 0.15">
-      <joint name="cone_right_joint_0124" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0124" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0125" pos="20.535640627523684 -0.9292072249564924 0.15">
-      <joint name="cone_right_joint_0125" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0125" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0126" pos="20.621407354246948 -1.6720334764495597 0.15">
-      <joint name="cone_right_joint_0126" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0126" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0127" pos="20.737502286888166 -2.410754888663959 0.15">
-      <joint name="cone_right_joint_0127" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0127" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0128" pos="20.876005993637712 -3.145623505106279 0.15">
-      <joint name="cone_right_joint_0128" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0128" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0129" pos="21.030500758702082 -3.877310077501715 0.15">
-      <joint name="cone_right_joint_0129" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0129" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0130" pos="21.19502371654184 -4.606814087405539 0.15">
-      <joint name="cone_right_joint_0130" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0130" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0131" pos="21.363891602668694 -5.335327704567163 0.15">
-      <joint name="cone_right_joint_0131" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0131" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0132" pos="21.531269042931925 -6.0641840228495205 0.15">
-      <joint name="cone_right_joint_0132" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0132" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0133" pos="21.690407307241365 -6.794875986378642 0.15">
-      <joint name="cone_right_joint_0133" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0133" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0134" pos="21.832766709409213 -7.529000535074175 0.15">
-      <joint name="cone_right_joint_0134" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0134" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0135" pos="21.946497512017075 -8.268051145009938 0.15">
-      <joint name="cone_right_joint_0135" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0135" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0136" pos="22.012139827551962 -9.012773663047948 0.15">
-      <joint name="cone_right_joint_0136" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0136" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0137" pos="21.994652505121323 -9.759701883544828 0.15">
-      <joint name="cone_right_joint_0137" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0137" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0138" pos="21.816009706750258 -10.482704211350452 0.15">
-      <joint name="cone_right_joint_0138" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0138" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0139" pos="21.339635787310797 -11.044869744184915 0.15">
-      <joint name="cone_right_joint_0139" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0139" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0140" pos="20.65472775104618 -11.337773534894708 0.15">
-      <joint name="cone_right_joint_0140" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0140" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0141" pos="19.92039745667664 -11.47518880322508 0.15">
-      <joint name="cone_right_joint_0141" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0141" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0142" pos="19.17426073495715 -11.520599114707068 0.15">
-      <joint name="cone_right_joint_0142" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0142" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0143" pos="18.42680254012764 -11.503070561782557 0.15">
-      <joint name="cone_right_joint_0143" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0143" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0144" pos="17.68192928702718 -11.437817056470031 0.15">
-      <joint name="cone_right_joint_0144" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0144" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0145" pos="16.9414589213159 -11.333694859281387 0.15">
-      <joint name="cone_right_joint_0145" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0145" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0146" pos="16.206456717122357 -11.196108759971061 0.15">
-      <joint name="cone_right_joint_0146" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0146" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0147" pos="15.477824376631126 -11.027993943997618 0.15">
-      <joint name="cone_right_joint_0147" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0147" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0148" pos="14.756594847937052 -10.830521451551004 0.15">
-      <joint name="cone_right_joint_0148" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0148" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0149" pos="14.044219356617475 -10.603194016560757 0.15">
-      <joint name="cone_right_joint_0149" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0149" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0150" pos="13.342921051856173 -10.3437357210341 0.15">
-      <joint name="cone_right_joint_0150" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0150" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0151" pos="12.65507826469944 -10.050462927905052 0.15">
-      <joint name="cone_right_joint_0151" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0151" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0152" pos="11.982161349940071 -9.72437986893846 0.15">
-      <joint name="cone_right_joint_0152" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0152" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0153" pos="11.324184475399392 -9.369079662426348 0.15">
-      <joint name="cone_right_joint_0153" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0153" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0154" pos="10.679519524125084 -8.990121681620561 0.15">
-      <joint name="cone_right_joint_0154" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0154" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0155" pos="10.045140515589843 -8.594154418871966 0.15">
-      <joint name="cone_right_joint_0155" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0155" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0156" pos="9.416514592863123 -8.18909179356741 0.15">
-      <joint name="cone_right_joint_0156" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0156" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0157" pos="8.779036399937347 -7.798261152197032 0.15">
-      <joint name="cone_right_joint_0157" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0157" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0158" pos="8.11327274254431 -7.458528949510708 0.15">
-      <joint name="cone_right_joint_0158" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0158" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0159" pos="7.4068056969641844 -7.21595842039784 0.15">
-      <joint name="cone_right_joint_0159" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0159" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0160" pos="6.669052357288926 -7.1000410314264215 0.15">
-      <joint name="cone_right_joint_0160" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0160" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0161" pos="5.922441862345536 -7.118029688332459 0.15">
-      <joint name="cone_right_joint_0161" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0161" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0162" pos="5.189478537573457 -7.262185129764131 0.15">
-      <joint name="cone_right_joint_0162" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0162" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0163" pos="4.48522036242192 -7.512031386068223 0.15">
-      <joint name="cone_right_joint_0163" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0163" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0164" pos="3.81584869765571 -7.844691733445245 0.15">
-      <joint name="cone_right_joint_0164" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0164" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0165" pos="3.179908007726965 -8.237775891557593 0.15">
-      <joint name="cone_right_joint_0165" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0165" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0166" pos="2.5732507964684004 -8.674862456971457 0.15">
-      <joint name="cone_right_joint_0166" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0166" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0167" pos="1.9900415462419332 -9.142859325739487 0.15">
-      <joint name="cone_right_joint_0167" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0167" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0168" pos="1.4246626066539605 -9.632295198678552 0.15">
-      <joint name="cone_right_joint_0168" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0168" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0169" pos="0.8719284953443776 -10.135994612246389 0.15">
-      <joint name="cone_right_joint_0169" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0169" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0170" pos="0.32711694344002495 -10.648266883848645 0.15">
-      <joint name="cone_right_joint_0170" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0170" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0171" pos="-0.21409102926622836 -11.164350387875334 0.15">
-      <joint name="cone_right_joint_0171" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0171" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0172" pos="-0.7557318005804348 -11.67997912100656 0.15">
-      <joint name="cone_right_joint_0172" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0172" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0173" pos="-1.3017380330027564 -12.190977085507058 0.15">
-      <joint name="cone_right_joint_0173" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0173" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0174" pos="-1.8559611708858341 -12.69303864088514 0.15">
-      <joint name="cone_right_joint_0174" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0174" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0175" pos="-2.4223136439946202 -13.181354955215957 0.15">
-      <joint name="cone_right_joint_0175" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0175" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0176" pos="-3.004828120210515 -13.65023949973878 0.15">
-      <joint name="cone_right_joint_0176" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0176" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0177" pos="-3.6076610054190468 -14.092642786227902 0.15">
-      <joint name="cone_right_joint_0177" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0177" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_right_0178" pos="-4.235054562337545 -14.499365424824148 0.15">
-      <joint name="cone_right_joint_0178" type="free" damping="0.1" frictionloss="0.05"/>
-      <geom name="cone_right_vis_0178" type="cylinder" size="0.15 0.15" material="yellow_cone" mass="0.2" condim="4" friction="0.5 0.005 0.0001"/>
-    </body>
-    <body name="cone_orange_big_0000" pos="4.7 2.5 0.25">
+    <body name="cone_orange_big_0000" pos="4.7 2.5 0.505">
       <joint name="cone_orange_big_joint_0000" type="free" damping="0.2" frictionloss="0.1"/>
-      <geom name="cone_orange_big_vis_0000" type="cylinder" size="0.3 0.25" material="orange_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_orange_big_vis_0000" type="cylinder" size="0.3 0.505" material="orange_cone" mass="2.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_orange_big_0001" pos="4.7 -2.5 0.25">
+    <body name="cone_orange_big_0001" pos="4.7 -2.5 0.505">
       <joint name="cone_orange_big_joint_0001" type="free" damping="0.2" frictionloss="0.1"/>
-      <geom name="cone_orange_big_vis_0001" type="cylinder" size="0.3 0.25" material="orange_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_orange_big_vis_0001" type="cylinder" size="0.3 0.505" material="orange_cone" mass="2.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_orange_big_0002" pos="7.3 2.5 0.25">
+    <body name="cone_orange_big_0002" pos="7.3 2.5 0.505">
       <joint name="cone_orange_big_joint_0002" type="free" damping="0.2" frictionloss="0.1"/>
-      <geom name="cone_orange_big_vis_0002" type="cylinder" size="0.3 0.25" material="orange_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_orange_big_vis_0002" type="cylinder" size="0.3 0.505" material="orange_cone" mass="2.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
-    <body name="cone_orange_big_0003" pos="7.3 -2.5 0.25">
+    <body name="cone_orange_big_0003" pos="7.3 -2.5 0.505">
       <joint name="cone_orange_big_joint_0003" type="free" damping="0.2" frictionloss="0.1"/>
-      <geom name="cone_orange_big_vis_0003" type="cylinder" size="0.3 0.25" material="orange_cone" mass="1.0" condim="4" friction="0.5 0.005 0.0001"/>
+      <geom name="cone_orange_big_vis_0003" type="cylinder" size="0.3 0.505" material="orange_cone" mass="2.0" condim="4" friction="0.5 0.005 0.0001"/>
     </body>
   </worldbody>
 </mujoco>

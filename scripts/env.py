@@ -159,11 +159,6 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         
         # Collision Detection
         self.car_geoms = self._get_car_geom_ids()
-
-        print(f"Car Geoms: {self.car_geoms}")
-
-
-
         self.cone_geoms = self._get_cone_geom_ids()
         
         # Filter

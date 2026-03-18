@@ -4,7 +4,8 @@
     <option timestep="0.01"/>
 
     <include file="track_1/track.xml"/>
-    <include file="cars/base_car/buddy.xml"/>
+    <!-- <include file="cars/base_car/buddy.xml"/> -->
+    <include file="formula_student/base_car/ads_dv.xml"/>
 
     <visual>
         <headlight ambient="0.6 0.6 0.6" diffuse="0.8 0.8 0.8" specular="0.2 0.2 0.2"/>
@@ -26,23 +27,9 @@
                   reflectance="0.0"/>    
     </asset>
 
-    <!-- Optional: Add a floor if needed (currently commented out) -->
     <worldbody>
-        <geom name="floor" type="plane" size="120 120 0.1" rgba="0.1 0.1 0.1 1.0" condim="3" friction="1.0 0.005 0.0001"/>
+        <geom name="floor" type="plane" size="-1 -1 0.1" rgba="0.1 0.1 0.1 1.0" condim="3" friction="1.0 0.005 0.0001" material="matplane"/>
     </worldbody>
-
-    <!-- <worldbody> -->
-        <!-- Ground plane -->
-        <!-- <geom name="floor" 
-              type="plane" 
-              size="100 100 0.1"
-              pos="0 0 -0.05"
-              material="matplane"
-              condim="3"
-              friction="0.5 0.005 0.0001"
-              contype="1"
-              conaffinity="1"/>
-    </worldbody> -->
 
 
 </mujoco>
