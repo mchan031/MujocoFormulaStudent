@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from random_track_generator import generate_track
 from random_track_generator import SimType
+import os
 
 def plot_track_with_frames(track, n_checkpoints=10, arrow_scale=3.0):
     """
@@ -171,11 +172,11 @@ def plot_perpendicular_lines(track, n_checkpoints=10, line_length=15.0):
 
 track = generate_track(
     n_points=60,       # Voronoi points
-    n_regions=10,      # Regions to select
+    n_regions=15,      # Regions to select
     min_bound=0.,      # Minimum x/y bound [m]
     max_bound=150.,    # Maximum x/y bound [m]
-    mode="extend",     # Generation mode
-    # seed=1            # Optional: for reproducibility
+    mode="expand",     # Generation mode
+    seed=239            # Optional: for reproducibility
 )
 
 print(track.orange_cones)
@@ -189,8 +190,12 @@ fig1, ax1, checkpoints = plot_track_with_frames(track, n_checkpoints=n_checkpoin
 # Method 2: Plot perpendicular lines
 # fig2, ax2 = plot_perpendicular_lines(track, n_checkpoints=n_checkpoints, line_length=5.0)
 # track.save("mujoco_tracks", SimType.MUJOCO,  include_checkpoints=True)
-track.save("mujoco_tracks", SimType.MUJOCO, include_checkpoints=True, n_checkpoints=n_checkpoints)
-track.save("mujoco_tracks", SimType.FSDS, include_checkpoints=True, n_checkpoints=n_checkpoints)
+
+track_dir = "mujoco_tracks/track_6"
+os.makedirs(track_dir, exist_ok=True)
+
+track.save(track_dir, SimType.MUJOCO, include_checkpoints=True, n_checkpoints=n_checkpoints)
+track.save(track_dir, SimType.FSDS, include_checkpoints=True, n_checkpoints=n_checkpoints)
 
 # print(f"{checkpoints = }")
 # # Access checkpoint data

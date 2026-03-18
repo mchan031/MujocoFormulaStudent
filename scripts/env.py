@@ -131,7 +131,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             observation_space=self.observation_space,
             width=render_width,
             height=render_height,
-            camera_name="buddy_third_person",
+            camera_name="third_person",
             **kwargs,
         )
         
@@ -159,6 +159,11 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         
         # Collision Detection
         self.car_geoms = self._get_car_geom_ids()
+
+        print(f"Car Geoms: {self.car_geoms}")
+
+
+
         self.cone_geoms = self._get_cone_geom_ids()
         
         # Filter
@@ -230,7 +235,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             self.data,
             width=self._observation_width,
             height=self._observation_height,
-            camera_name="buddy_realsense_d435i"
+            camera_name="realsense_rgb"
         )
         
     def step(self, action):      
@@ -337,9 +342,9 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
 
     def _get_car_joint_ids(self):
         """Find the qpos/qvel indices of the car's free joint."""
-        self.car_body_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "buddy")
+        self.car_body_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "chassis")
         if self.car_body_id < 0:
-            raise ValueError("Body 'buddy' not found.")
+            raise ValueError("Body 'chassis' not found.")
         self.car_qpos_start = None
         self.car_qvel_start = None
         for j in range(self.model.njnt):
@@ -352,14 +357,14 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
 
     def _get_sensor_id(self):
         """Get MuJoCo IDs for sensors."""
-        self.vel_sensor_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_SENSOR, "buddy_velocimeter")
+        self.vel_sensor_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_SENSOR, "ads_dv_velocimeter")
         if self.vel_sensor_id < 0:
             raise ValueError("Body 'Vel Sensor' not found.")
 
-        self.acc_sensor_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_SENSOR, "buddy_accelerometer")
+        self.acc_sensor_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_SENSOR, "ads_dv_accelerometer")
         if self.acc_sensor_id < 0:
             raise ValueError("Body 'Acc Sensor' not found.")        
-        self.gyro_sensor_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_SENSOR, "buddy_gyro")
+        self.gyro_sensor_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_SENSOR, "ads_dv_gyro")
         if self.gyro_sensor_id < 0:
             raise ValueError("Body 'Gyro Sensor' not found.")   
            
@@ -545,22 +550,22 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         return crossed
 
     def _check_crash(self):
-
+        crashed = False
         for i in range(self.data.ncon):
             c = self.data.contact[i]
-            if c.geom1 in self.car_geoms and c.geom2 in self.cone_geoms:
-                return True
-            if c.geom2 in self.car_geoms and c.geom1 in self.cone_geoms:
-                return True
-        return False
+            if (c.geom1 in self.car_geoms and c.geom2 in self.cone_geoms) or \
+                (c.geom2 in self.car_geoms and c.geom1 in self.cone_geoms):
+                crashed = True
+                break 
+        return crashed
 
     def _get_car_geom_ids(self):
         """Get all geom IDs that belong to the car."""
         car_geom_ids = []
-        car_body_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "buddy")
+        car_body_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, "chassis")
         
         if car_body_id < 0:
-            raise ValueError("Geom 'buddy' not found.")
+            raise ValueError("Geom 'chassis' not found.")
          
         # Find all geoms that belong to the car body or its children
         for i in range(self.model.ngeom):

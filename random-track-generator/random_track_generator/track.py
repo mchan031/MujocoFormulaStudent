@@ -332,7 +332,7 @@ def _create_mujoco_xml(cones_left, cones_right, cones_orange_big):
                   condim="4",  # Use 4 for friction cones, 6 for full friction
                   friction="0.5 0.005 0.0001",  # Sliding, torsional, rolling friction
                   solref="0.02 1.0",  # Contact solver parameters
-                  solimp="0.9 0.95 0.001")  # Contact impedance
+                  solimp="0.99 0.99 0.001")  # Contact impedance
     
     # Add assets (colors)
     asset = ET.SubElement(mujoco, "asset")
@@ -364,7 +364,7 @@ def _create_mujoco_xml(cones_left, cones_right, cones_orange_big):
         # Create body with FREE joint (allows 6DOF motion)
         body = ET.SubElement(worldbody, "body",
                             name=f"cone_left_{i:04d}",
-                            pos=f"{cone_pos[0]} {cone_pos[1]} 0.15")
+                            pos=f"{cone_pos[0]} {cone_pos[1]} 0.325")
         
         # Add free joint for physics
         ET.SubElement(body, "joint", 
@@ -377,14 +377,14 @@ def _create_mujoco_xml(cones_left, cones_right, cones_orange_big):
         ET.SubElement(body, "geom",
                      name=f"cone_left_vis_{i:04d}",
                      type="cylinder",
-                     size="0.15 0.15",
+                     size="0.228 0.325",
                      material="blue_cone",
-                     mass="0.2",  # Lightweight but not too light
+                     mass="1.0",  # Lightweight but not too light
                      density="100",  # Alternative to mass
                      condim="4",
                      friction="0.5 0.005 0.0001",
                      solref="0.02 1.0",
-                     solimp="0.9 0.95 0.001")
+                     solimp="0.99 0.99 0.001")
         
         # # Optional: Add a second geom for better rolling (sphere at bottom)
         # ET.SubElement(body, "geom",
@@ -401,7 +401,7 @@ def _create_mujoco_xml(cones_left, cones_right, cones_orange_big):
     for i, cone_pos in enumerate(cones_right):
         body = ET.SubElement(worldbody, "body",
                             name=f"cone_right_{i:04d}",
-                            pos=f"{cone_pos[0]} {cone_pos[1]} 0.15")
+                            pos=f"{cone_pos[0]} {cone_pos[1]} 0.325")
         
         ET.SubElement(body, "joint", 
                      name=f"cone_right_joint_{i:04d}",
@@ -412,9 +412,9 @@ def _create_mujoco_xml(cones_left, cones_right, cones_orange_big):
         ET.SubElement(body, "geom",
                      name=f"cone_right_vis_{i:04d}",
                      type="cylinder",
-                     size="0.15 0.15",
+                     size="0.228 0.325",
                      material="yellow_cone",
-                     mass="0.2",
+                     mass="1.0",
                      condim="4",
                      friction="0.5 0.005 0.0001")
         
@@ -434,7 +434,7 @@ def _create_mujoco_xml(cones_left, cones_right, cones_orange_big):
     for i, cone_pos in enumerate(cones_orange_big):
         body = ET.SubElement(worldbody, "body",
                             name=f"cone_orange_big_{i:04d}",
-                            pos=f"{cone_pos[0]} {cone_pos[1]} 0.25")
+                            pos=f"{cone_pos[0]} {cone_pos[1]} 0.505")
         
         ET.SubElement(body, "joint", 
                      name=f"cone_orange_big_joint_{i:04d}",
@@ -445,9 +445,9 @@ def _create_mujoco_xml(cones_left, cones_right, cones_orange_big):
         ET.SubElement(body, "geom",
                      name=f"cone_orange_big_vis_{i:04d}",
                      type="cylinder",
-                     size="0.3 0.25",
+                     size="0.3 0.505",
                      material="orange_cone",
-                     mass="1.0",  # Heavier
+                     mass="2.0",  # Heavier
                      condim="4",
                      friction="0.5 0.005 0.0001")
         

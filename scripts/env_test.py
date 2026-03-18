@@ -10,17 +10,21 @@ def test_longitudinal_acceleration():
     """Test acceleration and braking"""
     actions = []
     
-    # Phase 1: Acceleration (0-100 steps)
-    # for step in range(50):
-    #     actions.append([0.2, 1.0])  # Full throttle, straight
+    # # Phase 3: Braking (150-200 steps)
+    for step in range(10):
+        actions.append([0.0, -1.0])  # Brake
+        
+            # Phase 1: Acceleration (0-100 steps)
+    for step in range(1000):
+        actions.append([0.0, 1.0])  # Full throttle, straight
     
     # Phase 2: Coast (100-150 steps)
     # for step in range(50):
     #     actions.append([0.5, 0.0])  # No throttle
     
     # # Phase 3: Braking (150-200 steps)
-    for step in range(100):
-        actions.append([0.0, 1.0])  # Brake
+    # for step in range(100):
+    #     actions.append([0.0, -1.0])  # Brake
     
     # for step in range(200):
     #     actions.append([0.0, 1.0])  # Full throttle, straight
@@ -52,8 +56,9 @@ def test_env_with_logging():
     env = MujocoFormulaStudent(
         render_mode="rgb_array",
         num_checkpoints=10,
-        max_throttle=5,
+        max_throttle=1,
         domain_randomization=False,
+        track_idx=5
     )
     
     actions = test_longitudinal_acceleration()
@@ -139,7 +144,11 @@ def test_env_with_logging():
         
         # if step % 10 ==0:
         #     print(data)
-        
+        if terminated or truncated:
+            print("Terminated!!!!!!")
+            obs, info = env.reset()
+            total_reward = 0.0
+
         # Show camera
         frame = cv2.cvtColor(obs['image'], cv2.COLOR_RGB2BGR)
         cv2.imshow("View", cv2.resize(frame, (256, 256)))
@@ -162,10 +171,7 @@ def test_env_with_logging():
     if out is not None:
         out.release()
         
-        # if terminated or truncated:
-        #     print("Terminated!!!!!!")
-        #     obs, info = env.reset()
-        #     total_reward = 0.0
+
     
     env.close()
     cv2.destroyAllWindows()
