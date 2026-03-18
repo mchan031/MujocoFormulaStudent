@@ -20,7 +20,7 @@ def test_longitudinal_acceleration():
     
     # # Phase 3: Braking (150-200 steps)
     for step in range(100):
-        actions.append([0.0, 0.0])  # Brake
+        actions.append([0.0, 1.0])  # Brake
     
     # for step in range(200):
     #     actions.append([0.0, 1.0])  # Full throttle, straight
@@ -50,9 +50,10 @@ def test_env_with_logging():
     # model_path = "C:/Users/munki/OneDrive - Nanyang Technological University/Y4/new_fyp/mujoco_tracks/new_scene.xml"
     
     env = MujocoFormulaStudent(
-        render_mode="human",
+        render_mode="rgb_array",
         num_checkpoints=10,
-        # max_throttle=5
+        max_throttle=5,
+        domain_randomization=False,
     )
     
     actions = test_longitudinal_acceleration()
@@ -142,8 +143,24 @@ def test_env_with_logging():
         # Show camera
         frame = cv2.cvtColor(obs['image'], cv2.COLOR_RGB2BGR)
         cv2.imshow("View", cv2.resize(frame, (256, 256)))
+        
+        # Initialize video writer on first frame
+        if step == 0:
+            os.makedirs("./videos/env_test", exist_ok=True)
+            video_path = "./videos/env_test/env_test.mp4"
+            # fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            out = cv2.VideoWriter(video_path, fourcc, 20.0,
+                                (frame.shape[1], frame.shape[0]))
+        # Write frame to video
+        out.write(frame)
+        
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+        
+    # release AFTER loop
+    if out is not None:
+        out.release()
         
         # if terminated or truncated:
         #     print("Terminated!!!!!!")

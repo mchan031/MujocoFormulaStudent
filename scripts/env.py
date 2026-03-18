@@ -42,7 +42,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         vel_penalty_weight: int = 1,
         steer_penalty_weight: int = 1,
         max_throttle: float = 2.5,
-        random_track_mode: bool = True,
+        track_idx: Optional[int] = None,
         domain_randomization: bool = True,
         **kwargs,
     ):
@@ -66,7 +66,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             vel_penalty_weight,
             steer_penalty_weight,
             max_throttle,
-            random_track_mode,
+            track_idx,  
             domain_randomization,
             **kwargs,
         )
@@ -110,7 +110,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._initialize_observation_space()
         
         # Randomly select a track from the track root directory
-        track_dir = self._select_random_track(track_root, random_track_mode)        
+        track_dir = self._select_random_track(track_root, track_idx)        
         print("Running on track:", track_dir)
         
         # Load Selected Track Centreline
@@ -475,7 +475,9 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         curr_vel = np.array(curr_vel)
         vel_change = np.linalg.norm(curr_vel - self.prev_velocity)
         self.prev_velocity = curr_vel
-        reward -= self._vel_penalty_weight * vel_change
+        # reward -= self._vel_penalty_weight * vel_change
+        reward -= (1.5 * vel_change) ** 2
+
 
         # # # -------------------------------------------------
         # # # 5 Steering Smoothness Reward
@@ -484,11 +486,13 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         steering = action[0]
         steering_change = abs(steering - self.prev_steering)
         self.prev_steering = steering
-        reward -= self._steer_penalty_weight * steering_change
-        
+        # reward -= self._steer_penalty_weight * steering_change
+        reward -= (1.5 * steering_change) ** 2
+
         throttle = action[1]
-        if long_vel <= 0.05 and throttle < 0:
-            reward -= 1 * abs(throttle)
+        if long_vel <= 0.05 and throttle <= 0:
+            # reward -= 1 * abs(throttle)
+            reward -= 5
             
         # reward += steering_smooth_penalty        
         # -------------------------------------------------
@@ -697,7 +701,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         wind_force = self.wind_strength * self.wind_dir 
         self.data.xfrc_applied[self.car_body_id][:3] = wind_force
         
-    def _select_random_track(self, track_root, random_track_mode=False):
+    def _select_random_track(self, track_root, track_idx=None):
         
         if not os.path.exists(track_root):
             raise FileNotFoundError(f"Track root directory not found: {track_root}")
@@ -708,10 +712,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             if d.startswith("track")
         ]
         
-        if random_track_mode:
-            return random.choice(tracks)
+        if track_idx is not None:
+            return tracks[track_idx]
         else:
-            return tracks[0]
+            return random.choice(tracks)
 
 
     def _apply_domain_randomization(self):

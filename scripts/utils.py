@@ -4,6 +4,7 @@ import gymnasium as gym
 import matplotlib.pyplot as plt 
 from matplotlib.collections import LineCollection
 import os
+import abc
 
 
 class TelemetryStorage:
@@ -229,3 +230,22 @@ def create_env_xml(track_dir):
         f.write(xml)
 
     return "mujoco_tracks/sim_env_runtime.xml"
+
+
+class Controller:
+    def set_path(self, path):
+        self.path = path
+
+    @abc.abstractmethod
+    def feedback(self, info):
+        return NotImplementedError
+    
+def search_nearest(path, pos):
+    min_dist = 99999999
+    min_id = -1
+    for i in range(path.shape[0]):
+        dist = (pos[0] - path[i,0])**2 + (pos[1] - path[i,1])**2
+        if dist < min_dist:
+            min_dist = dist
+            min_id = i
+    return min_id, min_dist

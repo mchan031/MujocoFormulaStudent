@@ -27,7 +27,8 @@ def make_env(cfg):
             lap_completion_reward=cfg.env.lap_completion_reward,
             max_env_step=cfg.env.max_env_step,
             checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
-            max_throttle=3.5,
+            max_throttle=3,
+            domain_randomization=False,
         )
         # env.reset(seed=cfg.seed)
         
@@ -120,7 +121,7 @@ def main(config):
             print("Max step reached, ending evaluation.")
             break
         
-        if info[0]["progress"] - num_lap == 1.1:
+        if info[0]["progress"] - num_lap == 1.0:
             time_now = time.time()
             lap_time = time_now - lap_start_time
             lap_time_list.append(lap_time)
