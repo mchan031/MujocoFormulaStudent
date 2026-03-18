@@ -17,7 +17,7 @@ env:
   domain_randomization: False # Whether to apply domain randomization during training
 
 wandb:
-  project: mujoco-racing-new
+  project: mujoco-racing-ads-dv
   mode: offline # online
   
 ppo:

@@ -55,7 +55,7 @@ def main(config):
         wandb_config = OmegaConf.to_container(config, resolve=True, throw_on_missing=True)
 
         wandb.init(
-            project="mujoco-racing",
+            project=config.wandb.project,
             name=run_name,
             config=wandb_config,
             sync_tensorboard=True,  # automatically logs tensorboard
