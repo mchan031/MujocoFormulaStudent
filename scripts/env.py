@@ -109,18 +109,19 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # Initialize observation space
         self._initialize_observation_space()
         
-        # Randomly select a track from the track root directory
-        track_dir = self._select_random_track(track_root, track_idx)        
-        print("Running on track:", track_dir)
-        
+        self.track_root = track_root
+        self.available_tracks = self._discover_tracks(track_root)
+        self._track_mode = "fixed" if track_idx is not None else "random"
+        self._track_indices = [track_idx] if track_idx is not None else None
+        self.pending_track_dir = None
+        self.active_track_dir = self._resolve_track_dir(track_idx)
+        print("Running on track:", self.active_track_dir)
+
         # Load Selected Track Centreline
-        self._load_centreline(track_dir)
-        self._create_checkpoint()
-        
-        self.random_track_path = os.path.join(track_dir, "random_track.csv") 
+        self._load_track(self.active_track_dir)
 
         # Create Runtime XML with selected track
-        model_xml_path = create_env_xml(track_dir)
+        model_xml_path = create_env_xml(self.active_track_dir)
         full_xml_path = os.path.join(os.path.dirname(__file__), os.path.pardir, model_xml_path)
             
         # Initialize Parent Class
@@ -296,10 +297,16 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.prev_velocity = np.array(self._get_velocimeter())
         self.prev_steering = 0.0
         
+        if self.pending_track_dir is not None and self.pending_track_dir != self.active_track_dir:
+            self._reload_track(self.pending_track_dir)
+            self.pending_track_dir = None
+
         # Domain Randomize
         if self.domain_randomization:
             self._apply_domain_randomization()
-        
+        else:
+            self._reset_domain_randomization_state()
+
         return self._get_obs()
 
     def _get_obs(self):
@@ -334,6 +341,80 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             steering,
             throttle
         ], dtype=np.float32)
+
+
+    def set_track_mode(self, mode: str, track_indices: Optional[List[int]] = None):
+        if mode not in {"fixed", "cycle", "random"}:
+            raise ValueError(f"Unsupported track mode: {mode}")
+
+        self._track_mode = mode
+        self._track_indices = list(track_indices) if track_indices is not None else None
+        self.pending_track_dir = self._select_track_for_mode()
+
+    def set_domain_randomization(self, enabled: bool):
+        self.domain_randomization = bool(enabled)
+        if not self.domain_randomization:
+            self._reset_domain_randomization_state()
+
+    def set_max_throttle(self, max_throttle: float):
+        self._max_throttle = float(max_throttle)
+
+    def set_episode_budget(self, max_env_step: int, checkpoint_bonus_step: Optional[float] = None):
+        self.max_steps = int(max_env_step)
+        if checkpoint_bonus_step is not None:
+            self._checkpoint_bonus_step = float(checkpoint_bonus_step)
+
+    def set_checkpoint_layout(self, num_checkpoints: int):
+        self.n_checkpoints = int(num_checkpoints)
+        self.prev_cp_distances = np.zeros(self.n_checkpoints)
+        self._create_checkpoint()
+
+    def _discover_tracks(self, track_root):
+        if not os.path.exists(track_root):
+            raise FileNotFoundError(f"Track root directory not found: {track_root}")
+
+        tracks = [
+            os.path.join(track_root, d)
+            for d in os.listdir(track_root)
+            if d.startswith("track")
+        ]
+        tracks.sort(key=lambda x: int(x.split('_')[-1]))
+        return tracks
+
+    def _resolve_track_dir(self, track_idx=None):
+        return self._select_random_track(self.track_root, track_idx)
+
+    def _select_track_for_mode(self):
+        if self._track_mode == "fixed":
+            track_idx = self._track_indices[0] if self._track_indices else 0
+            return self._resolve_track_dir(track_idx)
+
+        if self._track_mode == "cycle":
+            if not self._track_indices:
+                raise ValueError("track_indices is required when using cycle mode")
+            next_idx = self._track_indices[self.np_random.integers(0, len(self._track_indices))]
+            return self._resolve_track_dir(int(next_idx))
+
+        if self._track_mode == "random":
+            return self._resolve_track_dir(None)
+
+        raise ValueError(f"Unsupported track mode: {self._track_mode}")
+
+    def _load_track(self, track_dir):
+        self._load_centreline(track_dir)
+        self._create_checkpoint()
+        self.random_track_path = os.path.join(track_dir, "random_track.csv")
+
+    def _reload_track(self, track_dir):
+        self.active_track_dir = track_dir
+        self._load_track(track_dir)
+        self.model.geom_friction[self.floor_id][0] = self.default_friction
+
+    def _reset_domain_randomization_state(self):
+        self.model.geom_friction[self.floor_id][0] = self.default_friction
+        self.wind_strength = None
+        self.wind_dir = None
+        self.data.xfrc_applied[self.car_body_id][:3] = 0
 
     def _get_car_joint_ids(self):
         """Find the qpos/qvel indices of the car's free joint."""
@@ -702,30 +783,19 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.data.xfrc_applied[self.car_body_id][:3] = wind_force
         
     def _select_random_track(self, track_root, track_idx=None):
-            
-        if not os.path.exists(track_root):
-            raise FileNotFoundError(f"Track root directory not found: {track_root}")
+        tracks = self.available_tracks
 
-        tracks = [
-            os.path.join(track_root, d)
-            for d in os.listdir(track_root)
-            if d.startswith("track")
-        ]
-        tracks.sort(key=lambda x: int(x.split('_')[-1]))
-        
         if track_idx is not None:
-            if (track_idx < 0 or track_idx >= len(tracks)):
-                raise IndexError(f"track_idx {track_idx} out of bounds. Available tracks: 0-{len(tracks)-1}")     
+            if track_idx < 0 or track_idx >= len(tracks):
+                raise IndexError(f"track_idx {track_idx} out of bounds. Available tracks: 0-{len(tracks)-1}")
             return tracks[track_idx]
-        else:
-            return random.choice(tracks)
+
+        return random.choice(tracks)
 
 
     def _apply_domain_randomization(self):
         # Reset to default first
-        self.model.geom_friction[self.floor_id][0] = self.default_friction
-        self.wind_strength = None
-        self.wind_dir = None
+        self._reset_domain_randomization_state()
 
         # Random slippery condition
         if self.np_random.random() < 0.3:  # 30% chance
