@@ -27,8 +27,9 @@ def make_env(cfg):
             lap_completion_reward=cfg.env.lap_completion_reward,
             max_env_step=cfg.env.max_env_step,
             checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
-            max_throttle=3,
+            max_throttle=1.0,
             domain_randomization=False,
+            track_idx=4
         )
         # env.reset(seed=cfg.seed)
         

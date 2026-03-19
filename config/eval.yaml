@@ -18,5 +18,6 @@ env:
 ppo:
   # model_dir: "good_model/MujocoFormulaStudent__smooth_reward_steer_vel__2026-03-10_17-14-42"
   # model_dir: "good_model/MujocoFormulaStudent__faster_speed_reverse_penalty__2026-03-11_16-06-12"
-  model_dir: "models/MujocoFormulaStudent__random_map_penalty_squared__2026-03-16_17-15-36"
+  # model_dir: "models/MujocoFormulaStudent__random_map_penalty_squared__2026-03-16_17-15-36"
   # model_dir: "models/MujocoFormulaStudent__random_map__2026-03-16_17-06-50"
+  model_dir: "models/MujocoFormulaStudent__half_throttle_gear_400__2026-03-19_03-45-41"

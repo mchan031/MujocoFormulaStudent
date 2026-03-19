@@ -38,6 +38,7 @@ def make_env(cfg): #, idx, capture_video, run_name):
             vel_penalty_weight=cfg.env.vel_penalty_weight,
             steer_penalty_weight=cfg.env.steer_penalty_weight,
             domain_randomization=cfg.env.domain_randomization,
+            track_idx=cfg.env.track_idx
             )
         
         env.action_space.seed(cfg.seed)

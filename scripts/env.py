@@ -703,6 +703,9 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         
     def _select_random_track(self, track_root, track_idx=None):
         
+        if track_idx is not None and (track_idx < 0 or track_idx >= len(tracks)):
+            raise IndexError(f"track_idx {track_idx} out of bounds. Available tracks: 0-{len(tracks)-1}")     
+
         if not os.path.exists(track_root):
             raise FileNotFoundError(f"Track root directory not found: {track_root}")
 
@@ -711,6 +714,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             for d in os.listdir(track_root)
             if d.startswith("track")
         ]
+        tracks.sort(key=lambda x: int(x.split('_')[-1]))
         
         if track_idx is not None:
             return tracks[track_idx]

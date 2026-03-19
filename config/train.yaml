@@ -1,8 +1,8 @@
 seed: 42
 cuda: True
 cuda_deterministic: True
-exp_name: testing
-track_exp: True
+exp_name: responsive_steer_gear_400
+track_exp: False
 capture_video: False
 
 env:
@@ -11,10 +11,11 @@ env:
   lap_completion_reward: 1000
   max_env_step: 500
   checkpoint_bonus_step: 150
-  max_throttle: 1.0
+  max_throttle: 0.5
   vel_penalty_weight: 0.5 # Weight for velocity penalty in the reward function
   steer_penalty_weight: 0.5 # Weight for steering penalty in the reward function
   domain_randomization: False # Whether to apply domain randomization during training
+  track_idx: 4 # Index of the track to use for training (if None, a random track will be selected each episode)
 
 wandb:
   project: mujoco-racing-ads-dv
