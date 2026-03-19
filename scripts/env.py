@@ -702,10 +702,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.data.xfrc_applied[self.car_body_id][:3] = wind_force
         
     def _select_random_track(self, track_root, track_idx=None):
-        
-        if track_idx is not None and (track_idx < 0 or track_idx >= len(tracks)):
-            raise IndexError(f"track_idx {track_idx} out of bounds. Available tracks: 0-{len(tracks)-1}")     
-
+            
         if not os.path.exists(track_root):
             raise FileNotFoundError(f"Track root directory not found: {track_root}")
 
@@ -717,6 +714,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         tracks.sort(key=lambda x: int(x.split('_')[-1]))
         
         if track_idx is not None:
+            if (track_idx < 0 or track_idx >= len(tracks)):
+                raise IndexError(f"track_idx {track_idx} out of bounds. Available tracks: 0-{len(tracks)-1}")     
             return tracks[track_idx]
         else:
             return random.choice(tracks)
