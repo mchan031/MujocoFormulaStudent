@@ -58,7 +58,7 @@ def test_env_with_logging():
         num_checkpoints=10,
         max_throttle=1,
         domain_randomization=False,
-        track_idx=5
+        track_idx=4
     )
     
     actions = test_longitudinal_acceleration()

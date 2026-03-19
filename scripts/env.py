@@ -19,7 +19,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             "human",
             "rgb_array",
         ],
-        "render_fps": 20,
+        "render_fps": 67,
     }
     
     def __init__(

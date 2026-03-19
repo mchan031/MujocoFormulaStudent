@@ -1,7 +1,7 @@
 <mujoco model="track_scene">
     <compiler angle="radian"/>
     <size njmax="500" nconmax="100"/>
-    <option timestep="0.01"/>
+    <option timestep="0.003"/>
 
     <include file="{TRACK_FILE}"/>
     <!-- <include file="cars/base_car/buddy.xml"/> -->
