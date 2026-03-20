@@ -13,7 +13,8 @@ from stable_baselines3.common.callbacks import (
     StopTrainingOnRewardThreshold, 
     StopTrainingOnNoModelImprovement, 
     EvalCallback, 
-    CallbackList
+    CallbackList,
+    CheckpointCallback
 )
 from utils import ForceForwardWrapper
 import wandb
@@ -46,6 +47,26 @@ def make_env(cfg): #, idx, capture_video, run_name):
         # env = ForceForwardWrapper(env)
         return env    
     return thunk
+
+
+def resolve_resume_model_path(model_path):
+    if os.path.isdir(model_path):
+        candidates = ["last.zip", "last_model.zip"]
+        for filename in candidates:
+            candidate_path = os.path.join(model_path, filename)
+            if os.path.exists(candidate_path):
+                return candidate_path
+        raise FileNotFoundError(
+            f"No checkpoint found in {model_path}. Expected one of: {candidates}"
+        )
+
+    if os.path.isfile(model_path):
+        return model_path
+
+    if os.path.isfile(f"{model_path}.zip"):
+        return f"{model_path}.zip"
+
+    raise FileNotFoundError(f"Could not find model checkpoint at: {model_path}")
     
     
 @hydra.main(config_path=FILE_PATH, config_name="train", version_base=None)
@@ -71,6 +92,9 @@ def main(config):
     torch.backends.cudnn.deterministic = config.cuda_deterministic
 
     device = torch.device('cuda' if torch.cuda.is_available() and config.cuda else 'cpu')
+
+    resume_model_path = config.ppo.model
+    is_resume = bool(resume_model_path)
     
     ## make train env
     train_env = make_vec_env(
@@ -79,7 +103,19 @@ def main(config):
     )
     train_env.seed(seed=config.seed)
     train_env = VecTransposeImage(train_env)
-    train_env = VecNormalize(train_env)
+
+    if is_resume:
+        resolved_model_path = resolve_resume_model_path(resume_model_path)
+        vecnormalize_path = os.path.join(os.path.dirname(resolved_model_path), "vecnormalize.pkl")
+        if not os.path.exists(vecnormalize_path):
+            raise FileNotFoundError(f"Could not find VecNormalize stats at: {vecnormalize_path}")
+
+        print(f"Resuming training from model: {resolved_model_path}")
+        print(f"Loading VecNormalize stats from: {vecnormalize_path}")
+        train_env = VecNormalize.load(vecnormalize_path, train_env)
+        train_env.training = True
+    else:
+        train_env = VecNormalize(train_env)
 
     if config.capture_video:
         train_env = VecVideoRecorder(
@@ -90,6 +126,23 @@ def main(config):
             video_length=500,
             name_prefix="ppo-car"
         )
+
+    if is_resume:
+        model = PPO.load(
+            resolved_model_path,
+            env=train_env,
+            device=device,
+            tensorboard_log=log_dir,
+        )
+    else:
+        model = PPO("MultiInputPolicy", 
+                    train_env, 
+                    verbose=1, 
+                    tensorboard_log=log_dir,
+                    device=device,
+                    n_steps=config.ppo.n_steps,
+                    batch_size=config.ppo.batchsize,
+                    )
         
     eval_env = make_vec_env(
         make_env(config),
@@ -97,19 +150,9 @@ def main(config):
     )
     eval_env.seed(seed=config.seed)
     eval_env = VecTransposeImage(eval_env)
-    # eval_env = VecNormalize(eval_env)
     eval_env = VecNormalize(eval_env, training=False)
     eval_env.obs_rms = train_env.obs_rms
     eval_env.ret_rms = train_env.ret_rms
-
-    model = PPO("MultiInputPolicy", 
-                train_env, 
-                verbose=1, 
-                tensorboard_log=log_dir,
-                device=device,
-                n_steps=config.ppo.n_steps,
-                batch_size=config.ppo.batchsize,
-                )
 
     model_run_dir = os.path.join(model_dir, run_name)
     os.makedirs(model_run_dir, exist_ok=True)
@@ -132,8 +175,14 @@ def main(config):
         best_model_save_path=model_run_dir
     )
 
+    checkpoint_callback = CheckpointCallback(save_freq=5000, 
+                                             save_path=model_run_dir,
+                                             name_prefix="ppo_checkpoint")
+
+
     # cb_list = [eval_callback]
     cb_list = []
+    cb_list.append(checkpoint_callback)
 
     if config.track_exp:
         wandb_cb = WandbCallback(
@@ -141,13 +190,17 @@ def main(config):
             verbose=2
         )
         cb_list.append(wandb_cb)
+ 
+    try:
+        model.learn(total_timesteps=config.ppo.total_timesteps, 
+                    tb_log_name=run_name, 
+                    progress_bar=True,
+                    reset_num_timesteps=not is_resume,
+                    callback=CallbackList(cb_list)
+                    )
+    except KeyboardInterrupt:
+        print("Training interrupted. Saving model...")
 
-    model.learn(total_timesteps=config.ppo.total_timesteps, 
-                tb_log_name=run_name, 
-                progress_bar=True,
-                callback=CallbackList(cb_list)
-                )
-    
     model.save(os.path.join(model_run_dir, 'last_model'))
     train_env.save(os.path.join(model_run_dir, "vecnormalize.pkl"))
 

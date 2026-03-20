@@ -44,7 +44,7 @@ FILE_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config")
 def main(config):
     device = torch.device('cuda' if torch.cuda.is_available() and config.cuda else 'cpu')
     
-    model_path = config.ppo.model_dir + "/model.zip"
+    model_path = config.ppo.model_dir + "/last_model.zip"
     vecnormalize_path = config.ppo.model_dir + "/vecnormalize.pkl"
     
     eval_env = make_vec_env(

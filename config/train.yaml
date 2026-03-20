@@ -1,17 +1,17 @@
 seed: 42
 cuda: True
 cuda_deterministic: True
-exp_name: responsive_steer_gear_400
-track_exp: False
+exp_name: responsive_steer_gear_400_distance_resume
+track_exp: True
 capture_video: False
 
 env:
-  num_envs: 8 # Number of envs for training
+  num_envs: 16 # Number of envs for training
   num_checkpoints: 10
   lap_completion_reward: 1000
   max_env_step: 500
-  checkpoint_bonus_step: 150
-  max_throttle: 0.5
+  checkpoint_bonus_step: 300
+  max_throttle: 1.0
   vel_penalty_weight: 0.5 # Weight for velocity penalty in the reward function
   steer_penalty_weight: 0.5 # Weight for steering penalty in the reward function
   domain_randomization: False # Whether to apply domain randomization during training
@@ -22,6 +22,9 @@ wandb:
   mode: offline # online
   
 ppo:
-  total_timesteps: 1_000_000
+  total_timesteps: 2_500_000
   batchsize: 256
-  n_steps: 2048
+  n_steps: 1024 
+  # model: models/MujocoFormulaStudent__responsive_steer_gear_400_relative__2026-03-19_14-13-46
+
+  model: "models/MujocoFormulaStudent__responsive_steer_gear_400_distance__2026-03-19_14-13-06"
