@@ -8,7 +8,7 @@ from .geometry import closest_node, clockwise_sort, curvature, arc_length, trans
 from .track import Track, Mode
 
 # Track parameters
-TRACK_WIDTH = 3.5                   # [m]
+TRACK_WIDTH = 3.8                   # [m]
 CONE_SPACING = 2.5                  # [m]
 LENGTH_START_AREA = 6.             # [m]
 CURVATURE_THRESHOLD = 1. / 3.75    # [m^-1]

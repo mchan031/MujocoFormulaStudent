@@ -110,14 +110,14 @@
         <!-- Coefficients calculated for these dimensions -->
         <joint joint1="fl_steer_joint" joint2="steering_master_joint" 
                 polycoef="0 1.0 0.392 0.153 -0.085"
-                solref="0.001 1"
-                solimp="0.9999 0.99 0.0001"/>
+                solref="0.0001 1"
+                solimp="1.0 1.0 0.0001"/>
             
         <!-- Link right steering to master with Ackermann polynomial -->
         <joint joint1="fr_steer_joint" joint2="steering_master_joint" 
                 polycoef="0 1.0 -0.392 0.153 0.085"
-                solref="0.001 1"
-                solimp="0.9999 0.99 0.0001"/>
+                solref="0.0001 1"
+                solimp="1.0 1.0 0.0001"/>
                 
     </equality>
 
@@ -134,7 +134,7 @@
     <!-- ========== ACTUATORS ========== -->
     <actuator>
         <!-- Steering - only actuate the master joint -->
-        <position name="steering" joint="steering_master_joint" kp="1500"/>
+        <position name="steering" joint="steering_master_joint" kp="4000"/>
 
         <!-- <position name="fl_steer" joint="fl_steer_joint" kp="1000"/>
         <position name="fr_steer" joint="fr_steer_joint" kp="1000"/>
@@ -144,7 +144,7 @@
                   kv="10" gear="3.0" forcerange="-2000 2000" ctrlrange="-100 300"/> -->
     
         <motor name="throttle" tendon="drive_tendon" 
-            gear="400" ctrllimited="true" ctrlrange="-1 1" forcerange="-200 200"/>
+            gear="500" ctrllimited="true" ctrlrange="-1 1" forcerange="-200 200"/>
     </actuator>
 
 
