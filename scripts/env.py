@@ -37,11 +37,12 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         checkpoint_bonus_step: float = 250.0,
         reset_noise_scale: float = 0.01,
         next_n_checkpoint: int = 5,
-        max_env_step: int = 1500,
+        max_env_step: int = 3000,
         num_checkpoints: int = 10,
-        vel_penalty_weight: int = 1,
-        steer_penalty_weight: int = 1,
+        vel_penalty_weight: int = 0.01,
+        steer_penalty_weight: int = 0.01,
         max_throttle: float = 2.5,
+        stuck_patience: int = 200,  
         track_idx: Optional[int] = None,
         domain_randomization: bool = True,
         **kwargs,
@@ -67,6 +68,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             steer_penalty_weight,
             max_throttle,
             track_idx,  
+            stuck_patience,
             domain_randomization,
             **kwargs,
         )
@@ -82,10 +84,13 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._vel_penalty_weight = vel_penalty_weight
         self._steer_penalty_weight = steer_penalty_weight
         self._max_throttle = max_throttle
-
+        self._stuck_patience = stuck_patience
+        self.last_progress_step = 0.0
+        
         self.step_count = 0
         self.prev_velocity = None
         self.prev_steering = 0.0
+        self.prev_throttle = 0.0
         
         ## Noise Config
         self._reset_noise_scale = reset_noise_scale
@@ -208,19 +213,19 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
                 shape=(self._next_n_checkpoint, 2),  # relative x, y to next n checkpoints
                 dtype=np.float32)  # distances to next 5            
 
-        # Progress 0.0 to 1.0, 1.0 for full lap completion 
-        prog_space = spaces.Box(
-            low=0.0, 
-            high=1.0, 
-            shape=(1,), 
-            dtype=np.float32
-        )
+        # # Progress 0.0 to 1.0, 1.0 for full lap completion 
+        # prog_space = spaces.Box(
+        #     low=0.0, 
+        #     high=1.0, 
+        #     shape=(1,), 
+        #     dtype=np.float32
+        # )
         
         self.observation_space = spaces.Dict({
             'image': image_space,
             'car_states': car_states_space,
             'checkpoints': checkpoint_space,
-            'progress': prog_space
+            # 'progress': prog_space
         })
   
     def _initialize_agent_camera(self):
@@ -245,20 +250,32 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         #2. Check Checkpoint
         crossed = self._check_checkpoint_crossing()
         crashed = self._check_crash()
+        if crashed:
+            print("Crash detected!")
+            
         observation = self._get_obs()
 
         #3. Compute Reward
-        reward = self._compute_reward(action, crashed)
-        self.prev_checkpoint = self.current_checkpoint
+        reward = self._compute_reward(action, crashed, crossed)
 
         #4. Check Termination
         terminated = crashed
+        truncated = False
+
         ##  max_allow_step =  max_step + (checkpoint_bonus_step * current_checkpoint) * num_of_lap
         # max_allow_step = self.max_steps + (self._checkpoint_bonus_step * (self.current_checkpoint)) * (self.lap_count + 1)
-        max_allow_step = self.max_steps + (self.current_checkpoint + self.n_checkpoints * self.lap_count) * self._checkpoint_bonus_step
-        truncated = self.step_count >= max_allow_step
-        if truncated:
-            print(f"Step Count: {self.step_count} >= Max Allowed Step: {max_allow_step}")
+        # max_allow_step = self.max_steps + (self.current_checkpoint + self.n_checkpoints * self.lap_count) * self._checkpoint_bonus_step
+        # truncated = self.step_count >= max_allow_step
+        if crossed:
+            print(f"Checkpoint {self.current_checkpoint} crossed at step {self.step_count - self.last_progress_step}.")
+            self.last_progress_step = self.step_count
+
+        if self.step_count - self.last_progress_step > self._stuck_patience:
+            print(f"Agent seems stuck. Step count since last checkpoint: {self.step_count - self.last_progress_step}. Terminating episode.")
+            truncated = True
+
+        if self.step_count >= self.max_steps:
+            truncated = True
         
         # Info dict
         info = {
@@ -295,6 +312,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.step_count = 0
         self.prev_velocity = np.array(self._get_velocimeter())
         self.prev_steering = 0.0
+        self.prev_throttle = 0.0
+        self.last_progress_step = 0
         
         # Domain Randomize
         if self.domain_randomization:
@@ -312,7 +331,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             'image': self._get_image(),
             'car_states': self._get_car_states(),
             'checkpoints': checkpoint_obs,
-            'progress': np.array([self.progress], dtype=np.float32)
+            # 'progress': np.array([self.progress], dtype=np.float32)
         }
 
     def _get_car_states(self):
@@ -446,10 +465,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         ## Discrete
         self.progress = (self.current_checkpoint) / (self.n_checkpoints) + self.lap_count
 
-    def _compute_reward(self, action, crashed):
+    def _compute_reward(self, action, crashed, crossed):
         
-        curr_vel = self._get_velocimeter()
-        lat_vel, long_vel = curr_vel
+        # curr_vel = self._get_velocimeter()
+        lat_vel, long_vel = self._get_velocimeter()
         reward = 0.0
 
         # -------------------------------------------------
@@ -460,23 +479,24 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # -------------------------------------------------
         # 2 Checkpoint reward
         # -------------------------------------------------
-        if self.current_checkpoint != self.prev_checkpoint:
+        if crossed:
             reward += self._lap_completion_reward / self.n_checkpoints
 
         # -------------------------------------------------
         # 3 Forward velocity reward
         # -------------------------------------------------
         reward += self._forward_velocity_reward * max(long_vel, 0.0)
+        # reward -= 0.01 * abs(lat_vel)
 
         # # -------------------------------------------------
         # # 4 Velocity Smoothness Reward
         # # -------------------------------------------------
         
-        curr_vel = np.array(curr_vel)
-        vel_change = np.linalg.norm(curr_vel - self.prev_velocity)
-        self.prev_velocity = curr_vel
+        # curr_vel = np.array(curr_vel)
+        # vel_change = np.linalg.norm(curr_vel - self.prev_velocity)
+        # self.prev_velocity = curr_vel
         # reward -= self._vel_penalty_weight * vel_change
-        reward -= (1.5 * vel_change) ** 2
+        # reward -= (1.5 * vel_change) ** 2
 
 
         # # # -------------------------------------------------
@@ -486,13 +506,19 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         steering = action[0]
         steering_change = abs(steering - self.prev_steering)
         self.prev_steering = steering
+        reward -= self._steer_penalty_weight * (steering_change) ** 2
         # reward -= self._steer_penalty_weight * steering_change
-        reward -= (1.5 * steering_change) ** 2
-
+        
         throttle = action[1]
-        if long_vel <= 0.05 and throttle <= 0:
-            # reward -= 1 * abs(throttle)
-            reward -= 5
+        throttle_change = abs(throttle - self.prev_throttle)
+        self.prev_throttle = throttle
+        reward -= self._vel_penalty_weight * (throttle_change) ** 2
+
+
+        # throttle = action[1]
+        # if long_vel <= 0.05 and throttle <= 0:
+        #     # reward -= 1 * abs(throttle)
+        #     reward -= 5
             
         # reward += steering_smooth_penalty        
         # -------------------------------------------------
