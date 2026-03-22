@@ -216,6 +216,7 @@ class Track:
             )
         
         total_length = distances[-1]
+        print(f"Total track length: {total_length:.2f} m")
         
         print(f"First Point: {self.centreline[0]}")
         

@@ -11,22 +11,22 @@ from controller import ControllerPIDBicycle
 def main():
     env = MujocoFormulaStudent(
         render_mode="rgb_array",
-        num_checkpoints=10,
+        num_checkpoints=100,
         lap_completion_reward=1000,
         max_env_step=250,
         checkpoint_bonus_step=150,
-        max_throttle=3.0,
+        max_throttle=1.0,
         domain_randomization=False,
-        track_idx=3,  # Set to a specific track index or None for random
+        track_idx=4,  # Set to a specific track index or None for random
     )
 
     controller = ControllerPIDBicycle(
-        kp=0.35,
+        kp=0.5,
         ki=0.0001,
-        kd=0.18,
-        heading_gain=2.5,
+        kd=0.25,
+        heading_gain=5,
         cte_gain=0.45,
-        target_speed=4.0,
+        target_speed=20.0,
     )
     controller.set_path(env.centreline[:, :2])
 
@@ -86,9 +86,9 @@ def main():
             prev_lap_count = lap_count
             print(f"Lap {lap_count} complete. Lap time: {lap_time_list[-1]:.2f}s")
 
-        if terminated or truncated:
-            print(f"Episode ended: terminated={terminated}, truncated={truncated}")
-            break
+        # if terminated or truncated:
+        #     print(f"Episode ended: terminated={terminated}, truncated={truncated}")
+        #     break
 
 
         frame = env.render()
