@@ -7,14 +7,17 @@ video_name: "eval_video"
 plot_racing_line: True
 max_step: 
 track_cones_path: "mujoco_tracks/random_track.csv"
-num_laps: 1
+num_laps: 2
 
 env:
   num_checkpoints: 10
   lap_completion_reward: 1000
-  max_env_step: 500
-  checkpoint_bonus_step: 300
-  
+  max_env_step: 10000
+  # checkpoint_bonus_step: 300
+  stuck_patience: 300
+  track_idx: 0
+  domain_randomization: False
+
 ppo:
   # model_dir: "good_model/MujocoFormulaStudent__smooth_reward_steer_vel__2026-03-10_17-14-42"
   # model_dir: "good_model/MujocoFormulaStudent__faster_speed_reverse_penalty__2026-03-11_16-06-12"
@@ -23,4 +26,8 @@ ppo:
   # model_dir: "models/MujocoFormulaStudent__half_throttle_gear_400__2026-03-19_03-45-41"
   # model_dir: "models/MujocoFormulaStudent__responsive_steer_gear_400_relative__2026-03-19_14-13-46"
 
-  model_dir: "models/MujocoFormulaStudent__responsive_steer_gear_400_relative__2026-03-19_14-13-46"
+  # model_dir: "models/MujocoFormulaStudent__responsive_steer_gear_400_relative__2026-03-19_14-13-46"
+  # model_dir: "models/MujocoFormulaStudent__new_reward_func_new_termination_logic__2026-03-23_03-39-10"
+  model_dir: "models/MujocoFormulaStudent__new_reward_func_new_termination_logic__2026-03-23_03-40-26"
+
+  

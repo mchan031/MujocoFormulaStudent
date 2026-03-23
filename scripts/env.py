@@ -41,7 +41,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         num_checkpoints: int = 10,
         vel_penalty_weight: int = 0.01,
         steer_penalty_weight: int = 0.01,
-        max_throttle: float = 2.5,
+        max_throttle: float = 1.0,
         stuck_patience: int = 200,  
         track_idx: Optional[int] = None,
         domain_randomization: bool = True,
@@ -271,10 +271,11 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             self.last_progress_step = self.step_count
 
         if self.step_count - self.last_progress_step > self._stuck_patience:
-            print(f"Agent seems stuck. Step count since last checkpoint: {self.step_count - self.last_progress_step}. Terminating episode.")
+            print(f"Agent seems stuck at Checkpoint {self.current_checkpoint}. Step count since last checkpoint: {self.step_count - self.last_progress_step}. Terminating episode.")
             truncated = True
 
         if self.step_count >= self.max_steps:
+            print(f"Maximum step count {self.max_steps} reached. Terminating episode.")
             truncated = True
         
         # Info dict

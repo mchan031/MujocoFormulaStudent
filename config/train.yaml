@@ -1,17 +1,17 @@
 seed: 42
 cuda: True
 cuda_deterministic: True
-exp_name: responsive_steer_gear_400_distance_resume
-track_exp: False
+exp_name: new_reward_func_new_termination_logic
+track_exp: True
 capture_video: False
 
 env:
   num_envs: 16 # Number of envs for training
-  num_checkpoints: 50
+  num_checkpoints: 10
   lap_completion_reward: 1000
   max_env_step: 3000
   # checkpoint_bonus_step: 300
-  stuck_patience: 200 # Number of steps to wait before considering the agent stuck
+  stuck_patience: 300 # Number of steps to wait before considering the agent stuck
   # max_throttle: 1.0
   vel_penalty_weight: 0.01 # Weight for velocity penalty in the reward function
   steer_penalty_weight: 0.01 # Weight for steering penalty in the reward function
@@ -23,7 +23,7 @@ wandb:
   mode: offline # online
   
 ppo:
-  total_timesteps: 1_000_000
+  total_timesteps: 3_000_000
   batchsize: 256
   n_steps: 1024 
   # model: models/MujocoFormulaStudent__responsive_steer_gear_400_relative__2026-03-19_14-13-46
