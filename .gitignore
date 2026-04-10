@@ -10,3 +10,4 @@ fs_gym/
 
 MUJOCO_LOG.TXT
 mujoco_tracks/sim_env_runtime.xml
+scripts/claude.py

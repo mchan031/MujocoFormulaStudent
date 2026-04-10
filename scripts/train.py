@@ -37,10 +37,12 @@ def make_env(cfg): #, idx, capture_video, run_name):
             # checkpoint_bonus_step=cfg.env.checkpoint_bonus_step,
             stuck_patience=cfg.env.stuck_patience,
             # max_throttle=cfg.env.max_throttle,
+            forward_velocity_reward=cfg.env.forward_velocity_reward,    
             vel_penalty_weight=cfg.env.vel_penalty_weight,
             steer_penalty_weight=cfg.env.steer_penalty_weight,
             domain_randomization=cfg.env.domain_randomization,
-            track_idx=cfg.env.track_idx
+            track_idx=cfg.env.track_idx,
+            waypoint_mode=cfg.env.waypoint_mode,
             )
         
         env.action_space.seed(cfg.seed)
@@ -104,6 +106,10 @@ def main(config):
     )
     train_env.seed(seed=config.seed)
     train_env = VecTransposeImage(train_env)
+    
+    norm_keys = ["car_states"]
+    if config.env.waypoint_mode != "none":
+        norm_keys.append("checkpoints")    
 
     if is_resume:
         resolved_model_path = resolve_resume_model_path(resume_model_path)
@@ -115,8 +121,16 @@ def main(config):
         print(f"Loading VecNormalize stats from: {vecnormalize_path}")
         train_env = VecNormalize.load(vecnormalize_path, train_env)
         train_env.training = True
+        
+        
     else:
-        train_env = VecNormalize(train_env)
+
+        train_env = VecNormalize(train_env,
+                                norm_obs=True,
+                                norm_reward=True,
+                                norm_obs_keys=norm_keys
+                                 )
+
 
     if config.capture_video:
         train_env = VecVideoRecorder(
@@ -143,6 +157,7 @@ def main(config):
                     device=device,
                     n_steps=config.ppo.n_steps,
                     batch_size=config.ppo.batchsize,
+                    ent_coef=config.ppo.entropy_coef
                     )
         
     eval_env = make_vec_env(
@@ -151,10 +166,18 @@ def main(config):
     )
     eval_env.seed(seed=config.seed)
     eval_env = VecTransposeImage(eval_env)
-    eval_env = VecNormalize(eval_env, training=False)
+    # eval_env = VecNormalize(eval_env, training=False)
+    # CORRECT - should exclude image same as train_env
+    eval_env = VecNormalize(
+        eval_env, 
+        training=False,
+        norm_obs=True,
+        norm_reward=False,  # don't normalise reward at eval
+        norm_obs_keys=norm_keys
+    )
     eval_env.obs_rms = train_env.obs_rms
     eval_env.ret_rms = train_env.ret_rms
-
+        
     model_run_dir = os.path.join(model_dir, run_name)
     os.makedirs(model_run_dir, exist_ok=True)
     

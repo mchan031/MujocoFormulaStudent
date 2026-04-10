@@ -7,25 +7,30 @@ capture_video: False
 
 env:
   num_envs: 16 # Number of envs for training
-  num_checkpoints: 10
+  num_checkpoints: 50
   lap_completion_reward: 1000
-  max_env_step: 3000
+  max_env_step: 1500
   # checkpoint_bonus_step: 300
   stuck_patience: 300 # Number of steps to wait before considering the agent stuck
   # max_throttle: 1.0
+  forward_velocity_reward: 0.05 # Weight for forward reward in the reward function
   vel_penalty_weight: 0.01 # Weight for velocity penalty in the reward function
   steer_penalty_weight: 0.01 # Weight for steering penalty in the reward function
   domain_randomization: False # Whether to apply domain randomization during training
   track_idx: 0 # Index of the track to use for training (if None, a random track will be selected each episode)
+  waypoint_mode: "none" # "none", "relative", "distance"
+
+
 
 wandb:
   project: mujoco-racing-ads-dv
   mode: offline # online
   
 ppo:
-  total_timesteps: 3_000_000
-  batchsize: 256
+  total_timesteps: 5_000_000
+  batchsize: 512
   n_steps: 1024 
+  entropy_coef: 0.005
   # model: models/MujocoFormulaStudent__responsive_steer_gear_400_relative__2026-03-19_14-13-46
 
   # model: "models/MujocoFormulaStudent__responsive_steer_gear_400_distance__2026-03-19_14-13-06"
