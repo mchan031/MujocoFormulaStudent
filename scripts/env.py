@@ -112,6 +112,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.n_checkpoints = num_checkpoints
         self._next_n_checkpoint = next_n_checkpoint        
         self._waypoint_mode = waypoint_mode
+        self._zero_speed_count = 0
+
 
         # Initialize observation space
         self._initialize_observation_space()
@@ -239,11 +241,17 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         #1. Process Action and Step Env
         self._apply_wind_force()
         action = self._process_action(action)
-        self.do_simulation(action, self.frame_skip)
-
+        # self.do_simulation(action, self.frame_skip)
+        crashed = False
+        for _ in range(self.frame_skip):
+            self.do_simulation(action, 1)
+            if self._check_crash():
+                crashed = True
+                # print("Crashed!!!")
+                break
         #2. Check Checkpoint
         crossed = self._check_checkpoint_crossing()
-        crashed = self._check_crash()
+        # crashed = self._check_crash()
         if crashed:
             print("Crash detected!")
             
@@ -272,6 +280,19 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             print(f"Maximum step count {self.max_steps} reached. Terminating episode.")
             truncated = True
         
+        _, long_vel = self._get_velocimeter()
+
+        if abs(long_vel) < 0.1 and self.step_count > 50:
+            # self._zero_speed_count = getattr(self, '_zero_speed_count', 0) + 1
+            self._zero_speed_count += 1
+        else:
+            self._zero_speed_count = 0
+
+        if self._zero_speed_count > 30:  # ~0.45s at 5 frame_skip, 0.003 dt
+            print(f"Zero speed detected for {self._zero_speed_count} steps. "
+              f"Terminating.")
+            truncated = True
+            
         # Info dict
         info = {
             'velocity': self.prev_velocity,
@@ -309,7 +330,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self.prev_steering = 0.0
         self.prev_throttle = 0.0
         self.last_progress_step = 0
-        
+        self._zero_speed_count = 0
+
         # Domain Randomize
         if self.domain_randomization:
             self._apply_domain_randomization()

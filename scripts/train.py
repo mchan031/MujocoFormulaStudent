@@ -43,6 +43,7 @@ def make_env(cfg): #, idx, capture_video, run_name):
             domain_randomization=cfg.env.domain_randomization,
             track_idx=cfg.env.track_idx,
             waypoint_mode=cfg.env.waypoint_mode,
+            crash_penalty=cfg.env.crash_penalty
             )
         
         env.action_space.seed(cfg.seed)
