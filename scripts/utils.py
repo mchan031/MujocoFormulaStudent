@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 import os
 import abc
+from gymnasium import spaces
 
 
 class TelemetryStorage:
@@ -253,3 +254,39 @@ def search_nearest(path, pos):
             min_dist = dist
             min_id = i
     return min_id, min_dist
+
+
+class GrayscaleDictObservation(gym.ObservationWrapper):
+    """Converts only the 'image' key in a Dict observation space to grayscale."""
+    
+    def __init__(self, env: gym.Env, image_key: str = "image"):
+        super().__init__(env)
+        self.image_key = image_key
+        
+        assert isinstance(env.observation_space, spaces.Dict), \
+            "GrayscaleDictObservation requires a Dict observation space"
+        assert image_key in env.observation_space.spaces, \
+            f"Key '{image_key}' not found in observation space"
+        
+        img_space = env.observation_space.spaces[image_key]
+        assert isinstance(img_space, spaces.Box), \
+            f"Observation key '{image_key}' must be a Box space"
+        
+        # HWC: (H, W, 3) -> (H, W, 1)
+        h, w, _ = img_space.shape
+        new_img_space = spaces.Box(
+            low=0, high=255,
+            shape=(h, w, 1),
+            dtype=np.uint8
+        )
+        
+        new_spaces = dict(env.observation_space.spaces)
+        new_spaces[image_key] = new_img_space
+        self.observation_space = spaces.Dict(new_spaces)
+    
+    def observation(self, obs):
+        img = obs[self.image_key]  # (H, W, 3)
+        # Rec. 601 luminance weights — same as gymnasium's GrayscaleObservation
+        gray = np.dot(img[..., :3], [0.2125, 0.7154, 0.0721]).astype(np.uint8)
+        gray = gray[..., np.newaxis]  # (H, W, 1)
+        return {**obs, self.image_key: gray}

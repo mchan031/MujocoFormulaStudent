@@ -16,7 +16,7 @@ from stable_baselines3.common.callbacks import (
     CallbackList,
     CheckpointCallback
 )
-from utils import ForceForwardWrapper
+from utils import ForceForwardWrapper, GrayscaleDictObservation
 import wandb
 from wandb.integration.sb3 import WandbCallback
 import hydra
@@ -51,7 +51,7 @@ def make_env(cfg): #, idx, capture_video, run_name):
         env.observation_space.seed(cfg.seed)
         # env = ForceForwardWrapper(env)
         if cfg.grayscale:
-            env = GrayscaleObservation(env, keep_dim=True)
+            env = GrayscaleDictObservation(env=env, image_key="image")
         return env    
     return thunk
 
