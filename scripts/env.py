@@ -251,9 +251,16 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         #         break
         #2. Check Checkpoint
         crossed = self._check_checkpoint_crossing()
+        crashed = False
         crashed = self._check_crash()
         if crashed:
             print("Crash detected!")
+            
+        out_of_track = self._check_out_of_bounds()
+        if out_of_track:
+            print("Track Limit Exceeded!!")
+        crashed = out_of_track or crashed
+        
             
         observation = self._get_obs()
 
@@ -780,3 +787,44 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # Random wind
         if self.np_random.random() < 0.3:  # 30% chance
             self._set_windy_scenario()
+            
+                
+    def _check_out_of_bounds(self, lateral_limit: float = 3.5):
+        """
+        Check if vehicle has exceeded lateral track limit using 
+        Frenet frame projection.
+        
+        Projects vehicle position onto the normal vector of the 
+        nearest checkpoint Frenet frame. The signed lateral 
+        deviation gives the cross-track error. If its magnitude 
+        exceeds lateral_limit, the vehicle is off-track.
+        
+        Args:
+            lateral_limit: max allowed lateral deviation in metres
+                        FSG minimum track width = 3m, so half-width = 1.5m
+                        Use 2.0m to add small tolerance for physics jitter
+        """
+        vehicle_pos = np.array(self._get_car_pos()[:2])
+        
+        # use nearest checkpoint rather than current_checkpoint
+        # current_checkpoint advances only when crossed — vehicle may be
+        # between checkpoints so find nearest by distance
+        dists = np.linalg.norm(
+            self.checkpoint_points[:, :2] - vehicle_pos, axis=1
+        )
+        nearest_idx = int(np.argmin(dists))
+        
+        checkpoint_pos = self.checkpoint_points[nearest_idx, :2]
+        
+        # normal vector at this checkpoint (points left of travel direction)
+        normal = self.checkpoint_normals[nearest_idx, :2]
+        
+        # lateral deviation = projection of (vehicle - checkpoint) onto normal
+        relative = vehicle_pos - checkpoint_pos
+        lateral_error = float(np.dot(relative, normal))
+        # if lateral_error > lateral_limit:
+        #     print(lateral_error)
+        result = abs(lateral_error) > lateral_limit * 1.5
+        # if result:
+        #     print(lateral_error, result)
+        return result
