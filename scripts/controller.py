@@ -54,9 +54,12 @@ class ControllerPIDBicycle(Controller):
         self.last_ep = 0.0
         self.acc_speed_error = 0.0
         self.last_speed_error = 0.0
+        self._last_nearest_idx = 0   # ADD this
+
 
     def set_path(self, path):
         super().set_path(path)
+        self._last_nearest_idx = 0   # ADD
         self.acc_ep = 0.0
         self.last_ep = 0.0
         self.acc_speed_error = 0.0
@@ -106,7 +109,9 @@ class ControllerPIDBicycle(Controller):
         dt = max(float(info.get("dt", 0.05)), 1e-3)
         long_vel = float(info.get("long_vel", 0.0))
 
-        nearest_idx, _ = self._search_nearest(np.array([x, y]))
+        # nearest_idx, _ = self._search_nearest(np.array([x, y]))
+        nearest_idx, _ = self._search_nearest_forward(np.array([x, y]))
+
 
         base_lookahead = int(self.lookahead_base + self.lookahead_gain * max(long_vel, 0.0))
         base_lookahead = max(base_lookahead, 2)
@@ -168,3 +173,26 @@ class ControllerPIDBicycle(Controller):
         self.last_speed_error = speed_error
 
         return np.array([steer_cmd, throttle_cmd], dtype=np.float32), target
+    
+    def _search_nearest_forward(self, pos_xy, search_window=30):
+        """
+        Only search within a forward window from last known position.
+        Prevents jumping to wrong part of track.
+        """
+        n = self.path.shape[0]
+        
+        # search only within window ahead of last position
+        indices = [(self._last_nearest_idx + i) % n 
+                for i in range(-5, search_window)]
+        
+        candidate_points = self.path[indices]
+        diffs = candidate_points - pos_xy
+        d2 = np.sum(diffs * diffs, axis=1)
+        
+        local_idx = int(np.argmin(d2))
+        global_idx = indices[local_idx]
+        
+        # update state
+        self._last_nearest_idx = global_idx
+        
+        return global_idx, float(np.sqrt(d2[local_idx]))

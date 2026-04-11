@@ -179,7 +179,11 @@ def plot_racing_line(traj, speed, track_csv, lap_time_list=None):
         )
         
     if lap_time_list is not None:
-        lap_time_str = "\n".join([f"Lap {i}: {lap_time:.2f} s" for i, lap_time in enumerate(lap_time_list)])
+        # lap_time_str = "\n".join([f"Lap {i}: {lap_time:.2f} s" for i, lap_time in enumerate(lap_time_list)])
+        lap_time_str = "\n".join([
+            f"Lap Time: {lap_time:.2f} s | Average Speed: {np.mean(speed):.2f} m/s"
+            for i, lap_time in enumerate(lap_time_list)
+        ])
         plt.text(0.05, 0.95, lap_time_str, transform=ax.transAxes, fontsize=10,
                  verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
 
