@@ -1,12 +1,13 @@
 seed: 42
 cuda: True
 cuda_deterministic: True
-exp_name: distance_waypoint
-track_exp: False
+exp_name: distance_waypoint_target_kl_lr
+track_exp: True
 capture_video: False
+grayscale: False
 
 env:
-  num_envs: 8 # Number of envs for training
+  num_envs: 4 # Number of envs for training
   num_checkpoints: 20
   lap_completion_reward: 1000
   max_env_step: 2000
@@ -28,7 +29,7 @@ wandb:
   mode: offline # online
   
 ppo:
-  total_timesteps: 3_000_000
+  total_timesteps: 5_000_000
   batchsize: 512
   n_steps: 1024 
   entropy_coef: 0.005

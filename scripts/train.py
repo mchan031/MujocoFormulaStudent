@@ -21,6 +21,7 @@ import wandb
 from wandb.integration.sb3 import WandbCallback
 import hydra
 from omegaconf import DictConfig, OmegaConf
+from gymnasium.wrappers import GrayscaleObservation
 
 model_dir = "models"
 log_dir = "logs"
@@ -49,6 +50,8 @@ def make_env(cfg): #, idx, capture_video, run_name):
         env.action_space.seed(cfg.seed)
         env.observation_space.seed(cfg.seed)
         # env = ForceForwardWrapper(env)
+        if cfg.grayscale:
+            env = GrayscaleObservation(env, keep_dim=True)
         return env    
     return thunk
 
