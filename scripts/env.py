@@ -218,7 +218,7 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             # k waypoints x (distance,)
             obs_dict['checkpoints'] = spaces.Box(
                 low=0, high=np.inf,
-                shape=(self._next_n_checkpoint, 1),
+                shape=(self._next_n_checkpoint, ),
                 dtype=np.float32
             )
         
@@ -241,17 +241,17 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         #1. Process Action and Step Env
         self._apply_wind_force()
         action = self._process_action(action)
-        # self.do_simulation(action, self.frame_skip)
-        crashed = False
-        for _ in range(self.frame_skip):
-            self.do_simulation(action, 1)
-            if self._check_crash():
-                crashed = True
-                # print("Crashed!!!")
-                break
+        self.do_simulation(action, self.frame_skip)
+        # crashed = False
+        # for _ in range(self.frame_skip):
+        #     self.do_simulation(action, 1)
+        #     if self._check_crash():
+        #         crashed = True
+        #         # print("Crashed!!!")
+        #         break
         #2. Check Checkpoint
         crossed = self._check_checkpoint_crossing()
-        # crashed = self._check_crash()
+        crashed = self._check_crash()
         if crashed:
             print("Crash detected!")
             

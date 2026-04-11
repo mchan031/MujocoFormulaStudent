@@ -158,7 +158,9 @@ def main(config):
                     device=device,
                     n_steps=config.ppo.n_steps,
                     batch_size=config.ppo.batchsize,
-                    ent_coef=config.ppo.entropy_coef
+                    ent_coef=config.ppo.entropy_coef,
+                    target_kl=config.ppo.target_kl,
+                    learning_rate=config.ppo.learning_rate
                     )
         
     eval_env = make_vec_env(
@@ -216,6 +218,22 @@ def main(config):
         )
         cb_list.append(wandb_cb)
  
+    # try:
+    #     model.learn(total_timesteps=config.ppo.total_timesteps, 
+    #                 tb_log_name=run_name, 
+    #                 progress_bar=True,
+    #                 reset_num_timesteps=not is_resume,
+    #                 callback=CallbackList(cb_list)
+    #                 )
+    # except KeyboardInterrupt:
+    #     print("Training interrupted. Saving model...")
+
+    # model.save(os.path.join(model_run_dir, 'last_model'))
+    # train_env.save(os.path.join(model_run_dir, "vecnormalize.pkl"))
+
+    # if config.track_exp:
+    #     wandb.finish(exit_code=0)
+
     try:
         model.learn(total_timesteps=config.ppo.total_timesteps, 
                     tb_log_name=run_name, 
@@ -224,13 +242,13 @@ def main(config):
                     callback=CallbackList(cb_list)
                     )
     except KeyboardInterrupt:
-        print("Training interrupted. Saving model...")
-
-    model.save(os.path.join(model_run_dir, 'last_model'))
-    train_env.save(os.path.join(model_run_dir, "vecnormalize.pkl"))
-
-    if config.track_exp:
-        wandb.finish(exit_code=0)
+        print("Training interrupted.")
+    finally:
+        print("Saving model and environment...")
+        model.save(os.path.join(model_run_dir, 'last_model'))
+        train_env.save(os.path.join(model_run_dir, "vecnormalize.pkl"))
+        if config.track_exp:
+            wandb.finish(exit_code=0)
 
 if __name__ == "__main__":
     main()
