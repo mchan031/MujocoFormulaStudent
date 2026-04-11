@@ -300,7 +300,10 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             'lap_count': self.lap_count,
             'crashed': crashed,
             'car_states':self._get_car_states(),
-            'car_pos': self._get_car_pos()
+            'car_pos': self._get_car_pos(),
+            'current_checkpoint': self.current_checkpoint,
+            'total_checkpoints': self.current_checkpoint + self.lap_count * self.n_checkpoints,
+
         }        
         
         if self.render_mode == "human":

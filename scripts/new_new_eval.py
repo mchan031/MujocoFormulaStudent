@@ -63,6 +63,8 @@ def run_episode(model, eval_env):
     steerings = []
     throttles = []
     sim_times = []
+    max_checkpoints_seen = 0
+
 
     while not done:
         action, _ = model.predict(obs, deterministic=True)
@@ -81,17 +83,24 @@ def run_episode(model, eval_env):
         steerings.append(float(action[0][0]))
         throttles.append(float(action[0][1]))
         sim_times.append(sim_t)
-
+        # track max checkpoints seen during episode
+        current_total = int(info[0].get("total_checkpoints",
+                            raw_env.current_checkpoint +
+                            raw_env.lap_count * raw_env.n_checkpoints))
+        max_checkpoints_seen = max(max_checkpoints_seen, current_total)
+        
         if done[0]:
             crashed = bool(info[0].get("crashed", False))
 
     lap_count = int(info[0].get("lap_count", 0))
+    lap_time = (sim_times[-1] / lap_count) if lap_count > 0 else None
 
     # total checkpoints crossed including previous laps
-    checkpoints = (raw_env.current_checkpoint +
-                   raw_env.lap_count * raw_env.n_checkpoints)
+    # checkpoints = (raw_env.current_checkpoint +
+    #                raw_env.lap_count * raw_env.n_checkpoints)
+    # checkpoints = int(info[0].get("total_checkpoints", 0))
 
-    lap_time = (sim_times[-1] / lap_count) if lap_count > 0 else None
+    # lap_time = (sim_times[-1] / lap_count) if lap_count > 0 else None
 
     metrics = {
         "reward":            ep_reward,
@@ -100,7 +109,7 @@ def run_episode(model, eval_env):
         "crashed":           crashed,
         "lap_completed":     lap_count > 0,
         "lap_count":         lap_count,
-        "checkpoints":       checkpoints,
+        "checkpoints":       max_checkpoints_seen,
         "lap_time_sim":      lap_time,
         "mean_speed":        float(np.mean(np.abs(long_vels)))
                              if long_vels else 0,
@@ -145,10 +154,11 @@ def aggregate(results):
 
 
 
-def save_racing_line(telem, track_idx, output_dir, track_root="mujoco_tracks"):
+def save_racing_line(telem, metrics, track_idx, output_dir,
+                     track_root="mujoco_tracks", episode_label="best"):
     """
-    Plot racing line coloured by speed (turbo cmap) with track boundaries.
-    track_root: root folder containing track_1, track_2, ... subfolders
+    Plot racing line coloured by speed (turbo cmap) with track
+    boundaries and episode stats overlay.
     """
     pos = telem["positions"]
     speeds = np.sqrt(
@@ -156,23 +166,21 @@ def save_racing_line(telem, track_idx, output_dir, track_root="mujoco_tracks"):
         np.array(telem["lat_vel"])**2
     )
 
-    # load cone boundaries for this track
+    # load cone boundaries
     track_csv = os.path.join(
-        track_root,
-        f"track_{track_idx + 1}",
-        "random_track.csv"
+        track_root, f"track_{track_idx + 1}", "random_track.csv"
     )
     blue, yellow = load_cones(track_csv)
 
-    fig, ax = plt.subplots(figsize=(8, 8))
+    fig, ax = plt.subplots(figsize=(10, 10))
 
     # --- track boundaries ---
     if len(blue) > 1:
         ax.plot(
             np.append(blue[:, 0], blue[0, 0]),
             np.append(blue[:, 1], blue[0, 1]),
-            color="#2166ac", linewidth=1.2,
-            linestyle="-", label="Blue boundary"
+            color="#2166ac", linewidth=1.2, linestyle="-",
+            label="Blue boundary", zorder=2
         )
         ax.scatter(blue[:, 0], blue[:, 1],
                    c="#2166ac", s=6, zorder=3)
@@ -181,8 +189,8 @@ def save_racing_line(telem, track_idx, output_dir, track_root="mujoco_tracks"):
         ax.plot(
             np.append(yellow[:, 0], yellow[0, 0]),
             np.append(yellow[:, 1], yellow[0, 1]),
-            color="#d4a017", linewidth=1.2,
-            linestyle="-", label="Yellow boundary"
+            color="#d4a017", linewidth=1.2, linestyle="-",
+            label="Yellow boundary", zorder=2
         )
         ax.scatter(yellow[:, 0], yellow[:, 1],
                    c="#d4a017", s=6, zorder=3)
@@ -200,27 +208,62 @@ def save_racing_line(telem, track_idx, output_dir, track_root="mujoco_tracks"):
     if len(pos) > 0:
         ax.scatter(pos[0, 0], pos[0, 1],
                    c="white", edgecolors="black",
-                   s=60, zorder=5, label="Start")
+                   s=80, zorder=5, label="Start")
 
+    # --- crash marker ---
+    if metrics.get("crashed") and len(pos) > 0:
+        ax.scatter(pos[-1, 0], pos[-1, 1],
+                   c="red", marker="x", s=120,
+                   linewidths=2, zorder=6, label="Crash")
+
+    # --- stats overlay ---
+    lap_completed  = metrics.get("lap_completed", False)
+    lap_time       = metrics.get("lap_time_sim", None)
+    avg_speed      = metrics.get("mean_speed", 0)
+    checkpoints    = metrics.get("checkpoints", 0)
+
+    lap_str  = "✓" if lap_completed else "✗"
+    time_str = f"{lap_time:.1f} s" if lap_time is not None else "N/A"
+
+    stats_text = (
+        f"Lap completed: {lap_str} | "
+        f"Lap time:      {time_str} | "
+        f"Avg speed:     {avg_speed:.2f} m/s"
+        # f"Checkpoints:   {checkpoints}"
+    )
+
+    ax.text(
+        0.02, 0.98, stats_text,
+        transform=ax.transAxes,
+        fontsize=9,
+        verticalalignment="top",
+        bbox=dict(boxstyle="round,pad=0.3",
+                  facecolor="white",
+                  alpha=0.85,
+                  edgecolor="gray")
+    )
+
+    
     # --- colourbar ---
     sm = plt.cm.ScalarMappable(cmap="turbo", norm=norm)
     sm.set_array([])
-    plt.colorbar(sm, ax=ax, label="Speed [m/s]", fraction=0.03, pad=0.04)
+    plt.colorbar(sm, ax=ax, label="Speed [m/s]",
+                 fraction=0.03, pad=0.04)
 
     ax.set_xlabel("X [m]")
     ax.set_ylabel("Y [m]")
-    ax.set_title(f"Racing Line — Track {track_idx + 1}")
+    ax.set_title(f"Racing Line — Track {track_idx + 1} ({episode_label})")
     ax.set_aspect("equal")
     ax.grid(True, alpha=0.2, linewidth=0.5)
-    ax.legend(loc="upper right", fontsize=8, framealpha=0.7)
+    # ax.legend(loc="upper right", fontsize=8, framealpha=0.7)
 
     plt.tight_layout()
     plt.savefig(
-        os.path.join(output_dir, f"racing_line_track{track_idx+1}.png"),
+        os.path.join(output_dir,
+                     f"racing_line_track{track_idx+1}_{episode_label}.png"),
         dpi=150, bbox_inches="tight"
     )
-    plt.close()
-    
+    plt.close()    
 
 def save_telemetry(telem, track_idx, output_dir):
     t = telem["sim_times"]
@@ -270,6 +313,134 @@ def save_telemetry(telem, track_idx, output_dir):
     plt.close()
 
 
+def save_racing_line_2(telem, metrics, track_idx, output_dir,
+                     track_root="mujoco_tracks",
+                     episode_label="best"):
+
+    pos    = telem["positions"]
+    speeds = np.sqrt(
+        np.array(telem["long_vel"])**2 +
+        np.array(telem["lat_vel"])**2
+    )
+
+    track_csv = os.path.join(
+        track_root, f"track_{track_idx + 1}", "random_track.csv"
+    )
+    blue, yellow = load_cones(track_csv)
+
+    # two panels: track left, stats table right
+    fig, (ax, ax_stats) = plt.subplots(
+        1, 2,
+        figsize=(11, 7),
+        gridspec_kw={"width_ratios": [3, 1]}
+    )
+
+    # --- track boundaries ---
+    if len(blue) > 1:
+        ax.plot(
+            np.append(blue[:, 0], blue[0, 0]),
+            np.append(blue[:, 1], blue[0, 1]),
+            color="#2166ac", linewidth=1.2,
+            linestyle="-", label="Blue boundary", zorder=2
+        )
+        ax.scatter(blue[:, 0], blue[:, 1],
+                   c="#2166ac", s=6, zorder=3)
+
+    if len(yellow) > 1:
+        ax.plot(
+            np.append(yellow[:, 0], yellow[0, 0]),
+            np.append(yellow[:, 1], yellow[0, 1]),
+            color="#d4a017", linewidth=1.2,
+            linestyle="-", label="Yellow boundary", zorder=2
+        )
+        ax.scatter(yellow[:, 0], yellow[:, 1],
+                   c="#d4a017", s=6, zorder=3)
+
+    # --- racing line ---
+    norm = plt.Normalize(0, 12)
+    cmap = cm.get_cmap("turbo")
+    for i in range(len(pos) - 1):
+        ax.plot(pos[i:i+2, 0], pos[i:i+2, 1],
+                color=cmap(norm(speeds[i])),
+                linewidth=2.0, zorder=4)
+
+    # --- start / crash markers ---
+    if len(pos) > 0:
+        ax.scatter(pos[0, 0], pos[0, 1],
+                   c="white", edgecolors="black",
+                   s=80, zorder=5, label="Start")
+    if metrics.get("crashed") and len(pos) > 0:
+        ax.scatter(pos[-1, 0], pos[-1, 1],
+                   c="red", marker="x", s=150,
+                   linewidths=2.5, zorder=6, label="Crash")
+
+    # --- colourbar ---
+    sm = plt.cm.ScalarMappable(cmap="turbo", norm=norm)
+    sm.set_array([])
+    plt.colorbar(sm, ax=ax, label="Speed [m/s]",
+                 fraction=0.03, pad=0.02)
+
+    ax.set_xlabel("X [m]")
+    ax.set_ylabel("Y [m]")
+    ax.set_title(f"Track {track_idx + 1}  ({episode_label})")
+    ax.set_aspect("equal")
+    ax.grid(True, alpha=0.2, linewidth=0.5)
+    ax.legend(loc="lower left", fontsize=8,
+              framealpha=0.9)
+
+    # --- stats panel (right) ---
+    ax_stats.axis("off")
+
+    lap_completed = metrics.get("lap_completed", False)
+    lap_time      = metrics.get("lap_time_sim", None)
+    avg_speed     = metrics.get("mean_speed", 0)
+    checkpoints   = metrics.get("checkpoints", 0)
+    crashed       = metrics.get("crashed", False)
+    steps         = metrics.get("steps", 0)
+
+    rows = [
+        ["Lap completed",  "✓" if lap_completed else "✗"],
+        ["Lap time",       f"{lap_time:.1f} s"
+                           if lap_time else "N/A"],
+        ["Avg speed",      f"{avg_speed:.2f} m/s"],
+        # ["Checkpoints",    str(checkpoints)],
+        ["Crashed",        "Yes" if crashed else "No"],
+        # ["Steps",          str(steps)],
+    ]
+
+    table = ax_stats.table(
+        cellText=rows,
+        colLabels=["Metric", "Value"],
+        loc="center",
+        cellLoc="left",
+    )
+    table.auto_set_font_size(False)
+    table.set_fontsize(10)
+    table.scale(1.2, 2.0)
+
+    # colour the header row
+    for j in range(2):
+        table[0, j].set_facecolor("#2c3e50")
+        table[0, j].set_text_props(color="white", fontweight="bold")
+
+    # colour lap completed row green/red
+    lap_row_color = "#d4edda" if lap_completed else "#f8d7da"
+    for j in range(2):
+        table[1, j].set_facecolor(lap_row_color)
+
+    # ax_stats.set_title("Episode Stats", fontsize=10,
+    #                     fontweight="bold", pad=12)
+
+    plt.tight_layout()
+    plt.savefig(
+        os.path.join(output_dir,
+                     f"racing_line_track{track_idx+1}"
+                     f"_{episode_label}.png"),
+        dpi=150, bbox_inches="tight"
+    )
+    plt.close()
+
+
 @hydra.main(config_path=FILE_PATH, config_name="eval",
             version_base=None)
 def main(config):
@@ -310,7 +481,9 @@ def main(config):
         model = PPO.load(model_path, env=eval_env, device=device)
 
         track_results = []
-        first_telem = None
+        # first_telem = None
+        best_result = None    # ← initialise HERE, inside track loop
+        best_telem  = None    # ← so best resets per track
 
         for ep in range(n_episodes):
             result, telem = run_episode(model, eval_env)
@@ -319,17 +492,22 @@ def main(config):
             track_results.append(result)
             all_results.append(result)
 
-            if first_telem is None:
-                first_telem = telem
-
+            # if first_telem is None:
+            #     first_telem = telem
+            # track best episode by reward
+            if best_result is None or result["reward"] > best_result["reward"]:
+                best_result = result
+                best_telem  = telem
+                
             print(
                 f"  ep{ep:02d}: "
                 f"reward={result['reward']:>8.1f}  "
                 f"steps={result['steps']:>5}  "
                 f"crash={result['crashed']}  "
-                f"lap={result['lap_completed']}  "
+                f"lap={'✓' if result['lap_completed'] else '✗'}  "
                 f"ckpt={result['checkpoints']:>4}  "
-                f"speed={result['mean_speed']:.1f}m/s"
+                f"speed={result['mean_speed']:.1f}m/s  "
+                f"laptime={str(round(result['lap_time_sim'],1))+'s' if result['lap_time_sim'] else 'N/A'}"
             )
 
         # per-track summary
@@ -338,10 +516,16 @@ def main(config):
         for k, v in track_metrics.items():
             print(f"    {k}: {v}")
 
-        # save plots for first episode
-        if first_telem is not None:
-            save_racing_line(first_telem, track_idx, output_dir)
-            save_telemetry(first_telem, track_idx, output_dir)
+        # # save plots for first episode
+        # if first_telem is not None:
+        #     save_racing_line(first_telem, track_idx, output_dir)
+        #     save_telemetry(first_telem, track_idx, output_dir)
+
+        # save best episode plots
+        if best_telem is not None:
+            save_racing_line(best_telem, best_result, track_idx, output_dir,
+                            episode_label=f"best_ep{best_result['episode']}")
+            save_telemetry(best_telem, track_idx, output_dir)
 
         eval_env.close()
 
