@@ -30,7 +30,8 @@ def make_env(cfg):
             # max_throttle=1.0,
             domain_randomization=cfg.env.domain_randomization,
             stuck_patience=cfg.env.stuck_patience,
-            track_idx=cfg.env.track_idx
+            track_idx=cfg.env.track_idx,
+            waypoint_mode=cfg.env.waypoint_mode
         )
         # env.reset(seed=cfg.seed)
         
