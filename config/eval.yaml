@@ -12,6 +12,7 @@ num_laps: 2
 eval_tracks: [0, 1, 2, 3, 4]   # which track indices to evaluate on
 n_episodes_per_track: 2         # episodes per track
 
+visualize: True
 
 env:
   num_checkpoints: 20

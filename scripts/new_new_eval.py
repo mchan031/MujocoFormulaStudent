@@ -1,6 +1,7 @@
 # new_eval.py
 import os
 import json
+import cv2
 import numpy as np
 import torch
 import matplotlib.pyplot as plt
@@ -44,7 +45,7 @@ def build_eval_env(config, vecnorm_path):
     return eval_env
 
 
-def run_episode(model, eval_env):
+def run_episode(model, eval_env, visualize=False):
     """Run one episode deterministically. Returns metrics + telemetry."""
     obs = eval_env.reset()
     done = False
@@ -69,6 +70,13 @@ def run_episode(model, eval_env):
     while not done:
         action, _ = model.predict(obs, deterministic=True)
         obs, reward, done, info = eval_env.step(action)
+        
+        if visualize:
+            frame = eval_env.render()  # render after step to capture final frame on done=True
+            frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+            cv2.imshow("View", frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
         ep_reward += float(reward[0])
         step_count += 1
@@ -95,6 +103,8 @@ def run_episode(model, eval_env):
     lap_count = int(info[0].get("lap_count", 0))
     lap_time = (sim_times[-1] / lap_count) if lap_count > 0 else None
 
+    if visualize:
+        cv2.destroyAllWindows()
     # total checkpoints crossed including previous laps
     # checkpoints = (raw_env.current_checkpoint +
     #                raw_env.lap_count * raw_env.n_checkpoints)
@@ -486,7 +496,7 @@ def main(config):
         best_telem  = None    # ← so best resets per track
 
         for ep in range(n_episodes):
-            result, telem = run_episode(model, eval_env)
+            result, telem = run_episode(model, eval_env, visualize=config.visualize)
             result["track_idx"] = track_idx
             result["episode"]   = ep
             track_results.append(result)
