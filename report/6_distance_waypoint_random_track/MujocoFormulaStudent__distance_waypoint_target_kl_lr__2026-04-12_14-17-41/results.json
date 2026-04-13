@@ -1,0 +1,428 @@
+{
+  "model": "models/MujocoFormulaStudent__distance_waypoint_target_kl_lr__2026-04-12_14-17-41",
+  "waypoint": "distance",
+  "tracks": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "overall": {
+    "mean_reward": 1177.96,
+    "std_reward": 852.06,
+    "crash_rate": 0.96,
+    "lap_completion_rate": 0.56,
+    "mean_checkpoints": 17.6,
+    "mean_speed_ms": 7.22,
+    "mean_lap_time_sim": 22.8,
+    "laps_completed": 14,
+    "n_episodes": 25
+  },
+  "episodes": [
+    {
+      "reward": 1456.4248663960025,
+      "steps": 1391,
+      "sim_time": 20.864999771118164,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 23,
+      "lap_time_sim": 18.060000000000002,
+      "lap_split_times": [
+        18.060000000000002
+      ],
+      "mean_speed": 7.884956359863281,
+      "mean_steer_change": 0.2173619568347931,
+      "track_idx": 0,
+      "episode": 0
+    },
+    {
+      "reward": 1451.0399699010304,
+      "steps": 1444,
+      "sim_time": 21.660001754760742,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 23,
+      "lap_time_sim": 18.81,
+      "lap_split_times": [
+        18.81
+      ],
+      "mean_speed": 7.601302623748779,
+      "mean_steer_change": 0.21667036414146423,
+      "track_idx": 0,
+      "episode": 1
+    },
+    {
+      "reward": 1504.6976779184188,
+      "steps": 1482,
+      "sim_time": 22.229999542236328,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 24,
+      "lap_time_sim": 19.095,
+      "lap_split_times": [
+        19.095
+      ],
+      "mean_speed": 7.500850200653076,
+      "mean_steer_change": 0.19587570428848267,
+      "track_idx": 0,
+      "episode": 2
+    },
+    {
+      "reward": 3364.1840800515492,
+      "steps": 3000,
+      "sim_time": 45.0,
+      "crashed": false,
+      "lap_completed": true,
+      "lap_count": 2,
+      "checkpoints": 50,
+      "lap_time_sim": 17.9175,
+      "lap_split_times": [
+        18.57,
+        35.835
+      ],
+      "mean_speed": 7.814213752746582,
+      "mean_steer_change": 0.2376338243484497,
+      "track_idx": 0,
+      "episode": 3
+    },
+    {
+      "reward": 1458.2505702698836,
+      "steps": 1424,
+      "sim_time": 21.35999870300293,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 23,
+      "lap_time_sim": 18.3,
+      "lap_split_times": [
+        18.3
+      ],
+      "mean_speed": 7.765886306762695,
+      "mean_steer_change": 0.17657876014709473,
+      "track_idx": 0,
+      "episode": 4
+    },
+    {
+      "reward": 2178.9556324429577,
+      "steps": 2297,
+      "sim_time": 34.45500183105469,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 32,
+      "lap_time_sim": 22.635,
+      "lap_split_times": [
+        22.635
+      ],
+      "mean_speed": 7.948904037475586,
+      "mean_steer_change": 0.17315517365932465,
+      "track_idx": 1,
+      "episode": 0
+    },
+    {
+      "reward": 2185.4136187083786,
+      "steps": 2261,
+      "sim_time": 33.915000915527344,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 32,
+      "lap_time_sim": 21.735000000000003,
+      "lap_split_times": [
+        21.735000000000003
+      ],
+      "mean_speed": 8.099421501159668,
+      "mean_steer_change": 0.15078116953372955,
+      "track_idx": 1,
+      "episode": 1
+    },
+    {
+      "reward": 1767.611388205376,
+      "steps": 1852,
+      "sim_time": 27.780000686645508,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 26,
+      "lap_time_sim": 21.705000000000002,
+      "lap_split_times": [
+        21.705000000000002
+      ],
+      "mean_speed": 8.162397384643555,
+      "mean_steer_change": 0.1500711888074875,
+      "track_idx": 1,
+      "episode": 2
+    },
+    {
+      "reward": 1757.8222318000044,
+      "steps": 1904,
+      "sim_time": 28.559999465942383,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 26,
+      "lap_time_sim": 22.244999999999997,
+      "lap_split_times": [
+        22.244999999999997
+      ],
+      "mean_speed": 7.899105072021484,
+      "mean_steer_change": 0.1823859065771103,
+      "track_idx": 1,
+      "episode": 3
+    },
+    {
+      "reward": 1756.5870636691106,
+      "steps": 1868,
+      "sim_time": 28.020000457763672,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 26,
+      "lap_time_sim": 22.215000000000003,
+      "lap_split_times": [
+        22.215000000000003
+      ],
+      "mean_speed": 8.000761985778809,
+      "mean_steer_change": 0.1755416840314865,
+      "track_idx": 1,
+      "episode": 4
+    },
+    {
+      "reward": 1701.856436176895,
+      "steps": 2108,
+      "sim_time": 31.619998931884766,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 23,
+      "lap_time_sim": 28.2,
+      "lap_split_times": [
+        28.2
+      ],
+      "mean_speed": 8.219193458557129,
+      "mean_steer_change": 0.17156058549880981,
+      "track_idx": 2,
+      "episode": 0
+    },
+    {
+      "reward": 1690.2511478515808,
+      "steps": 2169,
+      "sim_time": 32.53499984741211,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 23,
+      "lap_time_sim": 29.19,
+      "lap_split_times": [
+        29.19
+      ],
+      "mean_speed": 7.945998668670654,
+      "mean_steer_change": 0.19986653327941895,
+      "track_idx": 2,
+      "episode": 1
+    },
+    {
+      "reward": 1685.8214431791857,
+      "steps": 2245,
+      "sim_time": 33.67499923706055,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 23,
+      "lap_time_sim": 29.685000000000002,
+      "lap_split_times": [
+        29.685000000000002
+      ],
+      "mean_speed": 7.713081359863281,
+      "mean_steer_change": 0.21363909542560577,
+      "track_idx": 2,
+      "episode": 2
+    },
+    {
+      "reward": 755.516976491228,
+      "steps": 1212,
+      "sim_time": 18.18000030517578,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 11,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 7.097707748413086,
+      "mean_steer_change": 0.20399968326091766,
+      "track_idx": 2,
+      "episode": 3
+    },
+    {
+      "reward": 1637.553653165989,
+      "steps": 2161,
+      "sim_time": 32.415000915527344,
+      "crashed": true,
+      "lap_completed": true,
+      "lap_count": 1,
+      "checkpoints": 22,
+      "lap_time_sim": 29.4,
+      "lap_split_times": [
+        29.4
+      ],
+      "mean_speed": 7.9406938552856445,
+      "mean_steer_change": 0.18844535946846008,
+      "track_idx": 2,
+      "episode": 4
+    },
+    {
+      "reward": 639.1091549494304,
+      "steps": 1117,
+      "sim_time": 16.755001068115234,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 10,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 6.3497114181518555,
+      "mean_steer_change": 0.23918764293193817,
+      "track_idx": 3,
+      "episode": 0
+    },
+    {
+      "reward": 38.117002239101566,
+      "steps": 313,
+      "sim_time": 4.695000171661377,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 2,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 4.501758575439453,
+      "mean_steer_change": 0.22811199724674225,
+      "track_idx": 3,
+      "episode": 1
+    },
+    {
+      "reward": 1257.909781058901,
+      "steps": 1775,
+      "sim_time": 26.625,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 18,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 7.212532043457031,
+      "mean_steer_change": 0.2194557636976242,
+      "track_idx": 3,
+      "episode": 2
+    },
+    {
+      "reward": 32.72633233090164,
+      "steps": 305,
+      "sim_time": 4.575000286102295,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 2,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 4.203345775604248,
+      "mean_steer_change": 0.19963286817073822,
+      "track_idx": 3,
+      "episode": 3
+    },
+    {
+      "reward": 37.47676260770095,
+      "steps": 299,
+      "sim_time": 4.485000133514404,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 2,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 4.5531229972839355,
+      "mean_steer_change": 0.18049433827400208,
+      "track_idx": 3,
+      "episode": 4
+    },
+    {
+      "reward": 215.08563754160423,
+      "steps": 445,
+      "sim_time": 6.675000190734863,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 4,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 7.187927722930908,
+      "mean_steer_change": 0.08403386175632477,
+      "track_idx": 4,
+      "episode": 0
+    },
+    {
+      "reward": 219.25043032540998,
+      "steps": 459,
+      "sim_time": 6.884999752044678,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 4,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 7.212015628814697,
+      "mean_steer_change": 0.09806087613105774,
+      "track_idx": 4,
+      "episode": 1
+    },
+    {
+      "reward": 213.84096293963376,
+      "steps": 449,
+      "sim_time": 6.735000133514404,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 4,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 7.1125898361206055,
+      "mean_steer_change": 0.1536894589662552,
+      "track_idx": 4,
+      "episode": 2
+    },
+    {
+      "reward": 219.15679265989456,
+      "steps": 454,
+      "sim_time": 6.809999942779541,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 4,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 7.265591621398926,
+      "mean_steer_change": 0.09479044377803802,
+      "track_idx": 4,
+      "episode": 3
+    },
+    {
+      "reward": 224.23477543524496,
+      "steps": 480,
+      "sim_time": 7.200000286102295,
+      "crashed": true,
+      "lap_completed": false,
+      "lap_count": 0,
+      "checkpoints": 4,
+      "lap_time_sim": null,
+      "lap_split_times": [],
+      "mean_speed": 7.21352481842041,
+      "mean_steer_change": 0.11387757956981659,
+      "track_idx": 4,
+      "episode": 4
+    }
+  ]
+}
