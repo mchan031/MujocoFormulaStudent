@@ -54,86 +54,107 @@ def run_episode(model, eval_env, visualize=False):
     raw_env = eval_env.venv.envs[0].unwrapped
     sim_dt = raw_env.model.opt.timestep
     frame_skip = raw_env.frame_skip
+    max_steps = raw_env.max_steps  # used for pre-allocation
 
     ep_reward = 0.0
     step_count = 0
     crashed = False
-    positions = []
-    long_vels = []
-    lat_vels = []
-    steerings = []
-    throttles = []
-    sim_times = []
     max_checkpoints_seen = 0
+    prev_lap_count = 0
+    lap_completion_times = []
 
+    # pre-allocate numpy arrays instead of growing Python lists
+    positions  = np.empty((max_steps, 2), dtype=np.float32)
+    long_vels  = np.empty(max_steps,      dtype=np.float32)
+    lat_vels   = np.empty(max_steps,      dtype=np.float32)
+    steerings  = np.empty(max_steps,      dtype=np.float32)
+    throttles  = np.empty(max_steps,      dtype=np.float32)
 
     while not done:
         action, _ = model.predict(obs, deterministic=True)
         obs, reward, done, info = eval_env.step(action)
-        
+
         if visualize:
-            frame = eval_env.render()  # render after step to capture final frame on done=True
+            frame = eval_env.render()
             frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
             cv2.imshow("View", frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
         ep_reward += float(reward[0])
+        i = step_count  # current index before incrementing
         step_count += 1
         sim_t = step_count * sim_dt * frame_skip
 
-        car_states = info[0].get("car_states", np.zeros(7))
-        car_pos = info[0].get("car_pos", np.zeros(3))
+        car_states = info[0].get("car_states", None)
+        car_pos    = info[0].get("car_pos",    None)
 
-        positions.append([car_pos[0], car_pos[1]])
-        long_vels.append(float(car_states[0]))
-        lat_vels.append(float(car_states[1]))
-        steerings.append(float(action[0][0]))
-        throttles.append(float(action[0][1]))
-        sim_times.append(sim_t)
-        # track max checkpoints seen during episode
-        current_total = int(info[0].get("total_checkpoints",
-                            raw_env.current_checkpoint +
-                            raw_env.lap_count * raw_env.n_checkpoints))
+        positions[i, 0] = car_pos[0]  if car_pos    is not None else 0.0
+        positions[i, 1] = car_pos[1]  if car_pos    is not None else 0.0
+        long_vels[i]    = car_states[0] if car_states is not None else 0.0
+        lat_vels[i]     = car_states[1] if car_states is not None else 0.0
+        steerings[i]    = float(action[0][0])
+        throttles[i]    = float(action[0][1])
+
+        # track max checkpoints
+        current_total = int(info[0].get(
+            "total_checkpoints",
+            raw_env.current_checkpoint + raw_env.lap_count * raw_env.n_checkpoints
+        ))
         max_checkpoints_seen = max(max_checkpoints_seen, current_total)
-        
+
+        # record timestamp each time a new lap completes
+        current_lap_count = int(info[0].get("lap_count", 0))
+        if current_lap_count > prev_lap_count:
+            lap_completion_times.append(sim_t)
+            prev_lap_count = current_lap_count
+
         if done[0]:
             crashed = bool(info[0].get("crashed", False))
 
-    lap_count = int(info[0].get("lap_count", 0))
-    lap_time = (sim_times[-1] / lap_count) if lap_count > 0 else None
-
     if visualize:
         cv2.destroyAllWindows()
-    # total checkpoints crossed including previous laps
-    # checkpoints = (raw_env.current_checkpoint +
-    #                raw_env.lap_count * raw_env.n_checkpoints)
-    # checkpoints = int(info[0].get("total_checkpoints", 0))
 
-    # lap_time = (sim_times[-1] / lap_count) if lap_count > 0 else None
+    # slice pre-allocated arrays down to actual episode length
+    positions = positions[:step_count]
+    long_vels = long_vels[:step_count]
+    lat_vels  = lat_vels[:step_count]
+    steerings = steerings[:step_count]
+    throttles = throttles[:step_count]
+
+    # reconstruct sim_times cheaply as a range - no per-step append needed
+    sim_times = np.arange(1, step_count + 1, dtype=np.float32) * sim_dt * frame_skip
+
+    lap_count = int(info[0].get("lap_count", 0))
+
+    # use the actual lap finish timestamp instead of episode end time
+    # avoids inflating lap_time with post-lap driving or partial laps
+    if lap_completion_times and lap_count > 0:
+        lap_time = lap_completion_times[-1] / lap_count
+    else:
+        lap_time = None
 
     metrics = {
         "reward":            ep_reward,
         "steps":             step_count,
-        "sim_time":          sim_times[-1] if sim_times else 0,
+        "sim_time":          float(sim_times[-1]) if step_count > 0 else 0.0,
         "crashed":           crashed,
         "lap_completed":     lap_count > 0,
         "lap_count":         lap_count,
         "checkpoints":       max_checkpoints_seen,
         "lap_time_sim":      lap_time,
-        "mean_speed":        float(np.mean(np.abs(long_vels)))
-                             if long_vels else 0,
-        "mean_steer_change": float(np.mean(np.abs(np.diff(steerings))))
-                             if len(steerings) > 1 else 0,
+        "lap_split_times":   lap_completion_times,   # individual lap timestamps
+        "mean_speed":        float(np.mean(np.abs(long_vels))) if step_count > 0 else 0.0,
+        "mean_steer_change": float(np.mean(np.abs(np.diff(steerings)))) if step_count > 1 else 0.0,
     }
 
     telemetry = {
-        "positions":  np.array(positions),
-        "long_vel":   long_vels,
-        "lat_vel":    lat_vels,
-        "steerings":  steerings,
-        "throttles":  throttles,
-        "sim_times":  sim_times,
+        "positions": positions,
+        "long_vel":  long_vels.tolist(),
+        "lat_vel":   lat_vels.tolist(),
+        "steerings": steerings.tolist(),
+        "throttles": throttles.tolist(),
+        "sim_times": sim_times.tolist(),
     }
 
     return metrics, telemetry
