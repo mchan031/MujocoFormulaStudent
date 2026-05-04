@@ -9,11 +9,13 @@
 ![SB3](https://img.shields.io/badge/Stable--Baselines3-PPO-orange)
 ![License](https://img.shields.io/badge/License-Apache%202.0-lightgrey)
 
+![MuJoCo Simulator](doc/mujoco_simulator.png)
+
 ---
 
 ## Overview
 
-High-fidelity simulators (Gazebo, FSDS, FSSIM) are too slow for effective RL training. This project develops a lightweight MuJoCo FSD simulator that enables fast parallel training while remaining physically representative of the ADS-DV competition vehicle.
+High-fidelity simulators (Gazebo, FSDS, FSSIM, Carla) are too slow for effective RL training. This project develops a lightweight MuJoCo FSD simulator that enables fast parallel training while remaining physically representative of the ADS-DV competition vehicle.
 
 Three observation space configurations are evaluated under a 2×3 factorial design:
 
@@ -61,7 +63,12 @@ A privileged classical controller with full centreline knowledge, achieving 100%
 - **Parallel envs:** 8 × `make_vec_env`
 - **Frame skip:** 5 (effective control frequency: 66.7 Hz)
 
-### Sensor Suite (ADS-DV)
+
+### ADS-DV and Sensors
+![ADS-DV (FSUK)](doc/fsuk_ads_dv.jpg)
+
+The ADS-DV is the Formula Student UK autonomous ready race car platform used in this project. It is the reference vehicle for the simulator setup and sensor stack, providing a realistic basis for training and evaluating autonomous driving policies.
+
 
 | Sensor | Usage |
 |--------|-------|
@@ -80,9 +87,9 @@ Image (84×84×1)
     └─ NatureCNN ──────────────────────────────────┐
        Conv(8×8, s4, 32) → Conv(4×4, s2, 64)       │
        → Conv(3×3, s1, 64) → Linear(256)           │
-                                                    ├─► Combined features ──► Actor MLP (64→64→2)
-Vehicle state (7D) ──────────────────────────────── │                     └─► Critic MLP (64→64→1)
-Waypoints (5D or 10D, if used) ─────────────────── ┘
+                                                   ├─► Combined features ──► Actor MLP (64→64→2)
+Vehicle state (7D) ────────────────────────────────│                     └─► Critic MLP (64→64→1)
+Waypoints (5D or 10D, if used) ────────────────────┘
 ```
 
 - **Activation:** Tanh
@@ -104,7 +111,7 @@ r_t = r_progress + r_velocity − r_step − r_steer − r_throttle − r_crash
 | Step penalty | −0.1 per step |
 | Checkpoint reward | 10.0 / n per checkpoint |
 | Velocity reward | 0.02 × vₓ |
-| Steering penalty | 0.005 × |Δδ| |
+| Steering penalty | 0.005 × ʘ |
 | Crash penalty | −50.0 (terminal) |
 
 **Termination:** cone collision (terminated) or no checkpoint in 200 steps (truncated, stuck detection).
@@ -329,9 +336,9 @@ Issues encountered during development and their resolutions:
 | Entropy collapse | Policy std rising above 1.0 | ent_coef 0.02 → 0.01 |
 | Slow convergence | Insufficient on-policy data | n_steps 1024 → 2048 |
 
----
+<!-- --- -->
 
-## Citation
+<!-- ## Citation
 
 ```bibtex
 @misc{chan2026mujocoformulastudent,
@@ -340,7 +347,7 @@ Issues encountered during development and their resolutions:
   year      = {2026},
   note      = {Final Year Project D127, Nanyang Technological University, School of Mechanical and Aerospace Engineering},
 }
-```
+``` -->
 
 ---
 
