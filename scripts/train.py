@@ -10,12 +10,13 @@ import argparse
 import time
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import (
-    StopTrainingOnRewardThreshold, 
-    StopTrainingOnNoModelImprovement, 
-    EvalCallback, 
+    StopTrainingOnRewardThreshold,
+    StopTrainingOnNoModelImprovement,
+    EvalCallback,
     CallbackList,
-    CheckpointCallback
+    CheckpointCallback,
 )
+from curriculum import CurriculumCallback
 from utils import ForceForwardWrapper, GrayscaleDictObservation
 import wandb
 from wandb.integration.sb3 import WandbCallback
@@ -44,7 +45,8 @@ def make_env(cfg): #, idx, capture_video, run_name):
             domain_randomization=cfg.env.domain_randomization,
             track_idx=cfg.env.track_idx,
             waypoint_mode=cfg.env.waypoint_mode,
-            crash_penalty=cfg.env.crash_penalty
+            crash_penalty=cfg.env.crash_penalty,
+            curriculum_enabled=cfg.curriculum.enabled,
             )
         
         env.action_space.seed(cfg.seed)
@@ -213,6 +215,14 @@ def main(config):
     # cb_list = [eval_callback]
     cb_list = []
     cb_list.append(checkpoint_callback)
+
+    if config.curriculum.enabled:
+        curriculum_cb = CurriculumCallback(
+            train_env=train_env,
+            window=config.curriculum.window,
+            lap_threshold=config.curriculum.lap_threshold,
+        )
+        cb_list.append(curriculum_cb)
 
     if config.track_exp:
         wandb_cb = WandbCallback(

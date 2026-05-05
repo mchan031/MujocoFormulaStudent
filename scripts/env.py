@@ -7,7 +7,7 @@ import mujoco
 from typing import Optional, Dict, Any, Tuple, List
 import os
 import json
-from utils import MovingAverageFilter, create_env_xml 
+from utils import MovingAverageFilter, create_env_xml, create_env_xml_unique
 from gymnasium.utils import EzPickle
 import random
 
@@ -46,6 +46,8 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         track_idx: Optional[int] = None,
         domain_randomization: bool = True,
         waypoint_mode: str = "none", # "none", "relative", "distance"
+        difficulty_level: int = 0,
+        curriculum_enabled: bool = False,
         **kwargs,
     ):
         
@@ -68,9 +70,11 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
             vel_penalty_weight,
             steer_penalty_weight,
             max_throttle,
-            track_idx,  
+            track_idx,
             stuck_patience,
             domain_randomization,
+            difficulty_level,
+            curriculum_enabled,
             **kwargs,
         )
         
@@ -114,23 +118,34 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         self._waypoint_mode = waypoint_mode
         self._zero_speed_count = 0
 
+        # Curriculum state
+        self.difficulty_level = difficulty_level
+        self.curriculum_enabled = curriculum_enabled
+        self._pending_track_reload = False
+        self._track_root = track_root
+        self._env_id = os.getpid()
 
         # Initialize observation space
         self._initialize_observation_space()
-        
-        # Randomly select a track from the track root directory
-        track_dir = self._select_random_track(track_root, track_idx)        
+
+        # Select or generate the initial track
+        if self.curriculum_enabled:
+            track_dir = self._generate_and_save_track()
+        else:
+            track_dir = self._select_random_track(track_root, track_idx)
         print("Running on track:", track_dir)
-        
+
         # Load Selected Track Centreline
         self._load_centreline(track_dir)
         self._create_checkpoint()
-        
-        self.random_track_path = os.path.join(track_dir, "random_track.csv") 
 
-        # Create Runtime XML with selected track
-        model_xml_path = create_env_xml(track_dir)
-        full_xml_path = os.path.join(os.path.dirname(__file__), os.path.pardir, model_xml_path)
+        self.random_track_path = os.path.join(track_dir, "random_track.csv")
+
+        # Create per-env unique Runtime XML (safe for parallel subprocesses)
+        model_xml_path = create_env_xml_unique(track_dir, self._env_id)
+        full_xml_path = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), os.path.pardir, model_xml_path)
+        )
             
         # Initialize Parent Class
         MujocoEnv.__init__(
@@ -345,8 +360,88 @@ class MujocoFormulaStudent(MujocoEnv, EzPickle):
         # Domain Randomize
         if self.domain_randomization:
             self._apply_domain_randomization()
-        
+
         return self._get_obs()
+
+    def reset(self, seed=None, options=None):
+        if self.curriculum_enabled and self._pending_track_reload:
+            self._reload_mujoco_model()
+            self._pending_track_reload = False
+        return super().reset(seed=seed, options=options)
+
+    def set_difficulty(self, level: int):
+        """Signal this env to load a new track at the given difficulty on the next reset."""
+        self.difficulty_level = level
+        self._pending_track_reload = True
+
+    def _generate_and_save_track(self) -> str:
+        """Generate a random track for the current difficulty level and save it to disk.
+
+        Returns the relative path to the track directory (e.g. mujoco_tracks/track_runtime_<pid>).
+        """
+        from curriculum import DIFFICULTY_LEVELS, generate_track_for_difficulty
+        from random_track_generator import SimType
+
+        cfg = DIFFICULTY_LEVELS[self.difficulty_level]
+        print(
+            f"[Curriculum] Generating track at difficulty {self.difficulty_level} "
+            f"({cfg.label}), max_bound={cfg.max_bound}m..."
+        )
+        track = generate_track_for_difficulty(cfg)
+
+        track_dir = os.path.join(self._track_root, f"track_runtime_{self._env_id}")
+        os.makedirs(track_dir, exist_ok=True)
+        track.save(track_dir, SimType.MUJOCO)
+
+        return track_dir
+
+    def _reload_mujoco_model(self):
+        """Generate a new track and hot-reload the MuJoCo model without full env re-init."""
+        track_dir = self._generate_and_save_track()
+
+        runtime_xml_rel = create_env_xml_unique(track_dir, self._env_id)
+        full_xml_path = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), os.path.pardir, runtime_xml_rel)
+        )
+
+        new_model = mujoco.MjModel.from_xml_path(full_xml_path)
+        new_data = mujoco.MjData(new_model)
+
+        # Replace the gymnasium parent's model and data references
+        self.model = new_model
+        self.data = new_data
+        self.init_qpos = new_data.qpos.ravel().copy()
+        self.init_qvel = new_data.qvel.ravel().copy()
+
+        # Recreate the third-person renderer held by gymnasium MujocoEnv
+        self.mujoco_renderer.close()
+        self.mujoco_renderer = MujocoRenderer(
+            self.model,
+            self.data,
+            width=self._render_width,
+            height=self._render_height,
+            camera_name="third_person",
+        )
+
+        # Recreate the agent (first-person) camera
+        if hasattr(self, "agent_renderer") and self.agent_renderer is not None:
+            self.agent_renderer.close()
+        self._initialize_agent_camera()
+
+        # Re-cache all MuJoCo ID lookups — indices change with each new model
+        self._get_car_joint_ids()
+        self._get_sensor_id()
+        self._get_floor_id()
+        self.car_geoms = self._get_car_geom_ids()
+        self.cone_geoms = self._get_cone_geom_ids()
+        self.default_friction = self.model.geom_friction[self.floor_id][0]
+
+        # Update centreline and checkpoints for the new track layout
+        self._load_centreline(track_dir)
+        self._create_checkpoint()
+
+        print(f"[Curriculum] Model reloaded — difficulty {self.difficulty_level}, "
+              f"track length ~{self.track_length:.0f} m")
 
     def _get_obs(self):
         obs = {

@@ -237,6 +237,23 @@ def create_env_xml(track_dir):
     return "mujoco_tracks/sim_env_runtime.xml"
 
 
+def create_env_xml_unique(track_dir: str, env_id: int) -> str:
+    """Like create_env_xml but writes to a per-env unique path to avoid conflicts
+    when multiple environments run in parallel subprocesses."""
+    template = open("mujoco_tracks/sim_env.xml").read()
+
+    track_name = os.path.basename(track_dir)
+    track_xml = f"{track_name}/track.xml"
+
+    xml = template.replace("{TRACK_FILE}", track_xml)
+
+    runtime_path = f"mujoco_tracks/sim_env_runtime_{env_id}.xml"
+    with open(runtime_path, "w") as f:
+        f.write(xml)
+
+    return runtime_path
+
+
 class Controller:
     def set_path(self, path):
         self.path = path

@@ -23,6 +23,11 @@ env:
   waypoint_mode: "distance" # "none", "relative", "distance"
 
 
+curriculum:
+  enabled: true   # set to false to disable curriculum and use fixed tracks
+  window: 20      # rolling episode window used to compute the lap average
+  lap_threshold: 1.0  # avg laps per episode required to advance difficulty
+
 
 wandb:
   project: mujoco-racing-ads-dv
